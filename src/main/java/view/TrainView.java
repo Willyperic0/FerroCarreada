@@ -2,6 +2,7 @@ package view;
 
 import model.TrainModel;
 import willy.linkedlist.singly.LinkedList;
+ 
 
 public class TrainView {
     private LinkedList listTrain = new LinkedList<>();
