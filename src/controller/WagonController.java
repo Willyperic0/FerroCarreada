@@ -13,7 +13,12 @@ public class WagonController {
     }
 
     public void createWagon() {
-        view.displayWagon(wagon);
+        view.WagonList(wagon);
+    }
+
+    public void updateView() {
+        view.WagonList(wagon); // Modificación aquí
+        view.printWagonDetails();
     }
 
     public WagonModel getWagon() {

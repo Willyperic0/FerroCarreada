@@ -35,6 +35,18 @@ public class LinkedList <E> extends AbstractList<E> {
         }
     }
 
+    public E get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+        }
+ 
+        LinkedNode<E> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.getNext();
+        }
+        return current.get();
+    }
+
 @Override
 public boolean add(E element) {
     try {

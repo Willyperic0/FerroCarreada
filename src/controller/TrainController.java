@@ -19,8 +19,9 @@ public class TrainController {
     public int getTrainId() {
         return model.getTrainId();
     }
-
+    
     public void updateView() {
-        view.printTrainDetails(model);
+        view.TrainList(model); // Modificación aquí
+        view.printTrainDetails();
     }
 }
