@@ -5,11 +5,11 @@ public class TrainModel {
     public String name;
     public String identifier;
     public int capacityLoad;
-    public double mileage;
+    public int mileage;
 
     //LinkedList<Wagon> wagon = new LinkedList<>();
 
-    public TrainModel(int trainId, String name, String identifier, int capacityLoad, double mileage) {   
+    public TrainModel(int trainId, String name, String identifier, int capacityLoad, int mileage) {   
         this.trainId = trainId;
         this.name = name;
         this.identifier = identifier;
@@ -55,7 +55,7 @@ public class TrainModel {
         return this.mileage;
     }
 
-    public void setMileage(double mileage) {
+    public void setMileage(int mileage) {
         this.mileage = mileage;
     }
     
