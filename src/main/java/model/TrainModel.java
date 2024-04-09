@@ -17,6 +17,9 @@ public class TrainModel {
         this.mileage = mileage;
     }
 
+    public TrainModel() {
+    }
+
 
     
     public int getTrainId() {

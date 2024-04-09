@@ -9,63 +9,48 @@ import view.WagonView;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        String name = JOptionPane.showInputDialog(null,"Porfavor ingrese su nombre","MODULO EMPLEADOS", 0);
-        JOptionPane.showMessageDialog(null, "Bienvenido "+name, "MODULO EMPLEADOS", 0);
-        int rta = Integer.parseInt(JOptionPane.showInputDialog(null,"Que desea hacer?\n1. agregar trenes\n2.agregar vagones\n3.gestionar tickets","MODULO EMPLEADOS", 0));
-        switch (rta) {
+        //Crear variables temporales de tren
+int tId = 0, tCapacityLoad, tMileage;
+String tName, tIdentifier;
+        tId++;
+        tCapacityLoad = Integer.parseInt(JOptionPane.showInputDialog("tCapacityLoad"));
+        tMileage= Integer.parseInt(JOptionPane.showInputDialog("tMileage"));
+        tName = JOptionPane.showInputDialog("tName");
+        tIdentifier = JOptionPane.showInputDialog("tIdentifier");
+
+    TrainModel train = new TrainModel(tId, tName, tIdentifier, tCapacityLoad, tMileage);
+    TrainView trainView = new TrainView();
+    TrainController trainController = new TrainController(train, trainView);
+    trainController.updateView();
+
+     int wId=0,wCapacity,wPassengerCapacity,wLuggageCapacity, wTypeD;
+     String wType,wTrainIdentifier, wIdentifier;
+     
+        wId++;
+        wTypeD = Integer.parseInt(JOptionPane.showInputDialog(null, "Train Type\n1. para Pasajero\n2. para Carga"));
+        switch (wTypeD) {
             case 1:
-                String Tname, Tidentifier;
-                int Tid, Tcapacity, TMileage;
-                Tname = JOptionPane.showInputDialog(null,"Porfavor ingrese el nombre del tren","MODULO EMPLEADOS - Registro de trenes", 0);
-                Tidentifier = JOptionPane.showInputDialog(null,"Porfavor ingrese el identificador del tren","MODULO EMPLEADOS - Registro de trenes", 0);
-                Tid = Integer.parseInt(JOptionPane.showInputDialog(null,"Porfavor ingrese el id del tren","MODULO EMPLEADOS - Registro de trenes", 0));
-                Tcapacity = Integer.parseInt(JOptionPane.showInputDialog(null,"Porfavor ingrese la capacidad del tren","MODULO EMPLEADOS - Registro de trenes", 0));
-                TMileage = Integer.parseInt(JOptionPane.showInputDialog(null,"Porfavor ingrese la mileage del tren","MODULO EMPLEADOS - Registro de trenes", 0));
-                TrainModel newTrain = new TrainModel(Tid, Tname, Tidentifier, Tcapacity, TMileage);
-                TrainView trainView = new TrainView();
-                TrainController trainController = new TrainController(newTrain, trainView);
-                trainController.updateView();
+            wType = "Passenger";
+            wPassengerCapacity = 40; 
                 break;
             case 2:
-            JOptionPane.showMessageDialog(null, "lo siento "+name+" este modulo no se encuentra disponible por el momento", "MODULO EMPLEADOS", 0); 
-                break;
-            case 3:
-            JOptionPane.showMessageDialog(null, "lo siento "+name+" este modulo no se encuentra disponible por el momento", "MODULO EMPLEADOS", 0); 
-                break;
+            wType = "Cargo";
+            wPassengerCapacity = 0;
+                break; 
+
             default:
+            wType = "Cargo";
+            wPassengerCapacity = 0;
                 break;
         }
-/* 
-        // Crear un objeto TrainModel
-TrainModel train = new TrainModel(1, "Mercedes-Benz", "EXP001", 28, 1000);
+        wIdentifier = JOptionPane.showInputDialog("wIdentifier");
+        wTrainIdentifier = tIdentifier;
+        WagonModel wagon = new WagonModel(wId, wType, wPassengerCapacity, wTrainIdentifier, wIdentifier);
+        WagonView wagonView = new WagonView();
+        WagonController wagonController = new WagonController(wagon, wagonView);
+        wagonController.updateView();
 
-// Crear una vista para el tren
-TrainView trainView = new TrainView();
 
-// Crear un controlador para el tren
-TrainController trainController = new TrainController(train, trainView);
-
-// Actualizar la vista del tren
-trainController.updateView();
-
-// Crear vagones
-WagonModel wagon1 = new WagonModel(1, "Pasajeros", 40, train);
-
-WagonModel wagon2 = new WagonModel(2, "Carga", 500, train);
-
-// Crear una vista para los vagones
-WagonView wagonView = new WagonView();
-
-// Crear un controlador para el primer vagón
-WagonController wagonController1 = new WagonController(wagon1, wagonView);
-
-// Crear un controlador para el segundo vagón
-WagonController wagonController2 = new WagonController(wagon2, wagonView);
-
-// Actualizar la vista para el primer y segundo vagón
-wagonController1.updateView();
-wagonController2.updateView();
-*/
 }
 }
  

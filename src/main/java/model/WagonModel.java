@@ -6,14 +6,18 @@ public class WagonModel {
     private int capacity;
     private int passengerCapacity; // Capacidad de pasajeros
     private int luggageCapacity; // Capacidad de equipaje
-    private TrainModel train; // Referencia al tren al que pertenece el vagón
+    private String trainId;
+    private String identifier;
 
-    public WagonModel(int idWagon, String type, int capacity, TrainModel train) {
+    public WagonModel(int idWagon, String type, int capacity,String trainId, String identifier) {
         this.idWagon = idWagon;
         this.type = type;
         this.capacity = capacity;
-        this.train = train;
+        this.trainId = trainId;
+        this.identifier = identifier;
         initializeCapacities();
+    }
+    public WagonModel() {
     }
 
     private void initializeCapacities() {
@@ -60,11 +64,19 @@ public class WagonModel {
         return luggageCapacity;
     }
 
-    public TrainModel getTrain() {
-        return train;
+    public String getTrainId(){
+        return trainId;
     }
 
-    public void setTrain(TrainModel train) {
-        this.train = train;
+    public void settrainId(String trainId) {
+        this.trainId = trainId;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 }

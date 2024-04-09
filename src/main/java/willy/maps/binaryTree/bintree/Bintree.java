@@ -73,6 +73,7 @@ public class Bintree<E> {
     //Siguiente calcular si el arbol esta completo
     
     //Metodo de insercion con cualquiera de estos 4 
+    //Metodo para eliminar
 
     //LIBRO QUE EXPLICA ARBOLES OSWALDO ESTRUCTURAD DE DATOS DE OSWALDO 
 }
