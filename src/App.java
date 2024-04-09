@@ -65,7 +65,7 @@ WagonController wagonController2 = new WagonController(wagon2, wagonView);
 // Actualizar la vista para el primer y segundo vagón
 wagonController1.updateView();
 wagonController2.updateView();
-changua
+changuaaaaa
 */
 }
 }
