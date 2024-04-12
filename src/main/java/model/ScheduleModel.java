@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDateTime;
 
 public class ScheduleModel {
+    //horario no es tan necesario (esto es debatible)
     private LocalDateTime entrada;
     private LocalDateTime salida;
 

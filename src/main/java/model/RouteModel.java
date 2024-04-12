@@ -1,6 +1,7 @@
 package model;
 
 public class RouteModel {
+    //PENDIENTE MODIFICAR RUTAS
     //Graffo
     TrainModel train = new TrainModel(0, null, null, 0, 0);
     StationModel stationOrigin = new StationModel(null, 0);

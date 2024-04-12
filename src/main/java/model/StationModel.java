@@ -1,7 +1,7 @@
 package model;
 
 public class StationModel {
-
+    //PENDIENTE MODIFICAR O IMPLEMENTAR ESTACIONES
     public String nameStation;
     public int idStation;
     ScheduleModel schedule = new ScheduleModel(null, null);

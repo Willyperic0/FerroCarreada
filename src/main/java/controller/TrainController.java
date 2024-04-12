@@ -12,6 +12,7 @@ public class TrainController {
     public TrainController(TrainModel model, TrainView view) {
         this.model = model;
         this.view = view;
+        this.trains = new LinkedList<>(); //agregada la lista, por ello se devolvia nulo siempre
     }
 
     public void setTrainId(int trainId) {
@@ -34,9 +35,27 @@ public class TrainController {
         System.out.println("Tren agregado correctamente al sistema.");
     }
     
-     // Método para obtener la lista de trenes en el sistema
-    public LinkedList<TrainModel> getTrains() {
-      return trains;
+     // Método para obtener la lista de trenes en el sistema 
+     public String getTrains() {    // CORREGIDO METODO GETTRAINS
+        LinkedList<TrainModel> trains = this.trains; // Accede directamente a la lista de trenes en el controlador
+        StringBuilder message = new StringBuilder();
+        
+        if (trains != null && !trains.isEmpty()) {
+            message.append("Lista de trenes:\n");
+            for (int i = 0; i < trains.size(); i++) {
+                TrainModel train = trains.get(i);
+                message.append("ID: ").append(train.getTrainId()).append("\n")
+                        .append("Nombre: ").append(train.getName()).append("\n")
+                        .append("Identificador: ").append(train.getIdentifier()).append("\n")
+                        .append("Capacidad de carga: ").append(train.getCapacityLoad()).append("\n")
+                        .append("Millas: ").append(train.getMileage()).append("\n\n");
+            }
+        } else {
+            message.append("No hay trenes en el sistema.");
+        }
+        
+        return message.toString();
     }
+    
     
 }

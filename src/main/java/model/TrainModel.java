@@ -7,8 +7,6 @@ public class TrainModel {
     public int capacityLoad;
     public int mileage;
 
-    //LinkedList<Wagon> wagon = new LinkedList<>();
-
     public TrainModel(int trainId, String name, String identifier, int capacityLoad, int mileage) {   
         this.trainId = trainId;
         this.name = name;
