@@ -1,23 +1,30 @@
 [
   {
     "trainId": 1,
-    "name": "Mercedes-Benz",
-    "identifier": "00050",
-    "capacityLoad": 27,
-    "mileage": 4000
-  },
-  {
-    "trainId": 1,
     "name": "Arnold",
     "identifier": "2",
     "capacityLoad": 2,
     "mileage": 2
   },
   {
-    "trainId": 1,
+    "trainId": 2,
+    "name": "Mercedes-Benz",
+    "identifier": "1",
+    "capacityLoad": 1,
+    "mileage": 1
+  },
+  {
+    "trainId": 3,
     "name": "Arnold",
-    "identifier": "changua",
-    "capacityLoad": 31,
-    "mileage": 5000
+    "identifier": "23",
+    "capacityLoad": 23,
+    "mileage": 23
+  },
+  {
+    "trainId": 4,
+    "name": "Mercedes-Benz",
+    "identifier": "230805",
+    "capacityLoad": 23,
+    "mileage": 400098
   }
 ]

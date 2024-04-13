@@ -5,6 +5,7 @@ import willy.linkedlist.singly.LinkedList;
  
 
 public class TrainView {
+    // Error increible no estamos implementando una correcta vista!
     private LinkedList listTrain = new LinkedList<>();
     public void TrainList(TrainModel train) {
         listTrain.add("ID: "+train.getTrainId()+
