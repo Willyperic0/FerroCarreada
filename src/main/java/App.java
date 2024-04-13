@@ -6,7 +6,6 @@ import controller.FileJsonAdapter;
 import controller.TrainController;
 import model.TrainModel;
 import view.TrainView;
-import willy.linkedlist.singly.LinkedList;
 
 public class App {
     // RECORDAR QUE ESTO SE HACE PARA PROBAR LA LOGICA, SE DEBE USAR JFRAME
@@ -28,8 +27,8 @@ public static void main(String[] args) {
             // Crear una instancia de FileJsonAdapter
             FileJsonAdapter<TrainModel> jsonAdapter = FileJsonAdapter.getInstance();
             // Carpeta donde se guardará el archivo JSON
-        String folderPath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database";
-        File folder = new File(folderPath);
+            String folderPath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database";
+            File folder = new File(folderPath);
         // Crear la carpeta si no existe
         if (!folder.exists()) {
             folder.mkdirs();
@@ -84,9 +83,10 @@ public static void main(String[] args) {
             } while (answer == 1);
     
     // Ruta completa del archivo JSON
-        String filePath = folderPath + File.separator + "trains.json";
+    String filePath = folderPath + File.separator + "trains.json";
 
-        boolean success = jsonAdapter.writeObjects(filePath, trainController.getTrains());
+
+        boolean success = jsonAdapter.writeObjects(filePath,trainController.getTrainList());
 
             
     

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import willy.linkedlist.singly.LinkedList;
+import willy.linkedlist.doubly.LinkedList;
 
 public class FileJsonAdapter<E> implements FileJsonInterface<E> {
     private Object fileWriterLock;
@@ -40,18 +40,18 @@ public class FileJsonAdapter<E> implements FileJsonInterface<E> {
         return objList;
     }
 
-    public Boolean writeObjects(String pathFile, String jsonContent) {
+    public Boolean writeObjects(String pathFile, LinkedList<E> objects) {
         boolean successful = false;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    
+ 
         try (FileWriter writer = new FileWriter(pathFile)) {
             synchronized (fileWriterLock) {
                 // Limpiar el archivo (eliminar todos los objetos)
                 writer.write(""); // Esto eliminará todo el contenido del archivo
-    
-                // Escribir el contenido JSON proporcionado
-                writer.write(jsonContent);
-    
+ 
+                // Escribir los nuevos objetos
+                gson.toJson(objects.toArray(), writer);
+ 
                 successful = true;
             }
         } catch (IOException e) {

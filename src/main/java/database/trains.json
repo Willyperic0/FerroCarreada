@@ -1,7 +1,9 @@
-Lista de trenes:
-ID: 1
-Nombre: Arnold
-Identificador: weqeqweqewqeqewq
-Capacidad de carga: 20
-Millas: 2.18372183E8
-
+[
+  {
+    "trainId": 1,
+    "name": "Arnold",
+    "identifier": "2",
+    "capacityLoad": 2,
+    "mileage": 2
+  }
+]

@@ -1,8 +1,8 @@
 package controller;
 
-import willy.linkedlist.singly.LinkedList;
+import willy.linkedlist.doubly.LinkedList;
 
 public interface FileJsonInterface<E> {
     LinkedList<E> getObjects(String pathFile, Class<E[]> classOfT);
-    Boolean writeObjects(String pathFile, String jsonContent);
+    Boolean writeObjects(String pathFile, LinkedList<E> objects);
 }
