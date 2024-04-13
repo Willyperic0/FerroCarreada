@@ -1,6 +1,8 @@
 package model;
 
-public class TrainModel {
+import java.io.Serializable;
+
+public class TrainModel implements Serializable {
     public int trainId;
     public String name;
     public String identifier;

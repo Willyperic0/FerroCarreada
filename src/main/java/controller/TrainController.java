@@ -29,11 +29,14 @@ public class TrainController {
     }
 
         // Método para agregar un nuevo tren al sistema
-    public void addTrain(int trainId, String name, String identifier, int capacityLoad, int mileage) {
-        TrainModel nuevoTren = new TrainModel(trainId, name, identifier, capacityLoad, mileage);
-        trains.add(nuevoTren);
-        System.out.println("Tren agregado correctamente al sistema.");
-    }
+// Método para agregar un nuevo tren al sistema
+public void addTrain(int trainId, String name, String identifier, int capacityLoad, int mileage) {
+    TrainModel nuevoTren = new TrainModel(trainId, name, identifier, capacityLoad, mileage);
+    trains.add(nuevoTren);
+    System.out.println("Tren agregado correctamente al sistema.");
+    System.out.println("Lista de trenes después de agregar un nuevo tren: " + trains); // Línea de depuración
+}
+
     
      // Método para obtener la lista de trenes en el sistema 
      public String getTrains() {    // CORREGIDO METODO GETTRAINS
@@ -56,6 +59,12 @@ public class TrainController {
         
         return message.toString();
     }
+    public LinkedList<TrainModel> getTrainList() {
+        return trains;
+    }
+    
+    
+    
     
     
 }
