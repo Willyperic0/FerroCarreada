@@ -6,6 +6,7 @@ import controller.FileJsonAdapter;
 import controller.TrainController;
 import model.TrainModel;
 import view.TrainView;
+import willy.linkedlist.doubly.LinkedList;
 
 public class App {
     // RECORDAR QUE ESTO SE HACE PARA PROBAR LA LOGICA, SE DEBE USAR JFRAME
@@ -29,10 +30,15 @@ public static void main(String[] args) {
             // Carpeta donde se guardará el archivo JSON
             String folderPath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database";
             File folder = new File(folderPath);
+
         // Crear la carpeta si no existe
         if (!folder.exists()) {
             folder.mkdirs();
         }
+            // Ruta completa del archivo JSON
+    String filePath = folderPath + File.separator + "trains.json";
+    LinkedList<TrainModel> trainList = jsonAdapter.getObjects(filePath, TrainModel[].class);
+    trainController.setTrainList(trainList);
             do {
                 // solicita al usuario la información del tren
                 tId++; // incrementa el identificador del tren
@@ -82,8 +88,7 @@ public static void main(String[] args) {
                 answer = Integer.parseInt(JOptionPane.showInputDialog("¿Desea continuar?\n1. Sí\n2. No"));
             } while (answer == 1);
     
-    // Ruta completa del archivo JSON
-    String filePath = folderPath + File.separator + "trains.json";
+
 
 
         boolean success = jsonAdapter.writeObjects(filePath,trainController.getTrainList());
@@ -96,6 +101,5 @@ public static void main(String[] args) {
                 JOptionPane.showMessageDialog(null, "Error al guardar los datos en el archivo JSON.");
             }
         }
-    //FALTA LA CREACION DE LOS METODOS PARA LA BASE DE DATOS Y UNA INTERFAZ PARA MANEJO DE TRENES
+    //FALTA UNA INTERFAZ PARA MANEJO DE TRENES
 }
- 

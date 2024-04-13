@@ -62,6 +62,8 @@ public void addTrain(int trainId, String name, String identifier, int capacityLo
     public LinkedList<TrainModel> getTrainList() {
         return trains;
       }
-    
+      public void setTrainList(LinkedList<TrainModel> trainList) {
+        this.trains = trainList;
+    }
       
 }
