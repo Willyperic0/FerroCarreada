@@ -74,4 +74,37 @@ public class TrainController {
         this.trains = trainList; // Asigna la lista de trenes recibida como parámetro
     }
 
+    public void deleteAndReorganize(int trainIdToDelete) {
+        // Crear una LinkedList temporal para almacenar los datos
+        LinkedList<TrainModel> tempTrainList = new LinkedList<>();
+        
+        // Recorrer los elementos originales y agregar aquellos cuyo ID no coincida con el ID a eliminar
+        int newTrainId = 1; // Nuevo ID para los trenes después de la reorganización
+        for (int i = 0; i < trains.size(); i++) {
+            TrainModel train = trains.get(i);
+            if (train.getTrainId() != trainIdToDelete) {
+                train.setTrainId(newTrainId++); // Actualizar el ID del tren
+                tempTrainList.add(train); // Agregar el tren a la lista temporal
+            }
+        }
+        
+        // Actualizar la lista de trenes con la lista temporal
+        trains = tempTrainList;
+    }
+    
+    public void deleteAllTrains() {
+        trains.clear(); // Borra toda la lista de trenes
+    }    
+
+    public TrainModel findTrainByIdentifier(String identifier) {
+        // Recorrer la lista de trenes para encontrar el tren con el identificador dado
+        for (int i = 0; i < trains.size(); i++) {
+            TrainModel train = trains.get(i);
+            if (train.getIdentifier().equals(identifier)) {
+                return train; // Devolver el tren si se encuentra
+            }
+        }
+        return null; // Devolver null si no se encuentra ningún tren con el identificador dado
+    }
+    
 }

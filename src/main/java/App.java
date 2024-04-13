@@ -57,7 +57,7 @@ public class App {
         String tIdentifier; // identificador del tren
         
         do {
-            answer = Integer.parseInt(JOptionPane.showInputDialog("Que desea hacer?\n1. ver lista de trenes\n2. agregar trenes\n3. eliminar un tren\n4. eliminar TODOS los trenes"));
+            answer = Integer.parseInt(JOptionPane.showInputDialog("Que desea hacer?\n1. ver lista de trenes\n2. agregar trenes\n3. eliminar un tren\n4. eliminar TODOS los trenes\n5. buscar trenes"));
             switch (answer) {
                 case 1:
                     // Mostrar los trenes en el modelo
@@ -114,14 +114,43 @@ public class App {
                             break;
                     }
                     break;
-                case 3:
-                    // Implementar la lógica para eliminar un tren
-                    JOptionPane.showMessageDialog(null, "MODULO NO DISPONIBLE POR EL MOMENTO");
+                    case 3:
+                    // Solicitar al usuario el ID del tren a eliminar
+                    int trainIdToDelete = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del tren que desea eliminar:"));
+                    // Llamar al método deleteAndReorganize para eliminar el tren y reorganizar la lista
+                    trainController.deleteAndReorganize(trainIdToDelete);
+                    // Mostrar un mensaje indicando que el tren ha sido eliminado y la lista ha sido reorganizada
+                    JOptionPane.showMessageDialog(null, "El tren con ID " + trainIdToDelete + " ha sido eliminado y la lista ha sido reorganizada correctamente.");
+                    // Mostrar los trenes en la lista actualizada
+                    JOptionPane.showMessageDialog(null, trainController.getTrains());
                     break;
-                case 4:
-                    // Implementar la lógica para eliminar todos los trenes
-                    JOptionPane.showMessageDialog(null, "MODULO NO DISPONIBLE POR EL MOMENTO");
+                
+                    case 4:
+                    // Llamar al método deleteAllTrains para eliminar toda la lista de trenes
+                    trainController.deleteAllTrains();
+                    // Mostrar un mensaje indicando que todos los trenes han sido eliminados
+                    JOptionPane.showMessageDialog(null, "Todos los trenes han sido eliminados correctamente.");
                     break;
+                    case 5:
+                    // Solicitar al usuario el identificador del tren a buscar
+                    String searchIdentifier = JOptionPane.showInputDialog("Ingrese el identificador del tren que desea buscar:");
+                    // Buscar el tren por su identificador utilizando el método findTrainByIdentifier
+                    TrainModel foundTrain = trainController.findTrainByIdentifier(searchIdentifier);
+                    // Verificar si se encontró el tren
+                    if (foundTrain != null) {
+                        // Mostrar los detalles del tren encontrado
+                        JOptionPane.showMessageDialog(null, "Se encontró el tren:\n\n" + 
+                                                            "ID: " + foundTrain.getTrainId() + "\n" +
+                                                            "Nombre: " + foundTrain.getName() + "\n" +
+                                                            "Identificador: " + foundTrain.getIdentifier() + "\n" +
+                                                            "Capacidad de carga: " + foundTrain.getCapacityLoad() + "\n" +
+                                                            "Millas: " + foundTrain.getMileage());
+                    } else {
+                        // Mostrar un mensaje indicando que el tren no fue encontrado
+                        JOptionPane.showMessageDialog(null, "No se encontró ningún tren con el identificador proporcionado.");
+                    }
+                    break;
+                
                 default:
                     JOptionPane.showMessageDialog(null, "Por favor, ingrese una opción válida");
                     break;
