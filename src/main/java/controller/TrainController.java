@@ -16,25 +16,9 @@ public class TrainController {
         this.trains = new LinkedList<>(); // Inicializa la lista de trenes
     }
 
-    // Método para establecer el ID del tren en el modelo
-    public void setTrainId(int trainId) {
-        model.setTrainId(trainId);
-    }
-
-    // Método para obtener el ID del tren desde el modelo
-    public int getTrainId() {
-        return model.getTrainId();
-    }
-
-    // Método para actualizar la vista de tren
-    public void updateView() { // Este metodo se esta usando en App
-        view.TrainList(model); // Actualiza la lista de trenes en la vista
-        view.printTrainDetails(); // Imprime los detalles del tren en la vista
-    }
-
     // Método para agregar un nuevo tren al sistema
-    public void addTrain(int trainId, String name, String identifier, int capacityLoad, int mileage) { // Este metodo se esta usando en App
-        TrainModel nuevoTren = new TrainModel(trainId, name, identifier, capacityLoad, mileage); // Crea un nuevo objeto TrainModel
+    public void addTrain(String name, String identifier, int capacityLoad, int mileage) { // Este metodo se esta usando en App
+        TrainModel nuevoTren = new TrainModel(name, identifier, capacityLoad, mileage); // Crea un nuevo objeto TrainModel
         trains.add(nuevoTren); // Agrega el nuevo tren a la lista de trenes
         System.out.println("Tren agregado correctamente al sistema."); // Imprime un mensaje de éxito
         System.out.println("Lista de trenes después de agregar un nuevo tren: " + trains); // Imprime la lista de trenes (depuración)
@@ -51,8 +35,7 @@ public class TrainController {
             // Itera sobre la lista de trenes y agrega los detalles de cada tren al mensaje
             for (int i = 0; i < trains.size(); i++) {
                 TrainModel train = trains.get(i);
-                message.append("ID: ").append(train.getTrainId()).append("\n")
-                        .append("Nombre: ").append(train.getName()).append("\n")
+                message.append("Nombre: ").append(train.getName()).append("\n")
                         .append("Identificador: ").append(train.getIdentifier()).append("\n")
                         .append("Capacidad de carga: ").append(train.getCapacityLoad()).append("\n")
                         .append("Millas: ").append(train.getMileage()).append("\n\n");
@@ -75,21 +58,19 @@ public class TrainController {
     }
 
     public void deleteAndReorganize(int trainIdToDelete) {
-        // Crear una LinkedList temporal para almacenar los datos
-        LinkedList<TrainModel> tempTrainList = new LinkedList<>();
-        
-        // Recorrer los elementos originales y agregar aquellos cuyo ID no coincida con el ID a eliminar
-        int newTrainId = 1; // Nuevo ID para los trenes después de la reorganización
-        for (int i = 0; i < trains.size(); i++) {
-            TrainModel train = trains.get(i);
-            if (train.getTrainId() != trainIdToDelete) {
-                train.setTrainId(newTrainId++); // Actualizar el ID del tren
-                tempTrainList.add(train); // Agregar el tren a la lista temporal
-            }
-        }
-        
-        // Actualizar la lista de trenes con la lista temporal
-        trains = tempTrainList;
+     // Crear una LinkedList temporal para almacenar los datos
+     LinkedList<TrainModel> tempTrainList = new LinkedList<>();
+    
+     // Recorrer los elementos originales y agregar aquellos cuyo identificador no coincida con el identificador a eliminar
+     for (int i = 0; i < trains.size(); i++) {
+         TrainModel train = trains.get(i);
+         if (!train.getIdentifier().equals(trainIdToDelete)) {
+             tempTrainList.add(train); // Agregar el tren a la lista temporal
+         }
+     }
+     
+     // Actualizar la lista de trenes con la lista temporal
+     trains = tempTrainList;
     }
     
     public void deleteAllTrains() {

@@ -1,23 +1,20 @@
 [
   {
-    "trainId": 1,
-    "name": "Mercedes-Benz",
-    "identifier": "WillyTrain",
+    "name": "Arnold",
+    "identifier": "23ARchangua",
     "capacityLoad": 23,
     "mileage": 23000
   },
   {
-    "trainId": 2,
-    "name": "Arnold",
-    "identifier": "JuanPapuTrain",
-    "capacityLoad": 27,
-    "mileage": 27000
+    "name": "Mercedes-Benz",
+    "identifier": "changua",
+    "capacityLoad": 2,
+    "mileage": 222
   },
   {
-    "trainId": 3,
-    "name": "Mercedes-Benz",
-    "identifier": "VirginsTrain",
-    "capacityLoad": 19,
-    "mileage": 2019
+    "name": "Arnold",
+    "identifier": "2",
+    "capacityLoad": 2,
+    "mileage": 2
   }
 ]

@@ -4,15 +4,13 @@ import java.io.Serializable;
 
 public class TrainModel implements Serializable { // Define la clase TrainModel que implementa la interfaz Serializable
     // Variables de instancia para los atributos de un tren
-    public int trainId; // Identificador del tren
     public String name; // Nombre del tren
     public String identifier; // Identificador del tren
     public int capacityLoad; // Capacidad de carga del tren
     public int mileage; // Kilometraje del tren
 
     // Constructor con parámetros para inicializar los atributos de un tren
-    public TrainModel(int trainId, String name, String identifier, int capacityLoad, int mileage) {   // Este metodo se esta usando en App
-        this.trainId = trainId; // Asigna el identificador del tren
+    public TrainModel(String name, String identifier, int capacityLoad, int mileage) {   // Este metodo se esta usando en App
         this.name = name; // Asigna el nombre del tren
         this.identifier = identifier; // Asigna el identificador del tren
         this.capacityLoad = capacityLoad; // Asigna la capacidad de carga del tren
@@ -21,16 +19,6 @@ public class TrainModel implements Serializable { // Define la clase TrainModel 
 
     // Constructor sin parámetros (por defecto)
     public TrainModel() { // Este metodo se esta usando en App
-    }
-
-    // Método para obtener el identificador del tren
-    public int getTrainId() {
-        return this.trainId; // Retorna el identificador del tren
-    }
-
-    // Método para establecer el identificador del tren
-    public void setTrainId(int trainId) {
-        this.trainId = trainId; // Asigna el identificador del tren
     }
 
     // Método para obtener el nombre del tren

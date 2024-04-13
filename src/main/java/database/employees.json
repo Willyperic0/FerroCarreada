@@ -1,0 +1,26 @@
+[
+  {
+    "user": "William.Sanabria.58",
+    "password": "WS512958",
+    "name": "William",
+    "lastName": "Sanabria",
+    "phoneNumber": 2308,
+    "dni": 512958
+  },
+  {
+    "user": "luis.fuentes.66",
+    "password": "LF5",
+    "name": "Luis",
+    "lastName": "Fuentes",
+    "phoneNumber": 100200,
+    "dni": 560066
+  },
+  {
+    "user": "lenin.serrano.65",
+    "password": "LS456565",
+    "name": "Lenin",
+    "lastName": "Serrano",
+    "phoneNumber": 111111111,
+    "dni": 456565
+  }
+]
