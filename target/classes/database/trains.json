@@ -12,12 +12,6 @@
     "mileage": 2
   },
   {
-    "name": "Arnold",
-    "identifier": "brenda",
-    "capacityLoad": 25,
-    "mileage": 0
-  },
-  {
     "name": "Mercedes-Benz",
     "identifier": "1",
     "capacityLoad": 20,

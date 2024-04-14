@@ -89,6 +89,34 @@ public class EmployeeController {
         // Actualizar la lista de empleados con la lista temporal
         employees = tempEmployeeList;
     }
+
+    public String getEmployeeFullName(String username) {
+        // Obtener el tamaño de la lista de empleados
+        int size = employees.size();
+        
+        // Inicializar el índice del bucle
+        int index = 0;
+        
+        // Bucle mientras el índice sea menor que el tamaño de la lista
+        while (index < size) {
+            // Obtener el empleado en la posición del índice
+            EmployeeModel employee = employees.get(index);
+            
+            // Verificar si el nombre de usuario coincide
+            if (employee.getUser().equals(username)) {
+                // Si se encuentra el empleado, devolver su nombre completo
+                return employee.getName() + " " + employee.getLastName();
+            }
+            
+            // Incrementar el índice para pasar al siguiente elemento
+            index++;
+        }
+        
+        // Si no se encuentra el empleado, devolver una cadena vacía
+        return "";
+    }
+    
+    
     
 }
 

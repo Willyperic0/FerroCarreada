@@ -1,3 +1,4 @@
+package view;
 import java.io.File;
 
 import javax.swing.JOptionPane;
@@ -10,10 +11,9 @@ import model.TrainModel;
 import view.EmployeeView;
 import view.TrainView;
 import willy.linkedlist.doubly.LinkedList;
-
-public class App {
+public class MainTemp {
     public static void main(String[] args) {
-        new App().startApplication();
+        new MainTemp().startApplication();
     }
     public void startApplication() {
         // Crear instancias del modelo, la vista y el controlador

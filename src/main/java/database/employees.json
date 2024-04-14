@@ -6,5 +6,13 @@
     "lastName": "Sanabria",
     "phoneNumber": 2308,
     "dni": 512958
+  },
+  {
+    "user": "luis.fuentes.98",
+    "password": "LF510098",
+    "name": "Luis",
+    "lastName": "Fuentes",
+    "phoneNumber": 11,
+    "dni": 510098
   }
 ]
