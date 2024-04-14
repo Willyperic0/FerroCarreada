@@ -82,6 +82,8 @@ public class App {
                                     tIdentifier = JOptionPane.showInputDialog("Por favor, ingrese el serial del tren");
                                     // Agregar el tren al modelo
                                     trainController.addTrain(tName, tIdentifier, tCapacityLoad, tMileage);
+                                    int cargo = tCapacityLoad / 3;
+                                    int passenger = tCapacityLoad - cargo;
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Por favor, ingrese una cantidad válida");
                                 }
@@ -115,11 +117,11 @@ public class App {
                     break;
                     case 3:
                     // Solicitar al usuario el ID del tren a eliminar
-                    int trainIdToDelete = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del tren que desea eliminar:"));
+                    String trainIdToDelete = JOptionPane.showInputDialog("Ingrese el identificador del tren que desea eliminar:");
                     // Llamar al método deleteAndReorganize para eliminar el tren y reorganizar la lista
                     trainController.deleteAndReorganize(trainIdToDelete);
                     // Mostrar un mensaje indicando que el tren ha sido eliminado y la lista ha sido reorganizada
-                    JOptionPane.showMessageDialog(null, "El tren con ID " + trainIdToDelete + " ha sido eliminado y la lista ha sido reorganizada correctamente.");
+                    JOptionPane.showMessageDialog(null, "El tren con identificador " + trainIdToDelete + " ha sido eliminado correctamente.");
                     // Mostrar los trenes en la lista actualizada
                     JOptionPane.showMessageDialog(null, trainController.getTrains());
                     break;

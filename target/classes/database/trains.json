@@ -6,15 +6,21 @@
     "mileage": 23000
   },
   {
-    "name": "Mercedes-Benz",
-    "identifier": "changua",
-    "capacityLoad": 2,
-    "mileage": 222
-  },
-  {
     "name": "Arnold",
     "identifier": "2",
     "capacityLoad": 2,
     "mileage": 2
+  },
+  {
+    "name": "Arnold",
+    "identifier": "brenda",
+    "capacityLoad": 25,
+    "mileage": 0
+  },
+  {
+    "name": "Mercedes-Benz",
+    "identifier": "1",
+    "capacityLoad": 20,
+    "mileage": 1
   }
 ]

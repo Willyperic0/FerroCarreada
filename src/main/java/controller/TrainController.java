@@ -57,7 +57,7 @@ public class TrainController {
         this.trains = trainList; // Asigna la lista de trenes recibida como parámetro
     }
 
-    public void deleteAndReorganize(int trainIdToDelete) {
+    public void deleteAndReorganize(String trainIdToDelete) {
      // Crear una LinkedList temporal para almacenar los datos
      LinkedList<TrainModel> tempTrainList = new LinkedList<>();
     
