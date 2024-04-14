@@ -14,10 +14,6 @@ import controller.LoginController;
 import controller.FileJsonAdapter;
 import willy.linkedlist.doubly.LinkedList;
 
-/**
- *
- * @author Willyperic0
- */
 public class LoginView extends javax.swing.JFrame {
     
     // Lista de empleados cargada desde el archivo JSON
@@ -27,6 +23,7 @@ public class LoginView extends javax.swing.JFrame {
     static LoginController loginController = new LoginController();
     FileJsonAdapter<EmployeeModel> employeeJsonAdapter = FileJsonAdapter.getInstance();
     String employeeFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "employees.json";
+    
     /**
      * Creates new form LoginView
      */

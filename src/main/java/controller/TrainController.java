@@ -1,5 +1,7 @@
 package controller;
 
+import javax.swing.JOptionPane;
+
 import model.TrainModel;
 import view.TrainView;
 import willy.linkedlist.doubly.LinkedList;
@@ -16,13 +18,45 @@ public class TrainController {
         this.trains = new LinkedList<>(); // Inicializa la lista de trenes
     }
 
-    // Método para agregar un nuevo tren al sistema
-    public void addTrain(String name, String identifier, int capacityLoad, int mileage) { // Este metodo se esta usando en App
-        TrainModel nuevoTren = new TrainModel(name, identifier, capacityLoad, mileage); // Crea un nuevo objeto TrainModel
-        trains.add(nuevoTren); // Agrega el nuevo tren a la lista de trenes
-        System.out.println("Tren agregado correctamente al sistema."); // Imprime un mensaje de éxito
-        System.out.println("Lista de trenes después de agregar un nuevo tren: " + trains); // Imprime la lista de trenes (depuración)
+    public void addTrain(String name, String identifier, int capacityLoad, int mileage) {
+        // Verificar si ya existe un tren con el mismo identificador
+        if (isTrainExists(identifier)) {
+            JOptionPane.showMessageDialog(null,"Error: Ya existe un tren con el mismo identificador en el sistema.");
+            return; // Salir del método si ya existe un tren con el mismo identificador
+        }
+        
+        // Si no hay un tren con el mismo identificador, proceder con la adición del nuevo tren
+        TrainModel newTrain = new TrainModel(name, identifier, capacityLoad, mileage); // Crea un nuevo objeto TrainModel
+        trains.add(newTrain); // Agrega el nuevo tren a la lista de trenes
+        JOptionPane.showMessageDialog(null,"Tren agregado correctamente al sistema."); // Imprime un mensaje de éxito
     }
+
+    // Método para verificar si ya existe un tren con el mismo identificador
+private boolean isTrainExists(String identifier) {
+    // Obtener el tamaño de la lista de trenes
+    int size = trains.size();
+    
+    // Inicializar el índice del bucle
+    int index = 0;
+    
+    // Bucle mientras el índice sea menor que el tamaño de la lista
+    while (index < size) {
+        // Obtener el tren en la posición del índice
+        TrainModel train = trains.get(index);
+        
+        // Verificar si el identificador del tren coincide con el identificador proporcionado
+        if (train.getIdentifier().equals(identifier)) {
+            return true; // Devolver true si se encuentra un tren con el mismo identificador
+        }
+        
+        // Incrementar el índice para pasar al siguiente elemento
+        index++;
+    }
+    
+    // Si no se encuentra el tren, devolver false
+    return false;
+}
+
 
     // Método para obtener una representación de texto de la lista de trenes en el sistema
     public String getTrains() { // Este metodo se esta usando en App

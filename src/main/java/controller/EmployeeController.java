@@ -21,12 +21,47 @@ public class EmployeeController {
 
 
     // Método para agregar un nuevo empleado al sistema
-    public void addEmployee(String name, String lastName, int phoneNumber, int dni, String user, String password) {
-        EmployeeModel newEmployee = new EmployeeModel(name, lastName, phoneNumber, dni, user, password); // Crea un nuevo objeto EmployeeModel
-        employees.add(newEmployee); // Agrega el nuevo empleado a la lista de empleados
-        System.out.println("Empleado agregado correctamente al sistema."); // Imprime un mensaje de éxito
-        System.out.println("Lista de empleados después de agregar un nuevo empleado: " + employees); // Imprime la lista de empleados (depuración)
+// Método para agregar un nuevo empleado al sistema
+public void addEmployee(String name, String lastName, int phoneNumber, int dni, String user, String password) {
+    // Verificar si ya existe un empleado con el mismo DNI
+    if (isEmployeeExists(dni)) {
+        JOptionPane.showMessageDialog(null,"Error: Ya existe un empleado con el mismo DNI en el sistema.");
+        return; // Salir del método si ya existe un empleado con el mismo DNI
     }
+    
+    // Si no hay un empleado con el mismo DNI, proceder con la adición del nuevo empleado
+    EmployeeModel newEmployee = new EmployeeModel(name, lastName, phoneNumber, dni, user, password); // Crea un nuevo objeto EmployeeModel
+    employees.add(newEmployee); // Agrega el nuevo empleado a la lista de empleados
+    JOptionPane.showMessageDialog(null,"Empleado agregado correctamente al sistema."); // Imprime un mensaje de éxito
+}
+
+// Método para verificar si ya existe un empleado con el mismo DNI
+private boolean isEmployeeExists(int dni) {
+    // Obtener el tamaño de la lista de empleados
+    int size = employees.size();
+    
+    // Inicializar el índice del bucle
+    int index = 0;
+    
+    // Bucle mientras el índice sea menor que el tamaño de la lista
+    while (index < size) {
+        // Obtener el empleado en la posición del índice
+        EmployeeModel employee = employees.get(index);
+        
+        // Verificar si el DNI del empleado coincide con el DNI proporcionado
+        if (employee.getDni() == dni) {
+            return true; // Devolver true si se encuentra un empleado con el mismo DNI
+        }
+        
+        // Incrementar el índice para pasar al siguiente elemento
+        index++;
+    }
+    
+    // Si no se encuentra el empleado, devolver false
+    return false;
+}
+
+
 
     // Método para obtener una representación de texto de la lista de empleados en el sistema
     public String getEmployees() {
@@ -41,9 +76,7 @@ public class EmployeeController {
                 message.append("Nombre: ").append(employee.getName()).append("\n")
                         .append("Apellido: ").append(employee.getLastName()).append("\n")
                         .append("Número de teléfono: ").append(employee.getPhoneNumber()).append("\n")
-                        .append("DNI: ").append(employee.getDni()).append("\n")
-                        .append("Usuario: ").append(employee.getUser()).append("\n")
-                        .append("Contraseña: ").append(employee.getPassword()).append("\n\n");
+                        .append("DNI: ").append(employee.getDni()).append("\n");
             }
         } else { // Si la lista de empleados está vacía, agrega un mensaje indicando que no hay empleados en el sistema
             message.append("No hay empleados en el sistema.");
@@ -81,7 +114,7 @@ public class EmployeeController {
         // Crear una LinkedList temporal para almacenar los datos
         LinkedList<EmployeeModel> tempEmployeeList = new LinkedList<>();
         if (employeeDNI == loginController.loggedDNI()) {
-            JOptionPane.showMessageDialog(null, "No puedes eliminarte a ti mismo");
+            JOptionPane.showMessageDialog(null, "ERROR No puedes eliminarte a ti mismo!");
         } else {
         // Recorrer los elementos originales y agregar aquellos cuyo DNI no coincida con el DNI a eliminar
         for (int i = 0; i < employees.size(); i++) {
