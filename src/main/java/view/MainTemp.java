@@ -10,7 +10,6 @@ import controller.TrainController;
 import model.EmployeeModel;
 import model.TrainModel;
 import view.EmployeeView;
-import view.TrainView;
 import willy.linkedlist.doubly.LinkedList;
 public class MainTemp {
     public static void main(String[] args) {
@@ -19,13 +18,11 @@ public class MainTemp {
     public void startApplication() {
         // Crear instancias del modelo, la vista y el controlador
         TrainModel trainModel = new TrainModel();
-        TrainView trainView = new TrainView();
-        TrainController trainController = new TrainController(trainModel, trainView);
+        TrainController trainController = new TrainController(trainModel);
 
         // Crear instancias del modelo, la vista y el controlador
         EmployeeModel employeeModel = new EmployeeModel();
-        EmployeeView employeeView = new EmployeeView();
-        EmployeeController employeeController = new EmployeeController(employeeModel, employeeView);
+        EmployeeController employeeController = new EmployeeController(employeeModel);
         LoginController loginController = new LoginController();
 
         // Crear una instancia de FileJsonAdapter para trenes

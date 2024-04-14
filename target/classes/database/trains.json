@@ -16,5 +16,17 @@
     "identifier": "1",
     "capacityLoad": 20,
     "mileage": 1
+  },
+  {
+    "name": "Arnold",
+    "identifier": "brenda",
+    "capacityLoad": 2,
+    "mileage": 2
+  },
+  {
+    "name": "Mercedes-Benz",
+    "identifier": "camilo",
+    "capacityLoad": 25,
+    "mileage": 25
   }
 ]

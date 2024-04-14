@@ -11,11 +11,10 @@ import view.EmployeeView;
 public class EmployeeController {
     private LinkedList<EmployeeModel> employees; // Lista enlazada para almacenar los empleados
     private EmployeeModel model; // Modelo de empleado
-    private EmployeeView view;
+
     static LoginController loginController;
-    public EmployeeController(EmployeeModel model,EmployeeView view) {
+    public EmployeeController(EmployeeModel model) {
         this.model = model;
-        this.view = view;
         this.employees = new LinkedList<>();
     }
 

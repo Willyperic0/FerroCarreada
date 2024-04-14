@@ -3,18 +3,17 @@ package controller;
 import javax.swing.JOptionPane;
 
 import model.TrainModel;
-import view.TrainView;
+
 import willy.linkedlist.doubly.LinkedList;
 
 public class TrainController {
     private LinkedList<TrainModel> trains; // Lista enlazada para almacenar los trenes
     private TrainModel model; // Modelo de tren
-    private TrainView view; // Vista de tren
+
 
     // Constructor de la clase TrainController
-    public TrainController(TrainModel model, TrainView view) { // Este metodo se esta usando en App
-        this.model = model; // Asigna el modelo de tren
-        this.view = view; // Asigna la vista de tren
+    public TrainController(TrainModel model) { // Este metodo se esta usando en App
+        this.model = model; // Asigna el modelo de tre
         this.trains = new LinkedList<>(); // Inicializa la lista de trenes
     }
 
