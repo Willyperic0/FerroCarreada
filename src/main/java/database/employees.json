@@ -8,11 +8,11 @@
     "dni": 512958
   },
   {
-    "user": "luis.fuentes.98",
-    "password": "LF510098",
-    "name": "Luis",
-    "lastName": "Fuentes",
-    "phoneNumber": 11,
-    "dni": 510098
+    "user": "admin",
+    "password": "admin",
+    "name": "Usuario",
+    "lastName": "Admin",
+    "phoneNumber": 32090,
+    "dni": 27
   }
 ]

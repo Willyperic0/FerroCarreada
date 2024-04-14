@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 
 import controller.EmployeeController;
 import controller.FileJsonAdapter;
+import controller.LoginController;
 import controller.TrainController;
 import model.EmployeeModel;
 import model.TrainModel;
@@ -25,6 +26,7 @@ public class MainTemp {
         EmployeeModel employeeModel = new EmployeeModel();
         EmployeeView employeeView = new EmployeeView();
         EmployeeController employeeController = new EmployeeController(employeeModel, employeeView);
+        LoginController loginController = new LoginController();
 
         // Crear una instancia de FileJsonAdapter para trenes
         FileJsonAdapter<TrainModel> trainJsonAdapter = FileJsonAdapter.getInstance();

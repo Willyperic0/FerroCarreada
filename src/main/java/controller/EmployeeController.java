@@ -2,6 +2,9 @@ package controller;
 
 
 import willy.linkedlist.doubly.LinkedList;
+
+import javax.swing.JOptionPane;
+
 import model.EmployeeModel;
 import view.EmployeeView;
 
@@ -9,7 +12,7 @@ public class EmployeeController {
     private LinkedList<EmployeeModel> employees; // Lista enlazada para almacenar los empleados
     private EmployeeModel model; // Modelo de empleado
     private EmployeeView view;
-
+    static LoginController loginController;
     public EmployeeController(EmployeeModel model,EmployeeView view) {
         this.model = model;
         this.view = view;
@@ -77,7 +80,9 @@ public class EmployeeController {
     public void deleteEmployee(int employeeDNI) {
         // Crear una LinkedList temporal para almacenar los datos
         LinkedList<EmployeeModel> tempEmployeeList = new LinkedList<>();
-        
+        if (employeeDNI == loginController.loggedDNI()) {
+            JOptionPane.showMessageDialog(null, "No puedes eliminarte a ti mismo");
+        } else {
         // Recorrer los elementos originales y agregar aquellos cuyo DNI no coincida con el DNI a eliminar
         for (int i = 0; i < employees.size(); i++) {
             EmployeeModel employee = employees.get(i);
@@ -88,6 +93,7 @@ public class EmployeeController {
         
         // Actualizar la lista de empleados con la lista temporal
         employees = tempEmployeeList;
+    }
     }
 
     public String getEmployeeFullName(String username) {
@@ -115,8 +121,4 @@ public class EmployeeController {
         // Si no se encuentra el empleado, devolver una cadena vacía
         return "";
     }
-    
-    
-    
 }
-
