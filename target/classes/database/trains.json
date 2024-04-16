@@ -10,5 +10,17 @@
     "identifier": "1",
     "capacityLoad": 20,
     "mileage": 1
+  },
+  {
+    "name": "Arnold",
+    "identifier": "WillyTrain",
+    "capacityLoad": 23,
+    "mileage": 0
+  },
+  {
+    "name": "Arnold",
+    "identifier": "Changuanator",
+    "capacityLoad": 23,
+    "mileage": 23
   }
 ]
