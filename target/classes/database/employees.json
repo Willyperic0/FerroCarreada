@@ -14,5 +14,21 @@
     "lastName": "Admin",
     "phoneNumber": 32090,
     "dni": 27
+  },
+  {
+    "user": "luis.fuentes.56",
+    "password": "LF514856",
+    "name": "Luis",
+    "lastName": "Fuentes",
+    "phoneNumber": 300,
+    "dni": 514856
+  },
+  {
+    "user": "juan.mendoza.95",
+    "password": "JM111295",
+    "name": "Juan",
+    "lastName": "Mendoza",
+    "phoneNumber": 300,
+    "dni": 111295
   }
 ]
