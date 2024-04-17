@@ -1,0 +1,48 @@
+[
+  {
+    "registrationId": "XPJODO7820240415",
+    "purchaseDateTime": "2024-04-15 10:00:00",
+    "departureDateTime": "2024-04-15 12:00:00",
+    "arrivalDateTime": "2024-04-15 14:00:00",
+    "passenger": {
+      "contactPerson": "Jane",
+      "contactPersonLastName": "doe",
+      "contactPersonPhoneNumber": 12345,
+      "name": "Johna",
+      "lastName": "Doe",
+      "phoneNumber": 123456789,
+      "dni": 12345678
+    },
+    "train": {
+      "name": "Express",
+      "identifier": "EXP001",
+      "capacityLoad": 200,
+      "mileage": 500
+    },
+    "ticketValue": 50.0,
+    "category": "First Class"
+  },
+  {
+    "registrationId": "LCALSM2120240416",
+    "purchaseDateTime": "2024-04-16 11:00:00",
+    "departureDateTime": "2024-04-16 13:00:00",
+    "arrivalDateTime": "2024-04-16 15:00:00",
+    "passenger": {
+      "contactPerson": "Bob",
+      "contactPersonLastName": "Smith",
+      "contactPersonPhoneNumber": 123456789,
+      "name": "Alice",
+      "lastName": "Smith",
+      "phoneNumber": 987654321,
+      "dni": 87654321
+    },
+    "train": {
+      "name": "Local",
+      "identifier": "LOC001",
+      "capacityLoad": 100,
+      "mileage": 300
+    },
+    "ticketValue": 30.0,
+    "category": "Economy"
+  }
+]
