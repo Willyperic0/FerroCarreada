@@ -1,27 +1,37 @@
 package model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class StationModel {
-    //PENDIENTE MODIFICAR O IMPLEMENTAR ESTACIONES
-    private String name;
-    private Map<StationModel, Double> neighbors;
-
-    public StationModel(String name) {
-        this.name = name;
-        this.neighbors = new HashMap<>();
+    private String destino;
+    private Double distancia;
+    private StationModel next;
+    
+    public StationModel(String destino) {
+        this.destino = destino;
+        this.next = null;
     }
 
-    public String getName() {
-        return name;
+    public StationModel(String destino, Double distancia) {
+        this.destino = destino;
+        this.distancia = distancia;
+        this.next = null;
     }
 
-    public void addNeighbor(StationModel neighbor, double distance) {
-        neighbors.put(neighbor, distance);
+    public String getDestino() {
+        return destino;
     }
-
-    public Map<StationModel, Double> getNeighbors() {
-        return neighbors;
+    public void setDestino(String destino) {
+        this.destino = destino;
     }
+    public Double getDistancia() {
+        return distancia;
+    }
+    public void setDistancia(Double distancia) {
+        this.distancia = distancia;
+    }
+    public StationModel getNext() {
+        return next;
+    }
+    public void setNext(StationModel next) {
+        this.next = next;
+    }     
 }
