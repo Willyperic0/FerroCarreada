@@ -22,5 +22,11 @@
     "identifier": "Changuanator",
     "capacityLoad": 23,
     "mileage": 23
+  },
+  {
+    "name": "Arnold",
+    "identifier": "superaña",
+    "capacityLoad": 17,
+    "mileage": 0
   }
 ]
