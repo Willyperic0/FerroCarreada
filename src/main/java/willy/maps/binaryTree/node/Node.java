@@ -45,4 +45,5 @@ public class Node<E> implements Cloneable {
     public void setLeft(Node<E> left) {
         this.left = left;
     }
+    
 }

@@ -150,7 +150,7 @@ private boolean isPrime(int n) {
 
     
     public static void main(String[] args) {
-        hashmap<String> hashmap = new hashmap<>(10); // Tamaño del array: 10
+       hashmap<String> hashmap = new hashmap<>(10); // Tamaño del array: 10
         
          // Agregar un elemento
          boolean added = hashmap.put("7259", "luis");
@@ -169,6 +169,6 @@ private boolean isPrime(int n) {
          
          // Intentar obtener el elemento eliminado
          String valorEliminado = hashmap.get("7259");
-         System.out.println("El valor eliminado es: " + valorEliminado); // Debería imprimir null
+         System.out.println("El valor eliminado es: " + valorEliminado); // Debería imprimir null 
     }
 }
