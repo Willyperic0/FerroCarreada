@@ -16,6 +16,7 @@ import willy.linkedlist.doubly.LinkedList;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Random;
 
 
@@ -26,8 +27,10 @@ public class TicketPurchaseView extends javax.swing.JFrame {
     public TicketPurchaseView(TicketController ticketController) {
         initComponents();
         this.ticketController = ticketController;
-        ticketController.loadTicketsFromJson(); // Cargar los datos de tickets desde el archivo JSON al iniciar la ventana
+        String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
+        ticketController.loadTicketsFromJson(ticketFilePath); // Cargar los datos de tickets desde el archivo JSON al iniciar la ventana
     }
+    
 
     private void initComponents() {
 

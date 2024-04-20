@@ -31,6 +31,17 @@ public TrainModel getRandomTrain() {
     int index = rand.nextInt(trainList.size());
     return trainList.get(index);
 }
+    // Método para obtener la lista de tickets
+    public LinkedList<TicketModel> getTicketList() {
+        // Especifica la ruta completa del archivo JSON para los tickets
+        String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
+
+        // Carga los datos de tickets desde el archivo JSON antes de devolver la lista de tickets
+        loadTicketsFromJson(ticketFilePath);
+
+        // Retorna la lista de tickets
+        return tickets;
+    }
 
 // Guardar la lista de tickets en el archivo JSON especificado
 public void saveTicketsToJson() {
@@ -47,10 +58,7 @@ public void saveTicketsToJson() {
 }
 
 // Cargar la lista de tickets desde el archivo JSON especificado
-public void loadTicketsFromJson() {
-    // Definir la ruta del archivo desde donde se cargarán los tickets en formato JSON
-    String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
-    
+public void loadTicketsFromJson(String ticketFilePath) {
     FileJsonAdapter<TicketModel> ticketJsonAdapter = FileJsonAdapter.getInstance();
     LinkedList<TicketModel> loadedTickets = ticketJsonAdapter.getObjects(ticketFilePath, TicketModel[].class);
     if (!loadedTickets.isEmpty()) {

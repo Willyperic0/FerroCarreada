@@ -86,4 +86,16 @@ public class TicketModel implements Serializable {
     public void setCategory(String category) {
         this.category = category;
     }
+    @Override
+public String toString() {
+    return "Ticket ID: " + registrationId +
+           "\nFecha de compra: " + purchaseDateTime +
+           "\nFecha de salida: " + departureDateTime +
+           "\nFecha de llegada: " + arrivalDateTime +
+           "\nPasajero: " + passenger.getName() + " " + passenger.getLastName() +
+           "\nTren: " + train.getIdentifier() +
+           "\nValor del ticket: " + ticketValue +
+           "\nCategoría: " + category;
+}
+
 }
