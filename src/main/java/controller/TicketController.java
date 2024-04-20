@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+import java.util.Random;
 
 import model.PassengerModel;
 import model.TicketModel;
@@ -8,12 +9,28 @@ import model.TrainModel;
 import willy.linkedlist.doubly.LinkedList;
 
 public class TicketController {
-    private LinkedList<TicketModel> tickets; // Lista enlazada para almacenar los tickets
+    private LinkedList<TicketModel> tickets;
+    private TrainController trainController;
 
     // Constructor de la clase TicketController
-    public TicketController() {
-        this.tickets = new LinkedList<>(); // Inicializa la lista de tickets
+    public TicketController(TrainController trainController) {
+        this.tickets = new LinkedList<>();
+        this.trainController = trainController;
     }
+
+    // Otros métodos de la clase TicketController...
+
+// Método para obtener un tren aleatorio de la lista de trenes
+public TrainModel getRandomTrain() {
+    LinkedList<TrainModel> trainList = trainController.getTrainList();
+    if (trainList == null || trainList.isEmpty()) {
+        return null; // Devuelve null si la lista de trenes está vacía o es nula
+    }
+
+    Random rand = new Random();
+    int index = rand.nextInt(trainList.size());
+    return trainList.get(index);
+}
 
 // Guardar la lista de tickets en el archivo JSON especificado
 public void saveTicketsToJson() {
@@ -62,15 +79,20 @@ System.out.println("Boleto agregado correctamente al sistema.");
 
 
     // Método para generar el ID del boleto
-    private String generateTicketId(TrainModel train, PassengerModel passenger, String purchaseDateTime) {
-        String trainId = train.getIdentifier().substring(0, 3).replaceAll("[aeiouAEIOU]", "").toUpperCase();
-        String passengerId = passenger.getName().substring(0, 2).toUpperCase() +
-                             passenger.getLastName().substring(0, 2).toUpperCase() +
-                             String.valueOf(passenger.getDni()).substring(6);
-        String purchaseDate = purchaseDateTime.replaceAll("[^0-9]", "").substring(0, 8);
-
-        return trainId + passengerId + purchaseDate;
+private String generateTicketId(TrainModel train, PassengerModel passenger, String purchaseDateTime) {
+    // Verificar si el tren y su identificador son no nulos
+    if (train == null || train.getIdentifier() == null) {
+        return null; // Devolver null si el tren o su identificador son nulos
     }
+
+    String trainId = train.getIdentifier().substring(0, 3).replaceAll("[aeiouAEIOU]", "").toUpperCase();
+    String passengerId = passenger.getName().substring(0, 2).toUpperCase() +
+                         passenger.getLastName().substring(0, 2).toUpperCase() +
+                         String.valueOf(passenger.getDni()).substring(6);
+    String purchaseDate = purchaseDateTime.replaceAll("[^0-9]", "").substring(0, 8);
+
+    return trainId + passengerId + purchaseDate;
+}
 
     // Método para eliminar un boleto por su ID
     public void deleteAndReorganizeTicket(String ticketIdToDelete) {

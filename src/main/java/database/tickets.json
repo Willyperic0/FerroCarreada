@@ -44,5 +44,74 @@
     },
     "ticketValue": 30.0,
     "category": "Economy"
+  },
+  {
+    "registrationId": "WL1111111120240419",
+    "purchaseDateTime": "2024-04-19T21:55:37.749105700",
+    "departureDateTime": "2024-04-15 04:19:00",
+    "arrivalDateTime": "2024-04-15 06:19:00",
+    "passenger": {
+      "contactPerson": "aaaaa",
+      "contactPersonLastName": "aaaaa",
+      "contactPersonPhoneNumber": 11111111,
+      "name": "1111111",
+      "lastName": "11111",
+      "phoneNumber": 11111111,
+      "dni": 1111111111
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "WillyTrain",
+      "capacityLoad": 23,
+      "mileage": 0
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "CHADAD20240419",
+    "purchaseDateTime": "2024-04-19T22:07:41.189609600",
+    "departureDateTime": "2024-04-15 18:46:00",
+    "arrivalDateTime": "2024-04-15 20:46:00",
+    "passenger": {
+      "contactPerson": "Administrador",
+      "contactPersonLastName": "Administrador",
+      "contactPersonPhoneNumber": 232323,
+      "name": "Administrador",
+      "lastName": "Administrador",
+      "phoneNumber": 232323,
+      "dni": 232323
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Changuanator",
+      "capacityLoad": 23,
+      "mileage": 23
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "WLWISA20240419",
+    "purchaseDateTime": "2024-04-19T22:08:05.781696600",
+    "departureDateTime": "2024-04-15 16:56:00",
+    "arrivalDateTime": "2024-04-15 18:56:00",
+    "passenger": {
+      "contactPerson": "Julissa",
+      "contactPersonLastName": "Gutierrez",
+      "contactPersonPhoneNumber": 323232,
+      "name": "William",
+      "lastName": "Sanabria",
+      "phoneNumber": 323232,
+      "dni": 323232
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "WillyTrain",
+      "capacityLoad": 23,
+      "mileage": 0
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
   }
 ]

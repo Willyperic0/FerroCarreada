@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.File;
+
 import javax.swing.JOptionPane;
 
 import model.TrainModel;
@@ -81,9 +83,17 @@ private boolean isTrainExists(String identifier) {
     }
 
     // Método para obtener la lista de trenes
-    public LinkedList<TrainModel> getTrainList() {
-        return trains; // Retorna la lista de trenes
-    }
+// Método para obtener la lista de trenes
+public LinkedList<TrainModel> getTrainList() {
+    // Especifica la ruta completa del archivo JSON para los trenes
+    String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
+    
+    // Carga los datos de trenes desde el archivo JSON antes de devolver la lista de trenes
+    loadTrainsFromJson(trainFilePath);
+
+    // Retorna la lista de trenes
+    return trains;
+}
 
     // Método para establecer la lista de trenes
     public void setTrainList(LinkedList<TrainModel> trainList) {
@@ -120,5 +130,20 @@ private boolean isTrainExists(String identifier) {
         }
         return null; // Devolver null si no se encuentra ningún tren con el identificador dado
     }
-    
+        // Método para cargar los datos de trenes desde un archivo JSON
+        public void loadTrainsFromJson(String trainFilePath) {
+            // Crear una instancia de FileJsonAdapter para trenes
+            FileJsonAdapter<TrainModel> trainJsonAdapter = FileJsonAdapter.getInstance();
+        
+            // Leer los datos del archivo JSON y establecer la lista de trenes en el controlador de trenes
+            LinkedList<TrainModel> trainList = trainJsonAdapter.getObjects(trainFilePath, TrainModel[].class);
+        
+            // Verificar si se leyeron correctamente los datos
+            if (trainList != null) {
+                // Actualizar la lista de trenes en el controlador de trenes
+                this.trains = trainList;
+            } else {
+                System.out.println("Error al leer los datos de trenes desde el archivo JSON.");
+            }
+        }
 }
