@@ -15,20 +15,23 @@ import java.io.File;
 public class TicketSearchView extends javax.swing.JFrame {
 
     private final TicketController ticketController;
+    private final TrainController trainController;
+    private javax.swing.JComboBox<String> jComboBoxTrains;
 
-    public TicketSearchView(TicketController ticketController) {
+    public TicketSearchView(TicketController ticketController, TrainController trainController) {
         initComponents();
         this.ticketController = ticketController;
+        this.trainController = trainController;
+        initTrainComboBox();
     }
 
     private void initComponents() {
-
         jPanelMain = new javax.swing.JPanel();
         jLabelSearchById = new javax.swing.JLabel();
         jTextFieldTicketId = new javax.swing.JTextField();
         jButtonSearch = new javax.swing.JButton();
-        jScrollPaneResult = new javax.swing.JScrollPane();
         jTextAreaResult = new javax.swing.JTextArea();
+        jLabelSelectTrain = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Buscar Ticket por ID");
@@ -45,7 +48,10 @@ public class TicketSearchView extends javax.swing.JFrame {
         });
 
         jTextAreaResult.setEditable(false);
-        jScrollPaneResult.setViewportView(jTextAreaResult);
+
+        jLabelSelectTrain.setText("Seleccione el tren:");
+
+        jComboBoxTrains = new javax.swing.JComboBox<>(); // Move declaration here
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
@@ -54,11 +60,15 @@ public class TicketSearchView extends javax.swing.JFrame {
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneResult, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addComponent(jTextAreaResult, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addComponent(jLabelSearchById)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldTicketId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelSelectTrain)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxTrains, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonSearch)))
                 .addContainerGap())
@@ -70,9 +80,11 @@ public class TicketSearchView extends javax.swing.JFrame {
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSearchById)
                     .addComponent(jTextFieldTicketId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSearch))
+                    .addComponent(jButtonSearch)
+                    .addComponent(jComboBoxTrains, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSelectTrain))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneResult, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addComponent(jTextAreaResult, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -96,59 +108,44 @@ public class TicketSearchView extends javax.swing.JFrame {
         pack();
     }
 
-    private void searchTicketActionPerformed(ActionEvent evt) {
-        String registrationId = jTextFieldTicketId.getText(); // Obtener el ID de registro del campo de texto
-        
-        // Definir la ruta del archivo desde donde se cargarán los tickets en formato JSON
-        String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
-    
-        // Cargar los tickets desde el archivo JSON
-        ticketController.loadTicketsFromJson(ticketFilePath);
-    
-        // Obtener la lista de tickets
-        LinkedList<TicketModel> ticketList = ticketController.getTicketList();
-        
-        // Inicializar absol a -1 para indicar que no se ha encontrado ningún ticket
-        int absol = -1;
-        
-        // Buscar el ticket por su ID de registro
-        TicketModel foundTicket = null;
-        for (int i = 0; i < ticketList.size(); i++) {
-            TicketModel ticket = ticketList.get(i);
-            if (ticket.getRegistrationId().equals(registrationId)) {
-                absol = i;
-                foundTicket = ticket;
-                break; // Salir del bucle una vez encontrado el ticket
-            }
+    private void initTrainComboBox() {
+        LinkedList<TrainModel> trainList = trainController.getTrainList();
+        String[] trainNames = new String[trainList.size()];
+        for (int i = 0; i < trainList.size(); i++) {
+            trainNames[i] = trainList.get(i).getIdentifier();
         }
-    
+        jComboBoxTrains.setModel(new javax.swing.DefaultComboBoxModel<>(trainNames));
+    }
+
+    private void searchTicketActionPerformed(ActionEvent evt) {
+        String registrationId = jTextFieldTicketId.getText();
+        String selectedTrainName = (String) jComboBoxTrains.getSelectedItem();
+
+        // Llamar al controlador para buscar el ticket por su ID de registro y el nombre del tren seleccionado
+        TicketModel foundTicket = ticketController.findTicketByRegistrationId(registrationId, selectedTrainName);
+
         // Mostrar el resultado
         if (foundTicket != null) {
-            // Usar absol para obtener el ticket encontrado
-            jTextAreaResult.setText(ticketList.get(absol).toString());
+            jTextAreaResult.setText(foundTicket.toString());
         } else {
-            jTextAreaResult.setText("No se encontró ningún ticket con el ID de registro especificado.");
+            jTextAreaResult.setText("No se encontró ningún ticket con el ID de registro especificado para el tren seleccionado.");
         }
     }
-    
-    
+
     public static void main(String[] args) {
-        // Aquí puedes instanciar TicketController u obtenerlo de alguna manera según tu implementación
-        TrainModel trainModel = new TrainModel(); // Debes proporcionar el objeto TrainModel adecuado aquí
+        TrainModel trainModel = new TrainModel();
         TrainController trainController = new TrainController(trainModel);
         TicketController ticketController = new TicketController(trainController);
-        TicketSearchView frame = new TicketSearchView(ticketController);
+        TicketSearchView frame = new TicketSearchView(ticketController, trainController);
         frame.setVisible(true);
     }
-    
 
-    // Variables declaration - do not modify
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JLabel jLabelSearchById;
+    private javax.swing.JLabel jLabelSelectTrain;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JScrollPane jScrollPaneResult;
     private javax.swing.JTextArea jTextAreaResult;
     private javax.swing.JTextField jTextFieldTicketId;
-    // End of variables declaration
-}
 
+}

@@ -1,3 +1,338 @@
 [
-
+  {
+    "registrationId": "TRLUFU20240420",
+    "purchaseDateTime": "2024-04-20T01:54:00.154018",
+    "departureDateTime": "2024-04-15 03:13:00",
+    "arrivalDateTime": "2024-04-15 05:13:00",
+    "passenger": {
+      "contactPerson": "William",
+      "contactPersonLastName": "Sanabria",
+      "contactPersonPhoneNumber": 323232,
+      "name": "Luis",
+      "lastName": "Fuentes",
+      "phoneNumber": 323232,
+      "dni": 323232
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "TrainTest",
+      "capacityLoad": 28,
+      "mileage": 0,
+      "vipVagons": 75,
+      "executiveVagons": 152,
+      "standardVagons": 412,
+      "cargo": 9,
+      "passenger": 19
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "TRALAL20240420",
+    "purchaseDateTime": "2024-04-20T02:03:20.640940",
+    "departureDateTime": "2024-04-15 14:44:00",
+    "arrivalDateTime": "2024-04-15 16:44:00",
+    "passenger": {
+      "contactPerson": "alberto",
+      "contactPersonLastName": "alberto",
+      "contactPersonPhoneNumber": 232323,
+      "name": "alberto",
+      "lastName": "alberto",
+      "phoneNumber": 232323,
+      "dni": 232323
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "TrainTest",
+      "capacityLoad": 28,
+      "mileage": 0,
+      "vipVagons": 75,
+      "executiveVagons": 152,
+      "standardVagons": 412,
+      "cargo": 9,
+      "passenger": 19
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "TRCHCH20240420",
+    "purchaseDateTime": "2024-04-20T02:10:01.479101500",
+    "departureDateTime": "2024-04-15 16:24:00",
+    "arrivalDateTime": "2024-04-15 18:24:00",
+    "passenger": {
+      "contactPerson": "changua",
+      "contactPersonLastName": "changua",
+      "contactPersonPhoneNumber": 232323,
+      "name": "changua",
+      "lastName": "changua",
+      "phoneNumber": 232323,
+      "dni": 232323
+    },
+    "train": {
+      "name": "Mercedes-Benz",
+      "identifier": "TrainWilly",
+      "capacityLoad": 8,
+      "mileage": 2005,
+      "vipVagons": 23,
+      "executiveVagons": 48,
+      "standardVagons": 126,
+      "cargo": 2,
+      "passenger": 6
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "TRLULU20240420",
+    "purchaseDateTime": "2024-04-20T02:19:56.402813800",
+    "departureDateTime": "2024-04-15 22:56:00",
+    "arrivalDateTime": "2024-04-15 24:56:00",
+    "passenger": {
+      "contactPerson": "luciano",
+      "contactPersonLastName": "luciano",
+      "contactPersonPhoneNumber": 343434,
+      "name": "luciano",
+      "lastName": "luciano",
+      "phoneNumber": 343434,
+      "dni": 343434
+    },
+    "train": {
+      "name": "Mercedes-Benz",
+      "identifier": "TrainLuis",
+      "capacityLoad": 23,
+      "mileage": 0,
+      "vipVagons": 63,
+      "executiveVagons": 128,
+      "standardVagons": 346,
+      "cargo": 7,
+      "passenger": 16
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "TRAFAF20240420",
+    "purchaseDateTime": "2024-04-20T11:00:23.213000400",
+    "departureDateTime": "2024-04-15 06:32:00",
+    "arrivalDateTime": "2024-04-15 08:32:00",
+    "passenger": {
+      "contactPerson": "afrodita",
+      "contactPersonLastName": "afrodita",
+      "contactPersonPhoneNumber": 121212,
+      "name": "afrodita",
+      "lastName": "afrodita",
+      "phoneNumber": 121212,
+      "dni": 121212
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "TrainTest",
+      "capacityLoad": 28,
+      "mileage": 0,
+      "vipVagons": 74,
+      "executiveVagons": 152,
+      "standardVagons": 412,
+      "cargo": 9,
+      "passenger": 19
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "TRFIFI20240420",
+    "purchaseDateTime": "2024-04-20T11:01:00.021809300",
+    "departureDateTime": "2024-04-15 12:35:00",
+    "arrivalDateTime": "2024-04-15 14:35:00",
+    "passenger": {
+      "contactPerson": "fifita",
+      "contactPersonLastName": "fifita",
+      "contactPersonPhoneNumber": 232323,
+      "name": "fifita",
+      "lastName": "fifita",
+      "phoneNumber": 232323,
+      "dni": 232332
+    },
+    "train": {
+      "name": "Mercedes-Benz",
+      "identifier": "TrainLuis",
+      "capacityLoad": 23,
+      "mileage": 0,
+      "vipVagons": 62,
+      "executiveVagons": 128,
+      "standardVagons": 346,
+      "cargo": 7,
+      "passenger": 16
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "TRNANA20240420",
+    "purchaseDateTime": "2024-04-20T11:33:24.521556700",
+    "departureDateTime": "2024-04-15 21:12:00",
+    "arrivalDateTime": "2024-04-15 23:12:00",
+    "passenger": {
+      "contactPerson": "nanda",
+      "contactPersonLastName": "nanda",
+      "contactPersonPhoneNumber": 232323,
+      "name": "nanda",
+      "lastName": "nanda",
+      "phoneNumber": 232323,
+      "dni": 232323
+    },
+    "train": {
+      "name": "Mercedes-Benz",
+      "identifier": "TrainLuis",
+      "capacityLoad": 23,
+      "mileage": 0,
+      "vipVagons": 61,
+      "executiveVagons": 128,
+      "standardVagons": 346,
+      "cargo": 7,
+      "passenger": 16
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "TRAGAG20240420",
+    "purchaseDateTime": "2024-04-20T11:37:21.879212900",
+    "departureDateTime": "2024-04-15 01:48:00",
+    "arrivalDateTime": "2024-04-15 03:48:00",
+    "passenger": {
+      "contactPerson": "aguapanela",
+      "contactPersonLastName": "aguapanela",
+      "contactPersonPhoneNumber": 121212,
+      "name": "aguapanela",
+      "lastName": "aguapanela",
+      "phoneNumber": 121212,
+      "dni": 121212
+    },
+    "train": {
+      "name": "Mercedes-Benz",
+      "identifier": "TrainLuis",
+      "capacityLoad": 23,
+      "mileage": 0,
+      "vipVagons": 61,
+      "executiveVagons": 128,
+      "standardVagons": 346,
+      "cargo": 7,
+      "passenger": 16
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "TRCHCH20240420",
+    "purchaseDateTime": "2024-04-20T11:37:45.613944400",
+    "departureDateTime": "2024-04-15 15:16:00",
+    "arrivalDateTime": "2024-04-15 17:16:00",
+    "passenger": {
+      "contactPerson": "changuaa",
+      "contactPersonLastName": "changuaa",
+      "contactPersonPhoneNumber": 232323,
+      "name": "changuaa",
+      "lastName": "changuaa",
+      "phoneNumber": 232323,
+      "dni": 232323
+    },
+    "train": {
+      "name": "Mercedes-Benz",
+      "identifier": "TrainLuis",
+      "capacityLoad": 23,
+      "mileage": 0,
+      "vipVagons": 60,
+      "executiveVagons": 128,
+      "standardVagons": 346,
+      "cargo": 7,
+      "passenger": 16
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "TRAGAG20240420",
+    "purchaseDateTime": "2024-04-20T11:38:08.745784",
+    "departureDateTime": "2024-04-15 18:16:00",
+    "arrivalDateTime": "2024-04-15 20:16:00",
+    "passenger": {
+      "contactPerson": "aguapanela",
+      "contactPersonLastName": "aguapanela",
+      "contactPersonPhoneNumber": 242324,
+      "name": "aguapanela",
+      "lastName": "aguapanela",
+      "phoneNumber": 234242,
+      "dni": 245235
+    },
+    "train": {
+      "name": "Mercedes-Benz",
+      "identifier": "TrainLuis",
+      "capacityLoad": 23,
+      "mileage": 0,
+      "vipVagons": 60,
+      "executiveVagons": 127,
+      "standardVagons": 346,
+      "cargo": 7,
+      "passenger": 16
+    },
+    "ticketValue": 25.0,
+    "category": "Ejecutivo"
+  },
+  {
+    "registrationId": "TRTETE20240420",
+    "purchaseDateTime": "2024-04-20T11:47:33.037177200",
+    "departureDateTime": "2024-04-15 01:42:00",
+    "arrivalDateTime": "2024-04-15 03:42:00",
+    "passenger": {
+      "contactPerson": "testeo",
+      "contactPersonLastName": "testeo",
+      "contactPersonPhoneNumber": 2525252,
+      "name": "testeo",
+      "lastName": "testeo",
+      "phoneNumber": 252525,
+      "dni": 252525
+    },
+    "train": {
+      "name": "Mercedes-Benz",
+      "identifier": "TrainLuis",
+      "capacityLoad": 23,
+      "mileage": 0,
+      "vipVagons": 0,
+      "executiveVagons": 126,
+      "standardVagons": 346,
+      "cargo": 7,
+      "passenger": 16
+    },
+    "ticketValue": 25.0,
+    "category": "Ejecutivo"
+  },
+  {
+    "registrationId": "TRJUJU20240420",
+    "purchaseDateTime": "2024-04-20T11:48:33.621715100",
+    "departureDateTime": "2024-04-15 18:55:00",
+    "arrivalDateTime": "2024-04-15 20:55:00",
+    "passenger": {
+      "contactPerson": "julissa",
+      "contactPersonLastName": "julissa",
+      "contactPersonPhoneNumber": 313131,
+      "name": "julissa",
+      "lastName": "julissa",
+      "phoneNumber": 313131,
+      "dni": 313131
+    },
+    "train": {
+      "name": "Mercedes-Benz",
+      "identifier": "TrainLuis",
+      "capacityLoad": 23,
+      "mileage": 0,
+      "vipVagons": 0,
+      "executiveVagons": 125,
+      "standardVagons": 346,
+      "cargo": 7,
+      "passenger": 16
+    },
+    "ticketValue": 25.0,
+    "category": "Ejecutivo"
+  }
 ]
