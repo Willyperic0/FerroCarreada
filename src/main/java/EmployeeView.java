@@ -1,16 +1,3 @@
-package view;
-
-import java.io.File;
-
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
-import controller.EmployeeController;
-import controller.FileJsonAdapter;
-import controller.LoginController;
-import model.EmployeeModel;
-import willy.linkedlist.doubly.LinkedList;
-
 public class EmployeeView extends javax.swing.JFrame {
 
     private final EmployeeController employeeController;

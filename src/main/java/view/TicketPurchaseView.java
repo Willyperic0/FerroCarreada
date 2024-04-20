@@ -31,7 +31,14 @@ public class TicketPurchaseView extends javax.swing.JFrame {
         ticketController.loadTicketsFromJson(ticketFilePath); // Cargar los datos de tickets desde el archivo JSON al iniciar la ventana
     }
     
-
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LobbyView().setVisible(true);
+            }
+        });
+        this.dispose();
+    }
     private void initComponents() {
 
         jPanelMain = new javax.swing.JPanel();
@@ -52,37 +59,45 @@ public class TicketPurchaseView extends javax.swing.JFrame {
         jTextFieldDni = new javax.swing.JTextField();
         jComboBoxCategory = new javax.swing.JComboBox<>();
         jButtonPurchase = new javax.swing.JButton();
-
+        backButton = new javax.swing.JButton(); // Botón de retorno agregado
+    
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Compra de Boleto");
-
+    
         jPanelMain.setBorder(javax.swing.BorderFactory.createTitledBorder("Compra de Boleto"));
-
+    
         jLabelPassengerInfo.setText("Información del Pasajero:");
-
+    
         jLabelContactPerson.setText("Persona de Contacto:");
-
+    
         jLabelContactPersonLastName.setText("Apellido de la Persona de Contacto:");
-
+    
         jLabelContactPersonPhoneNumber.setText("Número de Teléfono de la Persona de Contacto:");
-
+    
         jLabelName.setText("Nombre:");
-
+    
         jLabelLastName.setText("Apellido:");
-
+    
         jLabelPhoneNumber.setText("Número de Teléfono:");
-
+    
         jLabelDni.setText("DNI:");
-
+    
         jComboBoxCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VIP", "Ejecutivo", "Estándar" }));
-
+    
         jButtonPurchase.setText("Comprar");
-        jButtonPurchase.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jButtonPurchase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 purchaseTicketActionPerformed(evt);
             }
         });
-
+    
+        backButton.setText("Volver"); // Texto del botón de retorno
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+    
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
         jPanelMainLayout.setHorizontalGroup(
@@ -113,12 +128,17 @@ public class TicketPurchaseView extends javax.swing.JFrame {
                                     .addComponent(jTextFieldDni, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
-                        .addComponent(jComboBoxCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonPurchase)
                         .addGap(152, 152, 152))))
+            .addGroup(jPanelMainLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBoxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(backButton) // Agregar el botón de retorno al diseño
+                .addContainerGap())
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,13 +173,15 @@ public class TicketPurchaseView extends javax.swing.JFrame {
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDni)
                     .addComponent(jTextFieldDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBoxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonPurchase)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(backButton) // Agregar el botón de retorno al diseño
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
+    
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,9 +198,10 @@ public class TicketPurchaseView extends javax.swing.JFrame {
                 .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
+    
         pack();
     }
+    
 
     private void purchaseTicketActionPerformed(java.awt.event.ActionEvent evt) {
         String contactPerson = jTextFieldContactPerson.getText();
@@ -250,24 +273,26 @@ public class TicketPurchaseView extends javax.swing.JFrame {
         frame.setVisible(true);
     }
 
-    // Variables declaration - do not modify
-    private javax.swing.JButton jButtonPurchase;
-    private javax.swing.JComboBox<String> jComboBoxCategory;
-    private javax.swing.JLabel jLabelPassengerInfo;
-    private javax.swing.JLabel jLabelContactPerson;
-    private javax.swing.JLabel jLabelContactPersonLastName;
-    private javax.swing.JLabel jLabelContactPersonPhoneNumber;
-    private javax.swing.JLabel jLabelName;
-    private javax.swing.JLabel jLabelLastName;
-    private javax.swing.JLabel jLabelPhoneNumber;
-    private javax.swing.JLabel jLabelDni;
-    private javax.swing.JPanel jPanelMain;
-    private javax.swing.JTextField jTextFieldContactPerson;
-    private javax.swing.JTextField jTextFieldContactPersonLastName;
-    private javax.swing.JTextField jTextFieldContactPersonPhoneNumber;
-    private javax.swing.JTextField jTextFieldName;
-    private javax.swing.JTextField jTextFieldLastName;
-    private javax.swing.JTextField jTextFieldPhoneNumber;
-    private javax.swing.JTextField jTextFieldDni;
-    // End of variables declaration
+// Variables declaration - do not modify
+private javax.swing.JButton jButtonPurchase;
+private javax.swing.JButton backButton; // Declaración del botón de retorno
+private javax.swing.JComboBox<String> jComboBoxCategory;
+private javax.swing.JLabel jLabelPassengerInfo;
+private javax.swing.JLabel jLabelContactPerson;
+private javax.swing.JLabel jLabelContactPersonLastName;
+private javax.swing.JLabel jLabelContactPersonPhoneNumber;
+private javax.swing.JLabel jLabelName;
+private javax.swing.JLabel jLabelLastName;
+private javax.swing.JLabel jLabelPhoneNumber;
+private javax.swing.JLabel jLabelDni;
+private javax.swing.JPanel jPanelMain;
+private javax.swing.JTextField jTextFieldContactPerson;
+private javax.swing.JTextField jTextFieldContactPersonLastName;
+private javax.swing.JTextField jTextFieldContactPersonPhoneNumber;
+private javax.swing.JTextField jTextFieldName;
+private javax.swing.JTextField jTextFieldLastName;
+private javax.swing.JTextField jTextFieldPhoneNumber;
+private javax.swing.JTextField jTextFieldDni;
+// End of variables declaration
+
 }
