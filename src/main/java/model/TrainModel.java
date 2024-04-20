@@ -2,62 +2,97 @@ package model;
 
 import java.io.Serializable;
 
-public class TrainModel implements Serializable { // Define la clase TrainModel que implementa la interfaz Serializable
-    // Variables de instancia para los atributos de un tren
-    public String name; // Nombre del tren
-    public String identifier; // Identificador del tren
-    public int capacityLoad; // Capacidad de carga del tren
-    public int mileage; // Kilometraje del tren
+import java.io.Serializable;
 
-    // Constructor con parámetros para inicializar los atributos de un tren
-    public TrainModel(String name, String identifier, int capacityLoad, int mileage) {   // Este metodo se esta usando en App
-        this.name = name; // Asigna el nombre del tren
-        this.identifier = identifier; // Asigna el identificador del tren
-        this.capacityLoad = capacityLoad; // Asigna la capacidad de carga del tren
-        this.mileage = mileage; // Asigna el kilometraje del tren
+public class TrainModel implements Serializable {
+    public String name;
+    public String identifier;
+    public int capacityLoad;
+    public int mileage;
+    public int vipVagons; // Número de vagones VIP
+    public int executiveVagons; // Número de vagones Ejecutivo
+    public int standardVagons; // Número de vagones Estándar
+    public int cargo; // Cantidad de carga
+    public int passenger; // Cantidad de pasajeros
+
+    public TrainModel(String name, String identifier, int capacityLoad, int mileage) {
+        this.name = name;
+        this.identifier = identifier;
+        this.capacityLoad = capacityLoad;
+        this.mileage = mileage;
+        this.vipVagons = 0; // Inicializamos en 0 por defecto
+        this.executiveVagons = 0;
+        this.standardVagons = 0;
+        this.cargo = 0; // Inicializamos en 0 por defecto
+        this.passenger = 0; // Inicializamos en 0 por defecto
     }
 
-    // Constructor sin parámetros (por defecto)
-    public TrainModel() { // Este metodo se esta usando en App
+    public TrainModel() {
     }
 
-    // Método para obtener el nombre del tren
     public String getName() {
-        return this.name; // Retorna el nombre del tren
+        return this.name;
     }
 
-    // Método para establecer el nombre del tren
     public void setName(String name) {
-        this.name = name; // Asigna el nombre del tren
+        this.name = name;
     }
 
-    // Método para obtener el identificador del tren
     public String getIdentifier() {
-        return this.identifier; // Retorna el identificador del tren
+        return this.identifier;
     }
 
-    // Método para establecer el identificador del tren
     public void setIdentifier(String identifier) {
-        this.identifier = identifier; // Asigna el identificador del tren
+        this.identifier = identifier;
     }
 
-    // Método para obtener la capacidad de carga del tren
     public int getCapacityLoad() {
-        return this.capacityLoad; // Retorna la capacidad de carga del tren
+        return this.capacityLoad;
     }
 
-    // Método para establecer la capacidad de carga del tren
     public void setCapacityLoad(int capacityLoad) {
-        this.capacityLoad = capacityLoad; // Asigna la capacidad de carga del tren
+        this.capacityLoad = capacityLoad;
     }
 
-    // Método para obtener el kilometraje del tren
     public int getMileage() {
-        return this.mileage; // Retorna el kilometraje del tren
+        return this.mileage;
     }
 
-    // Método para establecer el kilometraje del tren
     public void setMileage(int mileage) {
-        this.mileage = mileage; // Asigna el kilometraje del tren
+        this.mileage = mileage;
+    }
+    public void setPassenger(int passenger) {
+        this.passenger = passenger;
+    }
+    public void setCargo(int cargo) {
+        this.cargo = cargo;
+    }
+    public void setvipVagons(int vipVagons) {   this.vipVagons = vipVagons; }
+    public void setExecutiveVagons(int executiveVagons) { this.executiveVagons = executiveVagons; }
+    public void setStandardVagons(int standardVagons) { this.standardVagons = standardVagons; }
+
+   // Método para calcular los tickets VIP
+public int calculateVIP(int passengerCount) {
+    return passengerCount * 4; 
+}
+
+// Método para calcular los tickets Estándar
+public int calculateStandard(int passengerCount) {
+    return passengerCount * 22; 
+}
+
+// Método para calcular los tickets Ejecutivo
+public int calculateExecutive(int passengerCount) {
+    return passengerCount * 8; 
+}
+    
+    // Método para calcular la cantidad de carga
+    public int calculateCargo(int capacityLoad) {
+        return capacityLoad / 3;
+    }
+
+    // Método para calcular la cantidad de pasajeros
+    public int calculatePassenger(int capacityLoad, int cargo) {
+        return capacityLoad - cargo;
     }
 }

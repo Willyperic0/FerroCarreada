@@ -29,11 +29,34 @@ public class TrainController {
         
         // Si no hay un tren con el mismo identificador, proceder con la adición del nuevo tren
         TrainModel newTrain = new TrainModel(name, identifier, capacityLoad, mileage); // Crea un nuevo objeto TrainModel
+        
+        // Calcular la cantidad de carga y pasajeros
+        int cargo = newTrain.calculateCargo(capacityLoad);
+        int passenger = newTrain.calculatePassenger(capacityLoad, cargo);
+        
+        // Establecer la cantidad de carga y pasajeros en el objeto TrainModel
+        newTrain.setCargo(cargo);
+        newTrain.setPassenger(passenger);
+        
+        // Calcula el número de vagones VIP, ejecutivos y estándar
+        int executiveVagons = newTrain.calculateExecutive(passenger);
+        int standardVagons = newTrain.calculateStandard(passenger);
+        int vipVagons = newTrain.calculateVIP(passenger);
+
+        newTrain.setExecutiveVagons(executiveVagons);
+        newTrain.setStandardVagons(standardVagons);
+        newTrain.setvipVagons(vipVagons);
+        
         trains.add(newTrain); // Agrega el nuevo tren a la lista de trenes
+        
+        // Guardar la lista actualizada de trenes en el archivo JSON
         String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
         saveTrainsToJson(trainFilePath);
+        
         JOptionPane.showMessageDialog(null,"Tren agregado correctamente al sistema."); // Imprime un mensaje de éxito
     }
+    
+    
 
     // Método para verificar si ya existe un tren con el mismo identificador
 private boolean isTrainExists(String identifier) {
