@@ -18,7 +18,96 @@ public class TrainController {
         this.model = model; // Asigna el modelo de tre
         this.trains = new LinkedList<>(); // Inicializa la lista de trenes
     }
+    public void updateTrainDataTicket(String trainIdToUpdate, String category) {
+        // Crear una LinkedList temporal para almacenar los datos
+        LinkedList<TrainModel> tempTrainList = new LinkedList<>();
+        
+        // Recorrer los elementos originales y agregar aquellos cuyo identificador no coincida con el identificador a eliminar
+        for (int i = 0; i < trains.size(); i++) {
+            TrainModel train = trains.get(i);
+            if (!train.getIdentifier().equals(trainIdToUpdate)) {
+                tempTrainList.add(train); // Agregar el tren a la lista temporal
+            } else {
+                // Actualizar el número de vagones según la categoría
+                switch (category) {
+                    case "VIP":
+                        int updatedVipVagons = updateVip(train);
+                        train.setvipVagons(updatedVipVagons);
+                        break;
+                    case "Executive":
+                        int updatedExecutiveVagons = updateExecutive(train);
+                        train.setExecutiveVagons(updatedExecutiveVagons);
+                        break;
+                    case "Standard":
+                    default:
+                        int updatedStandardVagons = updateStandard(train);
+                        train.setStandardVagons(updatedStandardVagons);
+                        break;
+                }
+                tempTrainList.add(train); // Agregar el tren actualizado a la lista temporal
+            }
+        }
+        
+        // Limpiar la lista original de trenes
+        trains.clear();
+        
+        // Agregar los trenes de la lista temporal a la lista original uno por uno
+        for (int i = 0; i < tempTrainList.size(); i++) {
+            trains.add(tempTrainList.get(i));
+        }
+        
+        // Guardar la lista actualizada de trenes en el archivo JSON
+        String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
+        saveTrainsToJson(trainFilePath);
+    }
+    
+    
+    private int updateVip(TrainModel train) {
+        // Actualizar la cantidad de vagones VIP en el tren seleccionado
+        if (train.getVipVagons() > 0) {
+            return train.getVipVagons() - 1;
+        }
+        else {
+            return train.getVipVagons(); // No hay vagones VIP disponibles para actualizar
+        }
+    }
+    
+    private int updateStandard(TrainModel train) {
+        // Actualizar la cantidad de vagones Standard en el tren seleccionado
+        if (train.getStandardVagons() > 0) {
+            return train.getStandardVagons() - 1;
+        } else {
+            return train.getStandardVagons(); // No hay vagones Standard disponibles para actualizar
+        }
+    }
+    
+    private int updateExecutive(TrainModel train) {
+        // Actualizar la cantidad de vagones Executive en el tren seleccionado
+        if (train.getExecutiveVagons() > 0) {
+            return train.getExecutiveVagons() - 1;
+        } else {
+            return train.getExecutiveVagons(); // No hay vagones Executive disponibles para actualizar
+        }
+    }
+    
+    
+// Método para guardar los trenes en el archivo JSON
+public void saveTrainsToJson(String trainFilePath, LinkedList<TrainModel> trainList) {
+    // Crear una instancia de FileJsonAdapter para trenes
+    FileJsonAdapter<TrainModel> trainJsonAdapter = FileJsonAdapter.getInstance();
 
+    // Guardar los datos de trenes en un archivo JSON
+    boolean success = trainJsonAdapter.writeObjects(trainFilePath, trainList);
+
+    // Mostrar mensaje de éxito o error para trenes
+    if (success) {
+        System.out.println("Datos de trenes guardados correctamente en el archivo JSON.");
+    } else {
+        System.out.println("Error al guardar los datos de trenes en el archivo JSON.");
+    }
+}
+
+    
     public void addTrain(String name, String identifier, int capacityLoad, int mileage) {
         System.out.println("Add button clicked");
         // Verificar si ya existe un tren con el mismo identificador
@@ -40,7 +129,7 @@ public class TrainController {
         
         // Calcula el número de vagones VIP, ejecutivos y estándar
         int executiveVagons = newTrain.calculateExecutive(passenger);
-        int standardVagons = newTrain.calculateStandard(passenger);
+        int standardVagons = newTrain.calculateStandard(passenger)-6 ;
         int vipVagons = newTrain.calculateVIP(passenger);
 
         newTrain.setExecutiveVagons(executiveVagons);

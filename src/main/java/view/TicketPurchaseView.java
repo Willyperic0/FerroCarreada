@@ -23,13 +23,16 @@ import java.util.Random;
 public class TicketPurchaseView extends javax.swing.JFrame {
 
     private final TicketController ticketController;
+    private final TrainController trainController;
 
-    public TicketPurchaseView(TicketController ticketController) {
+    public TicketPurchaseView(TicketController ticketController, TrainController trainController) {
         initComponents();
         this.ticketController = ticketController;
+        this.trainController = trainController; // Se inicializa trainController
         String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
         ticketController.loadTicketsFromJson(ticketFilePath); // Cargar los datos de tickets desde el archivo JSON al iniciar la ventana
     }
+    
     
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -204,6 +207,7 @@ public class TicketPurchaseView extends javax.swing.JFrame {
     
 
     private void purchaseTicketActionPerformed(java.awt.event.ActionEvent evt) {
+        // Obtener los datos del pasajero
         String contactPerson = jTextFieldContactPerson.getText();
         String contactPersonLastName = jTextFieldContactPersonLastName.getText();
         int contactPersonPhoneNumber = Integer.parseInt(jTextFieldContactPersonPhoneNumber.getText());
@@ -211,50 +215,92 @@ public class TicketPurchaseView extends javax.swing.JFrame {
         String lastName = jTextFieldLastName.getText();
         int phoneNumber = Integer.parseInt(jTextFieldPhoneNumber.getText());
         int dni = Integer.parseInt(jTextFieldDni.getText());
-
         PassengerModel passenger = new PassengerModel(name, lastName, phoneNumber, dni, contactPerson, contactPersonLastName, contactPersonPhoneNumber);
-        String passengerInfo = passenger.toString();
-
+    
+        // Obtener la categoría seleccionada del combo box
         String selectedCategory = (String) jComboBoxCategory.getSelectedItem();
-
+    
         // Simular hora de compra
         String purchaseDateTime = java.time.LocalDateTime.now().toString();
-
+    
         // Simular hora de partida y llegada
         java.util.Random rand = new java.util.Random();
         int hour = rand.nextInt(24);
         int minute = rand.nextInt(60);
         String departureDateTime = "2024-04-15 " + String.format("%02d", hour) + ":" + String.format("%02d", minute) + ":00";
         String arrivalDateTime = "2024-04-15 " + String.format("%02d", hour + 2) + ":" + String.format("%02d", minute) + ":00";
-
-        // Seleccionar un tren aleatoriamente
+    
+        // Obtener el tren seleccionado
         TrainModel train = ticketController.getRandomTrain();
-
-        // Calcular el precio del boleto según la categoría seleccionada
         double ticketValue;
-        switch (selectedCategory) {
-            case "VIP":
-                ticketValue = 30.0;
-                break;
-            case "Ejecutivo":
-                ticketValue = 25.0;
-                break;
-            case "Estándar":
-            default:
-                ticketValue = 15.0;
-                break;
-        }
+    
+// Actualizar el número de vagones según la categoría seleccionada
+switch (selectedCategory) {
+    case "VIP":
+        ticketValue = 30.0;
+        int originalVipVagons = train.getVipVagons();
+        trainController.updateTrainDataTicket(train.getIdentifier(), "VIP");
+        // Verificar si el número de vagones VIP ha cambiado
+        if (train.getVipVagons() == originalVipVagons) {
+            JOptionPane.showMessageDialog(this, "¡Lo sentimos! No hay vagones VIP disponibles. Por favor, elija otra categoría.");
+            return; // Salir del método si no hay vagones VIP disponibles
+        } else {
+            // Crear el boleto utilizando el TicketController
+ticketController.addTicket(purchaseDateTime, departureDateTime, arrivalDateTime, passenger, train, ticketValue, selectedCategory);
+ticketController.saveTicketsToJson();
 
-        // Crear el boleto utilizando el TicketController
+// Mostrar un mensaje de éxito
+JOptionPane.showMessageDialog(this, "¡Boleto comprado exitosamente!");
+
+// Limpiar los campos de entrada
+clearFields();
+}
+        break;
+    case "Ejecutivo":
+        ticketValue = 25.0;
+        int originalExecutiveVagons = train.getExecutiveVagons();
+        trainController.updateTrainDataTicket(train.getIdentifier(), "Executive");
+        // Verificar si el número de vagones ejecutivos ha cambiado
+        if (train.getExecutiveVagons() == originalExecutiveVagons) {
+            JOptionPane.showMessageDialog(this, "¡Lo sentimos! No hay vagones ejecutivos disponibles. Por favor, elija otra categoría.");
+            return; // Salir del método si no hay vagones ejecutivos disponibles
+        } else {
+            // Crear el boleto utilizando el TicketController
+ticketController.addTicket(purchaseDateTime, departureDateTime, arrivalDateTime, passenger, train, ticketValue, selectedCategory);
+ticketController.saveTicketsToJson();
+
+// Mostrar un mensaje de éxito
+JOptionPane.showMessageDialog(this, "¡Boleto comprado exitosamente!");
+
+// Limpiar los campos de entrada
+clearFields();
+}
+        break;
+    case "Estándar":
+    default:
+        ticketValue = 15.0;
+        int originalStandardVagons = train.getStandardVagons();
+        trainController.updateTrainDataTicket(train.getIdentifier(), "Standard");
+        // Verificar si el número de vagones estándar ha cambiado
+        if (train.getStandardVagons() == originalStandardVagons) {
+            JOptionPane.showMessageDialog(this, "¡Lo sentimos! No hay vagones estándar disponibles. Por favor, elija otra categoría.");
+            return; // Salir del método si no hay vagones estándar disponibles
+        } else {
+                    // Crear el boleto utilizando el TicketController
         ticketController.addTicket(purchaseDateTime, departureDateTime, arrivalDateTime, passenger, train, ticketValue, selectedCategory);
         ticketController.saveTicketsToJson();
+    
         // Mostrar un mensaje de éxito
         JOptionPane.showMessageDialog(this, "¡Boleto comprado exitosamente!");
-
+    
         // Limpiar los campos de entrada
         clearFields();
-    }
+        }
+        break;
+}
 
+    }
+    
     private void clearFields() {
         jTextFieldContactPerson.setText("");
         jTextFieldContactPersonLastName.setText("");
@@ -269,7 +315,7 @@ public class TicketPurchaseView extends javax.swing.JFrame {
         TrainModel trainModel = new TrainModel(); // Crear una instancia de TrainModel
         TrainController trainController = new TrainController(trainModel); // Pasar trainModel como argumento
         TicketController ticketController = new TicketController(trainController); // Pasando trainController como argumento
-        TicketPurchaseView frame = new TicketPurchaseView(ticketController);
+        TicketPurchaseView frame = new TicketPurchaseView(ticketController, trainController);
         frame.setVisible(true);
     }
 

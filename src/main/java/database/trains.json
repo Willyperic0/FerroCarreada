@@ -1,101 +1,13 @@
 [
   {
-    "name": "Arnold",
-    "identifier": "2",
-    "capacityLoad": 2,
-    "mileage": 2,
-    "vipVagons": 0,
-    "executiveVagons": 0,
-    "standardVagons": 0,
-    "cargo": 0,
-    "passenger": 0
-  },
-  {
     "name": "Mercedes-Benz",
-    "identifier": "1",
-    "capacityLoad": 20,
-    "mileage": 1,
-    "vipVagons": 0,
-    "executiveVagons": 0,
-    "standardVagons": 0,
-    "cargo": 0,
-    "passenger": 0
-  },
-  {
-    "name": "Arnold",
-    "identifier": "WillyTrain",
+    "identifier": "TrainLuis",
     "capacityLoad": 23,
     "mileage": 0,
     "vipVagons": 0,
-    "executiveVagons": 0,
-    "standardVagons": 0,
-    "cargo": 0,
-    "passenger": 0
-  },
-  {
-    "name": "Arnold",
-    "identifier": "Changuanator",
-    "capacityLoad": 23,
-    "mileage": 23,
-    "vipVagons": 0,
-    "executiveVagons": 0,
-    "standardVagons": 0,
-    "cargo": 0,
-    "passenger": 0
-  },
-  {
-    "name": "Arnold",
-    "identifier": "superaña",
-    "capacityLoad": 17,
-    "mileage": 0,
-    "vipVagons": 0,
-    "executiveVagons": 0,
-    "standardVagons": 0,
-    "cargo": 0,
-    "passenger": 0
-  },
-  {
-    "name": "Arnold",
-    "identifier": "TestPassenger",
-    "capacityLoad": 17,
-    "mileage": 0,
-    "vipVagons": 68,
-    "executiveVagons": 136,
-    "standardVagons": 374,
-    "cargo": 0,
-    "passenger": 0
-  },
-  {
-    "name": "Arnold",
-    "identifier": "test",
-    "capacityLoad": 10,
-    "mileage": 23,
-    "vipVagons": 0,
-    "executiveVagons": 0,
-    "standardVagons": 0,
-    "cargo": 0,
-    "passenger": 0
-  },
-  {
-    "name": "Arnold",
-    "identifier": "papu",
-    "capacityLoad": 23,
-    "mileage": 1,
-    "vipVagons": 0,
-    "executiveVagons": 0,
-    "standardVagons": 0,
+    "executiveVagons": 125,
+    "standardVagons": 346,
     "cargo": 7,
     "passenger": 16
-  },
-  {
-    "name": "Arnold",
-    "identifier": "rrrrrr",
-    "capacityLoad": 22,
-    "mileage": 22,
-    "vipVagons": 60,
-    "executiveVagons": 120,
-    "standardVagons": 330,
-    "cargo": 7,
-    "passenger": 15
   }
 ]

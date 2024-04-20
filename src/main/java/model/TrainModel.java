@@ -70,6 +70,20 @@ public class TrainModel implements Serializable {
     public void setvipVagons(int vipVagons) {   this.vipVagons = vipVagons; }
     public void setExecutiveVagons(int executiveVagons) { this.executiveVagons = executiveVagons; }
     public void setStandardVagons(int standardVagons) { this.standardVagons = standardVagons; }
+    
+    public int getVipVagons() {
+        return this.vipVagons;
+    }
+    
+    public int getExecutiveVagons() {
+        return this.executiveVagons;
+    }
+    
+    public int getStandardVagons() {
+        return this.standardVagons;
+    }
+    
+
 
    // Método para calcular los tickets VIP
 public int calculateVIP(int passengerCount) {
