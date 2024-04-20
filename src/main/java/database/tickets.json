@@ -113,5 +113,28 @@
     },
     "ticketValue": 30.0,
     "category": "VIP"
+  },
+  {
+    "registrationId": "SPWIWI20240420",
+    "purchaseDateTime": "2024-04-20T00:42:52.610020800",
+    "departureDateTime": "2024-04-15 03:16:00",
+    "arrivalDateTime": "2024-04-15 05:16:00",
+    "passenger": {
+      "contactPerson": "william",
+      "contactPersonLastName": "william",
+      "contactPersonPhoneNumber": 232323,
+      "name": "william",
+      "lastName": "william",
+      "phoneNumber": 232323,
+      "dni": 232323
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "superaña",
+      "capacityLoad": 17,
+      "mileage": 0
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
   }
 ]

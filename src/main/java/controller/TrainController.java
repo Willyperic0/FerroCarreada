@@ -20,6 +20,7 @@ public class TrainController {
     }
 
     public void addTrain(String name, String identifier, int capacityLoad, int mileage) {
+        System.out.println("Add button clicked");
         // Verificar si ya existe un tren con el mismo identificador
         if (isTrainExists(identifier)) {
             JOptionPane.showMessageDialog(null,"Error: Ya existe un tren con el mismo identificador en el sistema.");
@@ -29,6 +30,8 @@ public class TrainController {
         // Si no hay un tren con el mismo identificador, proceder con la adición del nuevo tren
         TrainModel newTrain = new TrainModel(name, identifier, capacityLoad, mileage); // Crea un nuevo objeto TrainModel
         trains.add(newTrain); // Agrega el nuevo tren a la lista de trenes
+        String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
+        saveTrainsToJson(trainFilePath);
         JOptionPane.showMessageDialog(null,"Tren agregado correctamente al sistema."); // Imprime un mensaje de éxito
     }
 
@@ -82,7 +85,6 @@ private boolean isTrainExists(String identifier) {
         return message.toString(); // Retorna el mensaje como una cadena de texto
     }
 
-    // Método para obtener la lista de trenes
 // Método para obtener la lista de trenes
 public LinkedList<TrainModel> getTrainList() {
     // Especifica la ruta completa del archivo JSON para los trenes
@@ -101,20 +103,28 @@ public LinkedList<TrainModel> getTrainList() {
     }
 
     public void deleteAndReorganize(String trainIdToDelete) {
-     // Crear una LinkedList temporal para almacenar los datos
-     LinkedList<TrainModel> tempTrainList = new LinkedList<>();
-    
-     // Recorrer los elementos originales y agregar aquellos cuyo identificador no coincida con el identificador a eliminar
-     for (int i = 0; i < trains.size(); i++) {
-         TrainModel train = trains.get(i);
-         if (!train.getIdentifier().equals(trainIdToDelete)) {
-             tempTrainList.add(train); // Agregar el tren a la lista temporal
-         }
-     }
-     
-     // Actualizar la lista de trenes con la lista temporal
-     trains = tempTrainList;
+        // Crear una LinkedList temporal para almacenar los datos
+        LinkedList<TrainModel> tempTrainList = new LinkedList<>();
+        
+        // Recorrer los elementos originales y agregar aquellos cuyo identificador no coincida con el identificador a eliminar
+        for (int i = 0; i < trains.size(); i++) {
+            TrainModel train = trains.get(i);
+            if (!train.getIdentifier().equals(trainIdToDelete)) {
+                tempTrainList.add(train); // Agregar el tren a la lista temporal
+            }
+        }
+        
+        // Limpiar la lista original de trenes
+        trains.clear();
+        
+        // Agregar los trenes de la lista temporal a la lista original uno por uno
+        for (int i = 0; i < tempTrainList.size(); i++) {
+            trains.add(tempTrainList.get(i));
+        }
+        String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
+        saveTrainsToJson(trainFilePath);
     }
+    
     
     public void deleteAllTrains() {
         trains.clear(); // Borra toda la lista de trenes
@@ -146,4 +156,19 @@ public LinkedList<TrainModel> getTrainList() {
                 System.out.println("Error al leer los datos de trenes desde el archivo JSON.");
             }
         }
+            // Método para guardar los trenes en el archivo JSON
+    public void saveTrainsToJson(String trainFilePath) {
+        // Crear una instancia de FileJsonAdapter para trenes
+        FileJsonAdapter<TrainModel> trainJsonAdapter = FileJsonAdapter.getInstance();
+
+        // Guardar los datos de trenes en un archivo JSON
+        boolean success = trainJsonAdapter.writeObjects(trainFilePath, trains);
+
+        // Mostrar mensaje de éxito o error para trenes
+        if (success) {
+            System.out.println("Datos de trenes guardados correctamente en el archivo JSON.");
+        } else {
+            System.out.println("Error al guardar los datos de trenes en el archivo JSON.");
+        }
+    }
 }

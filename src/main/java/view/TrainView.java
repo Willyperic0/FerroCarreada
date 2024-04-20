@@ -16,86 +16,50 @@ public class TrainView extends javax.swing.JFrame {
     public TrainView(TrainController trainController) {
         initComponents();
         this.trainController = trainController;
-        loadTrainsFromJson(); // Cargar los datos de trenes desde el archivo JSON al iniciar la ventana
-    }
-
-// Método para cargar los datos de trenes desde el archivo JSON
-private void loadTrainsFromJson() {
-    // Ruta del archivo JSON para trenes
-    String pathFile = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
-    
-    // Crear una instancia de FileJsonAdapter para trenes
-    FileJsonAdapter<TrainModel> trainJsonAdapter = FileJsonAdapter.getInstance();
-    
-    // Leer los datos de trenes desde el archivo JSON
-    LinkedList<TrainModel> trainList = trainJsonAdapter.getObjects(pathFile, TrainModel[].class);
-    
-    // Verificar si se leyeron correctamente los datos
-    if (trainList != null) {
-        // Establecer la lista de trenes en el controlador de trenes
-        trainController.setTrainList(trainList);
-        // Actualizar la tabla de trenes con los datos leídos
-        updateTrainTable(trainList);
-    } else {
-        JOptionPane.showMessageDialog(null, "Error al leer los datos de trenes desde el archivo JSON.");
-    }
-}
-
-
-    // Método para actualizar la tabla de trenes con los datos leídos del archivo JSON
-    private void updateTrainTable(LinkedList<TrainModel> trainList) {
-        DefaultTableModel model = (DefaultTableModel) trainTable.getModel();
-        model.setRowCount(0); // Limpiar la tabla antes de agregar los datos
-        
-        // Agregar cada tren a la tabla
-        for (int i = 0; i < trainList.size(); i++) {
-            TrainModel train = trainList.get(i);
-            Object[] row = {train.getName(), train.getIdentifier(), train.getCapacityLoad(), train.getMileage()};
-            model.addRow(row);
-        }
-        
+        // No se necesita llamar a loadTrainsFromJson() ya que se carga en el controlador
+        updateTrainTable(); // Actualiza la tabla de trenes al iniciar la ventana
     }
 
     // ActionListener para el botón "AGREGAR"
-// ActionListener para el botón "AGREGAR"
-private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    String identifier = nameText.getText(); // Obtener el identificador del tren del campo "identificador" nameText.getText();
-    String selectedOption = (String) typeComboBox.getSelectedItem();
-    int capacityLoad = Integer.parseInt(capacityLoadText.getText());
-    int mileage = Integer.parseInt(mileageText.getText());
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        System.out.println("Add button clicked");
+        String identifier = nameText.getText(); // Obtener el identificador del tren del campo "identificador"
+        String selectedOption = (String) typeComboBox.getSelectedItem();
+        int capacityLoad = Integer.parseInt(capacityLoadText.getText());
+        int mileage = Integer.parseInt(mileageText.getText());
 
-    // Validar la capacidad de carga según la opción seleccionada
-    if (selectedOption.equals("Arnold")) {
-        if (capacityLoad <= 32) {
-            // Agregar tren al controlador
-            trainController.addTrain(selectedOption, identifier, capacityLoad, mileage); // Usar el identificador en lugar del nombre
-            // Actualizar la tabla de trenes
-            updateTrainTable();
-            // Limpiar los campos de texto después de agregar un tren
-            clearTextFields();
-            // Guardar los trenes en el archivo JSON
-            saveTrainsToJson();
+        // Validar la capacidad de carga según la opción seleccionada
+        if (selectedOption.equals("Arnold")) {
+            if (capacityLoad <= 32) {
+                // Agregar tren al controlador
+                trainController.addTrain(selectedOption, identifier, capacityLoad, mileage); // Usar el identificador en lugar del nombre
+                // Actualizar la tabla de trenes
+                updateTrainTable();
+                // Limpiar los campos de texto después de agregar un tren
+                clearTextFields();
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese una capacidad de carga válida.");
+            }
+        } else if (selectedOption.equals("Mercedes-Benz")) {
+            if (capacityLoad <= 28) {
+                // Agregar tren al controlador
+                trainController.addTrain(selectedOption, identifier, capacityLoad, mileage); // Usar el identificador en lugar del nombre
+                // Actualizar la tabla de trenes
+                updateTrainTable();
+                // Limpiar los campos de texto después de agregar un tren
+                clearTextFields();
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese una capacidad de carga válida.");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese una capacidad de carga válida.");
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una opción válida.");
         }
-    } else if (selectedOption.equals("Mercedes-Benz")) {
-        if (capacityLoad <= 28) {
-            // Agregar tren al controlador
-            trainController.addTrain(selectedOption, identifier, capacityLoad, mileage); // Usar el identificador en lugar del nombre
-            // Actualizar la tabla de trenes
-            updateTrainTable();
-            // Limpiar los campos de texto después de agregar un tren
-            clearTextFields();
-            // Guardar los trenes en el archivo JSON
-            saveTrainsToJson();
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese una capacidad de carga válida.");
-        }
-    } else {
-        JOptionPane.showMessageDialog(null, "Por favor, seleccione una opción válida.");
+        System.out.println("Identifier: " + identifier);
+        System.out.println("Selected Option: " + selectedOption);
+        System.out.println("Capacity Load: " + capacityLoad);
+        System.out.println("Mileage: " + mileage);
+    
     }
-}
-
 
     // ActionListener para el botón "ELIMINAR"
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,45 +76,24 @@ private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
         // Actualizar la tabla de trenes
         updateTrainTable();
-        // Guardar los trenes en el archivo JSON
-        saveTrainsToJson();
     }
 
-    // Método para actualizar la tabla de trenes
-    private void updateTrainTable() {
-        DefaultTableModel model = (DefaultTableModel) trainTable.getModel();
-        model.setRowCount(0); // Limpiar la tabla antes de agregar los datos
+// Método para actualizar la tabla de trenes
+private void updateTrainTable() {
+    DefaultTableModel model = (DefaultTableModel) trainTable.getModel();
+    model.setRowCount(0); // Limpiar la tabla antes de agregar los datos
 
-        // Obtener la lista de trenes del controlador
-        LinkedList<TrainModel> trainList = trainController.getTrainList();
+    // Obtener la lista de trenes del controlador
+    LinkedList<TrainModel> trainList = trainController.getTrainList();
 
-        // Agregar cada tren a la tabla
-        for (int i = 0; i < trainList.size(); i++) {
-            TrainModel train = trainList.get(i);
-            Object[] row = {train.getName(), train.getIdentifier(), train.getCapacityLoad(), train.getMileage()};
-            model.addRow(row);
-        }
-        
+    // Agregar cada tren a la tabla
+    for (int i = 0; i < trainList.size(); i++) {
+        TrainModel train = trainList.get(i);
+        Object[] row = {train.getName(), train.getIdentifier(), train.getCapacityLoad(), train.getMileage()};
+        model.addRow(row);
     }
+}
 
-    // Método para guardar los trenes en el archivo JSON
-    public void saveTrainsToJson() {
-        // Ruta completa del archivo JSON para trenes
-        String pathFile = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
-
-        // Crear una instancia de FileJsonAdapter para trenes
-        FileJsonAdapter<TrainModel> trainJsonAdapter = FileJsonAdapter.getInstance();
-
-        // Guardar los datos de trenes en un archivo JSON
-        boolean trainSuccess = trainJsonAdapter.writeObjects(pathFile, trainController.getTrainList());
-
-        // Mostrar mensaje de éxito o error para trenes
-        if (trainSuccess) {
-            JOptionPane.showMessageDialog(null, "Datos de trenes guardados correctamente en el archivo JSON.");
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al guardar los datos de trenes en el archivo JSON.");
-        }
-    }
 
     // Método para limpiar los campos de texto después de agregar un tren
     private void clearTextFields() {
