@@ -19,7 +19,25 @@ public class TicketController {
         this.trainController = trainController;
         this.boardingQueue = new PriorityQueue<>(3);
     }
+    public PriorityQueue<String> getPriorityQueue() {
+        PriorityQueue<String> priorityQueue = new PriorityQueue<>(3);
 
+        // Agregar los mensajes a la cola de prioridad
+        priorityQueue.insert("Bienvenidos");
+        priorityQueue.insert("Ingresen clientes VIP");
+        priorityQueue.insert("Ingresen clientes ejecutivos");
+        priorityQueue.insert("Ingresen clientes estándar");
+        priorityQueue.insert("Tengan buen viaje");
+
+        return priorityQueue;
+    }
+
+    // Método para imprimir los mensajes de acuerdo con la cola de prioridad
+    public void printBoardingOrder(PriorityQueue<String> priorityQueue) {
+        while (!priorityQueue.isEmpty()) {
+            System.out.println(priorityQueue.extract());
+        }
+    }
     // Otros métodos de la clase TicketController...
     public TicketModel findTicketByRegistrationId(String registrationId, String trainName) {
         // Crear una nueva lista para almacenar los tickets
@@ -27,45 +45,42 @@ public class TicketController {
     
         // Especifica la ruta completa del archivo JSON para los tickets
         String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
-        System.out.println("Ticket file path: " + ticketFilePath);
     
         // Cargar los datos de tickets desde el archivo JSON en la nueva lista
         loadTicketsFromJson(ticketFilePath, ticketList);
-        System.out.println("Ticket list size after loading from JSON: " + ticketList.size());
+
     
         // Obtener el ID del tren seleccionado
         String trainId = getTrainId(trainName);
-        System.out.println("Train ID obtained from getTrainId(): " + trainId);
+
     
         // Verificar si el registrationId del ticket está presente en la lista de tickets
         for (int i = 0; i < ticketList.size(); i++) {
             TicketModel ticket = ticketList.get(i);
-            System.out.println("Ticket registration ID: " + ticket.getRegistrationId());
-            System.out.println("Ticket train identifier: " + ticket.getTrain().getIdentifier());
+
             if (ticket.getRegistrationId().equals(registrationId) && ticket.getTrain().getIdentifier().equals(trainId)) {
                 // Si encontramos un ticket con el ID de registro y el ID del tren coincidentes, retornamos el ticket
-                System.out.println("Found matching ticket.");
                 return ticket;
             }
         }
     
         // Si no se encuentra ningún ticket que cumpla con los criterios, retornamos null
-        System.out.println("No matching ticket found.");
+
         return null;
     }
     
     
     private String getTrainId(String trainName) {
-        System.out.println("String getTrainId(String trainName)");
+
         // Obtener la lista de trenes desde el controlador de trenes
         LinkedList<TrainModel> trainList = trainController.getTrainList();
         
-        System.out.println("Train list size: " + trainList.size());
+
         
         // Buscar el ID del tren por su nombre
         for (int i = 0; i < trainList.size(); i++) {
             TrainModel train = trainList.get(i);
-            System.out.println("Train identifier: " + train.getIdentifier());
+
             if (train.getIdentifier().equals(trainName)) {
                 return train.getIdentifier();
             }
@@ -83,36 +98,54 @@ public class TicketController {
             for (int i = 0; i < size; i++) {
                 TicketModel ticket = loadedTickets.get(i);
                 ticketList.add(ticket);
-                System.out.println("Ticket cargado desde archivo JSON: " + ticket);
+
             }
-            System.out.println("Lista de tickets cargada desde archivo JSON correctamente.");
+
         } else {
-            System.out.println("No se pudo cargar la lista de tickets desde el archivo JSON.");
+
         }
     }
 
     
 
-    public String getBoardingOrder() {
+    public String getBoardingOrder(String selectedTrainName) {
         StringBuilder boardingOrder = new StringBuilder();
+        
+        // Obtener todos los tickets relacionados con el tren seleccionado
+        LinkedList<TicketModel> trainTickets = getTrainTickets(selectedTrainName);
+        
+        // Crear una cola de prioridad para almacenar temporalmente los tickets y establecer el orden de abordaje
+        PriorityQueue<TicketModel> boardingQueue = new PriorityQueue<>(trainTickets.size());
+
+        // Agregar los tickets a la cola de prioridad
+        for (int i = 0; i < trainTickets.size(); i++) {
+            boardingQueue.insert(trainTickets.get(i));
+        }
+
         // Iterar sobre la cola de prioridad y agregar los tickets a la cadena de texto
-// Crear una nueva cola de prioridad para almacenar temporalmente los elementos
-PriorityQueue<TicketModel> tempQueue = new PriorityQueue<>(boardingQueue.size());
-
-// Copiar los elementos de la cola de abordaje original a la nueva cola
-while (!boardingQueue.isEmpty()) {
-    TicketModel ticket = boardingQueue.extract();
-    tempQueue.insert(ticket);
-}
-
-// Restaurar la cola de abordaje original
-while (!tempQueue.isEmpty()) {
-    TicketModel ticket = tempQueue.extract();
-    boardingQueue.insert(ticket);
-}
+        while (!boardingQueue.isEmpty()) {
+            TicketModel ticket = boardingQueue.extract();
+            boardingOrder.append(ticket.toString()).append("\n");
+        }
 
         return boardingOrder.toString();
     }
+
+    // Método para obtener todos los tickets relacionados con el tren seleccionado
+    private LinkedList<TicketModel> getTrainTickets(String selectedTrainName) {
+        LinkedList<TicketModel> trainTickets = new LinkedList<>();
+        // Iterar sobre todos los tickets y agregar aquellos que pertenezcan al tren seleccionado
+        for (int i = 0; i < tickets.size(); i++) {
+            TicketModel ticket = tickets.get(i);
+            if (ticket.getTrain().getIdentifier().equals(selectedTrainName)) {
+                trainTickets.add(ticket);
+            }
+        }
+        return trainTickets;
+    }
+
+
+
 // Método para obtener un tren aleatorio de la lista de trenes
 public TrainModel getRandomTrain() {
     LinkedList<TrainModel> trainList = trainController.getTrainList();
@@ -144,9 +177,9 @@ public void saveTicketsToJson() {
     FileJsonAdapter<TicketModel> ticketJsonAdapter = FileJsonAdapter.getInstance();
     boolean success = ticketJsonAdapter.writeObjects(ticketFilePath, tickets);
     if (success) {
-        System.out.println("Lista de tickets guardada en archivo JSON correctamente.");
+
     } else {
-        System.out.println("Error al guardar la lista de tickets en el archivo JSON.");
+
     }
 }
 
@@ -156,9 +189,9 @@ public void loadTicketsFromJson(String ticketFilePath) {
     LinkedList<TicketModel> loadedTickets = ticketJsonAdapter.getObjects(ticketFilePath, TicketModel[].class);
     if (!loadedTickets.isEmpty()) {
         tickets = loadedTickets;
-        System.out.println("Lista de tickets cargada desde archivo JSON correctamente.");
+
     } else {
-        System.out.println("No se pudo cargar la lista de tickets desde el archivo JSON.");
+
     }
 }
 
@@ -175,7 +208,7 @@ TicketModel newTicket = new TicketModel(ticketId, purchaseDateTime, departureDat
 tickets.add(newTicket);
 
 // Mostrar mensaje de éxito
-System.out.println("Boleto agregado correctamente al sistema.");
+
 }
 
 
@@ -212,7 +245,7 @@ private String generateTicketId(TrainModel train, PassengerModel passenger, Stri
         tickets = tempTicketList;
         
         // Mostrar mensaje de éxito
-        System.out.println("Boleto eliminado correctamente.");
+
     }   
 
     // Método para buscar un boleto por su ID
@@ -244,12 +277,12 @@ ticket.setPassenger(passenger);
 ticket.setTrain(train);
 ticket.setTicketValue(ticketValue);
 ticket.setCategory(category);
-System.out.println("Información del boleto actualizada correctamente.");
+
 return;
 }
 }
 // Mostrar mensaje si no se encuentra el boleto con el ID dado
-System.out.println("No se encontró ningún boleto con el ID proporcionado.");
+
 }
 
 
@@ -265,11 +298,11 @@ System.out.println("No se encontró ningún boleto con el ID proporcionado.");
     }
     public void displayTickets() {
         if (tickets.isEmpty()) {
-            System.out.println("No hay tickets en el sistema.");
+
         } else {
             for (int i = 0; i < tickets.size(); i++) {
                 TicketModel ticket = tickets.get(i);
-                System.out.println(ticket);
+
             }
         }
     }

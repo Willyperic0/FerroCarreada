@@ -8,14 +8,6 @@
     "dni": 512958
   },
   {
-    "user": "admin",
-    "password": "admin",
-    "name": "Usuario",
-    "lastName": "Admin",
-    "phoneNumber": 32090,
-    "dni": 27
-  },
-  {
     "user": "luis.fuentes.56",
     "password": "LF514856",
     "name": "Luis",

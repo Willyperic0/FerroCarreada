@@ -10,6 +10,8 @@ import controller.FileJsonAdapter;
 import controller.LoginController;
 import model.EmployeeModel;
 import willy.linkedlist.doubly.LinkedList;
+import javax.swing.*;
+import java.awt.*;
 
 public class EmployeeView extends javax.swing.JFrame {
 
@@ -168,7 +170,6 @@ private void updateEmployeeTable() {
 
 // Método para inicializar los componentes de la interfaz gráfica
 private void initComponents() {
-
     jPanel1 = new javax.swing.JPanel();
     jLabel1 = new javax.swing.JLabel();
     nameText = new javax.swing.JTextField();
@@ -190,16 +191,23 @@ private void initComponents() {
     setSize(new java.awt.Dimension(800, 500)); // Ajuste del tamaño de la ventana
 
     jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar Empleado"));
+    jPanel1.setBackground(new Color(255, 255, 255)); // Color blanco
 
     jLabel1.setText("Nombre:");
+    jLabel1.setForeground(new Color(78, 41, 115)); // Color morado
 
     jLabel2.setText("Apellido:");
+    jLabel2.setForeground(new Color(78, 41, 115)); // Color morado
 
     jLabel3.setText("Teléfono:");
+    jLabel3.setForeground(new Color(78, 41, 115)); // Color morado
 
     jLabel4.setText("DNI:");
+    jLabel4.setForeground(new Color(78, 41, 115)); // Color morado
 
     addButton.setText("Agregar");
+    addButton.setBackground(new Color(127, 117, 191)); // Color púrpura para el fondo del botón
+    addButton.setForeground(Color.WHITE); // Texto blanco para el botón
     addButton.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             addButtonActionPerformed(evt);
@@ -207,6 +215,8 @@ private void initComponents() {
     });
 
     deleteButton.setText("Eliminar");
+    deleteButton.setBackground(new Color(127, 117, 191)); // Color púrpura para el fondo del botón
+    deleteButton.setForeground(Color.WHITE); // Texto blanco para el botón
     deleteButton.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             deleteButtonActionPerformed(evt);
@@ -261,6 +271,7 @@ private void initComponents() {
     );
 
     jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Empleados"));
+    jPanel2.setBackground(new Color(255, 255, 255)); // Color blanco
 
     employeeTable.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {
@@ -290,6 +301,8 @@ private void initComponents() {
     );
 
     backButton.setText("Volver"); // Configuración del botón de retorno
+    backButton.setBackground(new Color(127, 117, 191)); // Color púrpura para el fondo del botón
+    backButton.setForeground(Color.WHITE); // Texto blanco para el botón
     backButton.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             backButtonActionPerformed(evt);

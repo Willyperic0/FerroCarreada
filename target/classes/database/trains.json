@@ -6,6 +6,17 @@
     "mileage": 0,
     "vipVagons": 0,
     "executiveVagons": 125,
+    "standardVagons": 345,
+    "cargo": 7,
+    "passenger": 16
+  },
+  {
+    "name": "Arnold",
+    "identifier": "train12",
+    "capacityLoad": 23,
+    "mileage": 23,
+    "vipVagons": 64,
+    "executiveVagons": 128,
     "standardVagons": 346,
     "cargo": 7,
     "passenger": 16

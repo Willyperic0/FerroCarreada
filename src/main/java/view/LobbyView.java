@@ -10,10 +10,9 @@ import model.EmployeeModel;
 import model.TrainModel;
 import willy.linkedlist.doubly.LinkedList;
 
-/**
- *
- * @author Willyperic0
- */
+import javax.swing.*;
+import java.awt.*;
+
 import javax.swing.JOptionPane;
 
 public class LobbyView extends javax.swing.JFrame {
@@ -23,6 +22,8 @@ public class LobbyView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRoute;
     private javax.swing.JButton jButtonTrain;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabelWelcome;
+    private javax.swing.JLabel jLabelInstruction;
 
     public LobbyView() {
         initComponents();
@@ -36,6 +37,8 @@ public class LobbyView extends javax.swing.JFrame {
         jButtonEmployee = new javax.swing.JButton();
         jButtonRoute = new javax.swing.JButton();
         jButtonPurchaseTicket = new javax.swing.JButton();
+        jLabelWelcome = new javax.swing.JLabel();
+        jLabelInstruction = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lobby");
@@ -43,14 +46,14 @@ public class LobbyView extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lobby"));
 
-        jButtonTrain.setText("TrainView");
+        jButtonTrain.setText("Gestión de Trenes");
         jButtonTrain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTrainActionPerformed(evt);
             }
         });
 
-        jButtonEmployee.setText("EmployeeView");
+        jButtonEmployee.setText("Gestión de Empleados");
         jButtonEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEmployeeActionPerformed(evt);
@@ -71,54 +74,86 @@ public class LobbyView extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        // Aplica el color al botón
+        Color buttonColor = new Color(127, 117, 191);
+        jButtonTrain.setBackground(buttonColor);
+        jButtonEmployee.setBackground(buttonColor);
+        jButtonRoute.setBackground(buttonColor);
+        jButtonPurchaseTicket.setBackground(buttonColor);
+        jButtonTrain.setForeground(Color.WHITE);
+        jButtonEmployee.setForeground(Color.WHITE);
+        jButtonRoute.setForeground(Color.WHITE);
+        jButtonPurchaseTicket.setForeground(Color.WHITE);
+
+        // Coloca los botones a la izquierda del panel
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonTrain, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                    .addComponent(jButtonEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                    .addComponent(jButtonRoute, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                    .addComponent(jButtonPurchaseTicket, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
+                .addContainerGap(300, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonTrain, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEmployee, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRoute, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonPurchaseTicket, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonTrain, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonRoute, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonPurchaseTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButtonTrain, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonEmployee, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonRoute, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonPurchaseTicket, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        // Etiqueta de bienvenida
+        jLabelWelcome.setFont(new Font("Segoe UI", Font.BOLD, 36));
+        jLabelWelcome.setForeground(new Color(78, 41, 115));
+        jLabelWelcome.setText("¡Bienvenido!");
+
+        // Etiqueta de instrucción
+        jLabelInstruction.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        jLabelInstruction.setForeground(new Color(78, 41, 115));
+        jLabelInstruction.setText("¿Qué desea hacer?");
+
+        // Coloca las etiquetas a la derecha del panel
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(300, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelWelcome, GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelInstruction, GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelWelcome)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelInstruction))
+                    .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
     }
 
-    private void jButtonTrainActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void jButtonTrainActionPerformed(java.awt.event.ActionEvent evt) {
         TrainController trainController = new TrainController(new TrainModel());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -126,9 +161,9 @@ public class LobbyView extends javax.swing.JFrame {
             }
         });
         this.dispose();
-    }                                            
+    }
 
-    private void jButtonEmployeeActionPerformed(java.awt.event.ActionEvent evt) {                                                
+    private void jButtonEmployeeActionPerformed(java.awt.event.ActionEvent evt) {
         EmployeeController employeeController = new EmployeeController(new EmployeeModel());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -136,21 +171,21 @@ public class LobbyView extends javax.swing.JFrame {
             }
         });
         this.dispose();
-    }                                               
+    }
 
-    private void jButtonRouteActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void jButtonRouteActionPerformed(java.awt.event.ActionEvent evt) {
         JOptionPane.showMessageDialog(null, "Modulo de gestion de rutas no disponible por el momento");
-    }                                            
+    }
 
-    private void jButtonPurchaseTicketActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+    private void jButtonPurchaseTicketActionPerformed(java.awt.event.ActionEvent evt) {
         TicketController ticketController = new TicketController(new TrainController(new TrainModel()));
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TicketPurchaseView(ticketController).setVisible(true);
+                //new TicketPurchaseView(ticketController).setVisible(true);
             }
         });
         this.dispose();
-    }                                                    
+    }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
