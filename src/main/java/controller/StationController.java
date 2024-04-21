@@ -1,41 +1,37 @@
 package controller;
 
-import java.util.*;
 
-import model.StationModel;
+import model.RouteModel;
+import view.RouteView;
 import willy.linkedlist.doubly.LinkedList;
 
-public class StationController {
 
-    private int numVertices;
-    private LinkedList<LinkedList<StationModel>> matrizAdyacencia;
+public class StationController{
+    
+    private RouteModel modelo;
+    private RouteView vista;
 
-    public StationController(int numVertices) {
-        this.numVertices = numVertices;
-        this.matrizAdyacencia = new LinkedList<>();
-        for (int i = 0; i < numVertices; i++) {
-            LinkedList<StationModel> nuevaLista = new LinkedList<>();
-            matrizAdyacencia.add(nuevaLista); 
-        }
+    public StationController(RouteModel modelo, RouteView vista) {
+        
+        this.modelo = modelo;
+        this.vista = vista;
     }
 
-    public void agregarArista(int origen, StationModel arco) {
-        matrizAdyacencia.get(origen).add(arco);
+    // Método para agregar una conexión entre dos ciudades con su respectiva distancia
+    public void agregarConexion(int ciudadOrigen, int ciudadDestino, double distancia) {
+        modelo.agregarArista(ciudadOrigen, ciudadDestino, distancia);
     }
 
-    public void imprimirMatrizAdyacencia() {
-        if (matrizAdyacencia == null) {
-            System.out.println("La matriz de adyacencia no ha sido inicializada.");
-            return;
-        }
-        for (int i = 0; i < numVertices; i++) {
-            System.out.print("Vértice " + i + ": ");
-            LinkedList<StationModel> listaAdyacente = matrizAdyacencia.get(i);
-            for (int j = 0; j < listaAdyacente.size(); j++) {
-                StationModel arco = listaAdyacente.get(j);
-                System.out.print("(" + arco.getDestino() + ", " + arco.getDistancia() + ") ");
+    // Método para obtener la distancia entre dos ciudades
+    public double obtenerDistancia(int ciudadOrigen, int ciudadDestino) {
+        LinkedList<RouteModel.Arista> aristas = modelo.obtenerAristas(ciudadOrigen);
+        for (int i = 0; i < aristas.size(); i++) {
+            RouteModel.Arista arista = aristas.get(i);
+            if (arista.getDestino() == ciudadDestino) {
+                return arista.getDistancia();
             }
-            System.out.println();
         }
+        // Si no se encuentra una conexión directa entre las ciudades, devolver un valor negativo o infinito
+        return -1; // o Double.POSITIVE_INFINITY;
     }
 }
