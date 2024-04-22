@@ -1,20 +1,53 @@
 [
   {
+    "name": "Arnold",
+    "identifier": "Rapido",
+    "capacityLoad": 27,
+    "mileage": 45320,
+    "vipVagons": 72,
+    "executiveVagons": 144,
+    "standardVagons": 390,
+    "cargo": 9,
+    "passenger": 18
+  },
+  {
     "name": "Mercedes-Benz",
-    "identifier": "TrainLuis",
-    "capacityLoad": 23,
-    "mileage": 0,
-    "vipVagons": 0,
-    "executiveVagons": 125,
-    "standardVagons": 345,
+    "identifier": "Clase C",
+    "capacityLoad": 15,
+    "mileage": 62178,
+    "vipVagons": 40,
+    "executiveVagons": 80,
+    "standardVagons": 214,
+    "cargo": 5,
+    "passenger": 10
+  },
+  {
+    "name": "Mercedes-Benz",
+    "identifier": "Clase E",
+    "capacityLoad": 21,
+    "mileage": 29845,
+    "vipVagons": 56,
+    "executiveVagons": 112,
+    "standardVagons": 302,
     "cargo": 7,
-    "passenger": 16
+    "passenger": 14
   },
   {
     "name": "Arnold",
-    "identifier": "train12",
+    "identifier": "N",
+    "capacityLoad": 30,
+    "mileage": 81503,
+    "vipVagons": 80,
+    "executiveVagons": 160,
+    "standardVagons": 434,
+    "cargo": 10,
+    "passenger": 20
+  },
+  {
+    "name": "Arnold",
+    "identifier": "HN",
     "capacityLoad": 23,
-    "mileage": 23,
+    "mileage": 37691,
     "vipVagons": 64,
     "executiveVagons": 128,
     "standardVagons": 346,

@@ -23,6 +23,8 @@ public class RouteManagerView extends JFrame {
     private JLabel selectTrainLabel;
     private JComboBox<String> trainComboBox;
     private JButton assignButton;
+    private JButton editButton; // Botón para editar la ruta
+    private JButton deleteButton; // Botón para eliminar la ruta
     private JTable routeTable;
     private RouteMController routeController;
     String routesFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "routes.json";
@@ -69,6 +71,16 @@ public class RouteManagerView extends JFrame {
             dispose();
         });
 
+        // Agregar el botón "Editar"
+        editButton = new JButton("Editar");
+        editButton.setBackground(new Color(127, 117, 191));
+        editButton.setForeground(Color.WHITE);
+
+        // Agregar el botón "Eliminar"
+        deleteButton = new JButton("Eliminar");
+        deleteButton.setBackground(new Color(127, 117, 191));
+        deleteButton.setForeground(Color.WHITE);
+
         formPanel.add(routeNameLabel, gbc);
         gbc.gridy++;
         formPanel.add(routeNameField, gbc);
@@ -82,6 +94,10 @@ public class RouteManagerView extends JFrame {
         formPanel.add(trainComboBox, gbc);
         gbc.gridy++;
         formPanel.add(assignButton, gbc);
+        gbc.gridy++;
+        formPanel.add(editButton, gbc); // Agregar el botón "Editar"
+        gbc.gridy++;
+        formPanel.add(deleteButton, gbc); // Agregar el botón "Eliminar"
         gbc.gridy++;
         formPanel.add(backButton, gbc); // Agregar el botón "Volver"
 
@@ -102,6 +118,13 @@ public class RouteManagerView extends JFrame {
         assignButton.addActionListener(e -> {
             String routeName = routeNameField.getText();
             String routePoints = routePointsField.getText();
+
+            // Verificar si el nombre de la ruta o los puntos de la ruta están vacíos
+            if (routeName.isEmpty() || routePoints.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar el nombre y los puntos de la ruta.");
+                return; // Salir del método sin continuar con la asignación
+            }
+
             TrainModel selectedTrain = routeController.findTrainByIdentifier((String) trainComboBox.getSelectedItem());
 
             if (selectedTrain != null) {
@@ -138,6 +161,47 @@ public class RouteManagerView extends JFrame {
             }
         });
 
+        // Agregar ActionListener al botón de "Editar"
+        editButton.addActionListener(e -> {
+            int selectedRowIndex = routeTable.getSelectedRow();
+            if (selectedRowIndex != -1) {
+                String routeName = (String) routeTable.getValueAt(selectedRowIndex, 0);
+                String selectedTrainIdentifier = (String) trainComboBox.getSelectedItem();
+                if (selectedTrainIdentifier != null) {
+                    TrainModel selectedTrain = routeController.findTrainByIdentifier(selectedTrainIdentifier);
+                    if (selectedTrain != null) {
+                        // Validar si el tren seleccionado ya está asignado a otra ruta
+                        if (!routeController.isTrainAvailable(selectedTrain.getIdentifier())) {
+                            JOptionPane.showMessageDialog(null, "El tren ya ha sido asignado a otra ruta.");
+                            return; // Salir del método sin continuar con la edición
+                        }
+                        routeController.editTrainForRoute(routeName, selectedTrainIdentifier);
+                        updateRouteTable();
+                        routeController.saveRoutesToJson(routesFilePath);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Por favor, seleccione un tren válido.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por favor, seleccione un tren.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione una ruta para editar.");
+            }
+        });
+
+        // Agregar ActionListener al botón de "Eliminar"
+        deleteButton.addActionListener(e -> {
+            int selectedRowIndex = routeTable.getSelectedRow();
+            if (selectedRowIndex != -1) {
+                String selectedTrainIdentifier = (String) routeTable.getValueAt(selectedRowIndex, 1);
+                routeController.removeRouteByTrainId(selectedTrainIdentifier);
+                updateRouteTable();
+                routeController.saveRoutesToJson(routesFilePath);
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione una ruta para eliminar.");
+            }
+        });
+
         loadTrainsToComboBox();
         startTable(); // Iniciar la tabla cargando y agregando las rutas
 
@@ -148,8 +212,17 @@ public class RouteManagerView extends JFrame {
         routeTable = new JTable(new DefaultTableModel(
                 new Object[][]{},
                 new String[]{"Nombre de Ruta", "Tren Asignado", "Puntos de Ruta", "Distancia"}
-        ));
+        )) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Hacer que ninguna celda sea editable
+            }
+        };
+        
+        // Establecer la selección de una sola fila
+        routeTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
+    
 
     private void loadTrainsToComboBox() {
         LinkedList<TrainModel> trainList = routeController.getTrainList();

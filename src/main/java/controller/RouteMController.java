@@ -286,6 +286,52 @@ public LinkedList<RouteMModel> getRoutes() {
         printRouteData(routeName, String.join(",", points), distance);
         controller.printAllRoutes();
     }
+    public void removeRouteByTrainId(String trainIdToDelete) {
+        // Crear una LinkedList temporal para almacenar las rutas que no coinciden con el tren a eliminar
+        LinkedList<RouteMModel> tempRouteList = new LinkedList<>();
+        
+        // Recorrer los elementos originales y agregar aquellos cuyo identificador de tren asignado no coincida con el tren a eliminar
+        for (int i = 0; i < routes.size(); i++) {
+            RouteMModel route = routes.get(i);
+            if (!route.getTrainModel().getIdentifier().equals(trainIdToDelete)) {
+                tempRouteList.add(route); // Agregar la ruta a la lista temporal
+            }
+        }
+        
+        // Limpiar la lista original de rutas
+        routes.clear();
+        
+        // Agregar las rutas de la lista temporal a la lista original una por una
+        for (int i = 0; i < tempRouteList.size(); i++) {
+            routes.add(tempRouteList.get(i));
+        }
+        saveRoutesToJson(routesFilePath);
+    }
+    
+    public void editTrainForRoute(String routeName, String newTrainIdentifier) {
+        // Iterar sobre la lista de rutas para encontrar la ruta con el nombre dado
+        for (int i = 0; i < routes.size(); i++) {
+            RouteMModel route = routes.get(i);
+            if (route.getRouteName().equals(routeName)) {
+                // Encontramos la ruta, ahora necesitamos encontrar el nuevo tren en la lista de trenes
+                TrainModel newTrain = findTrainByIdentifier(newTrainIdentifier);
+                if (newTrain != null) {
+                    // Asignamos el nuevo tren a la ruta
+                    route.setTrainModel(newTrain);
+                    // Guardamos los cambios en el archivo JSON
+                    saveRoutesToJson(routesFilePath);
+                    System.out.println("El tren asignado a la ruta " + routeName + " ha sido actualizado correctamente.");
+                    return;
+                } else {
+                    System.out.println("Error: No se encontró ningún tren con el identificador proporcionado.");
+                    return;
+                }
+            }
+        }
+        // Si no se encuentra ninguna ruta con el nombre dado
+        System.out.println("Error: No se encontró ninguna ruta con el nombre proporcionado.");
+    }
+    
     
     private static void printRouteData(String routeName, String points, int distance) {
         System.out.println("Datos de la ruta asignada:");
