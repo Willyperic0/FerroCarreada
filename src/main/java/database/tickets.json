@@ -1,3 +1,226 @@
 [
-
+  {
+    "registrationId": "RPCASU20240422",
+    "purchaseDateTime": "2024-04-22T00:35:27.515585500",
+    "departureDateTime": "2024-04-15 21:18:00",
+    "arrivalDateTime": "2024-04-15 23:18:00",
+    "passenger": {
+      "contactPerson": "Diego",
+      "contactPersonLastName": "Suarez",
+      "contactPersonPhoneNumber": 121212,
+      "name": "Carol",
+      "lastName": "Suarez",
+      "phoneNumber": 121212,
+      "dni": 121212
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 72,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "RPJUPA20240422",
+    "purchaseDateTime": "2024-04-22T00:37:30.615589200",
+    "departureDateTime": "2024-04-15 08:56:00",
+    "arrivalDateTime": "2024-04-15 10:56:00",
+    "passenger": {
+      "contactPerson": "luis",
+      "contactPersonLastName": "fuentes",
+      "contactPersonPhoneNumber": 141414,
+      "name": "juan",
+      "lastName": "pablo",
+      "phoneNumber": 141414,
+      "dni": 141414
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 72,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "RPWISA20240422",
+    "purchaseDateTime": "2024-04-22T00:37:59.574211700",
+    "departureDateTime": "2024-04-15 21:21:00",
+    "arrivalDateTime": "2024-04-15 23:21:00",
+    "passenger": {
+      "contactPerson": "ana",
+      "contactPersonLastName": "gutierrez",
+      "contactPersonPhoneNumber": 141414,
+      "name": "william",
+      "lastName": "sanabria",
+      "phoneNumber": 141414,
+      "dni": 141414
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 72,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 30.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "RPLUFU20240422",
+    "purchaseDateTime": "2024-04-22T00:48:06.323517200",
+    "departureDateTime": "2024-04-15 03:33:00",
+    "arrivalDateTime": "2024-04-15 05:33:00",
+    "passenger": {
+      "contactPerson": "william",
+      "contactPersonLastName": "sanabria",
+      "contactPersonPhoneNumber": 121212,
+      "name": "luis",
+      "lastName": "fuentes",
+      "phoneNumber": 121212,
+      "dni": 121212
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 72,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 180000.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "RPWISA20240422",
+    "purchaseDateTime": "2024-04-22T00:55:00.367592700",
+    "departureDateTime": "2024-04-15 09:28:00",
+    "arrivalDateTime": "2024-04-15 11:28:00",
+    "passenger": {
+      "contactPerson": "lina",
+      "contactPersonLastName": "gomez",
+      "contactPersonPhoneNumber": 121212,
+      "name": "william",
+      "lastName": "sanabria",
+      "phoneNumber": 121212,
+      "dni": 121212
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 72,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 180000.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "RPDYBA20240422",
+    "purchaseDateTime": "2024-04-22T00:59:02.205645400",
+    "departureDateTime": "2024-04-15 11:48:00",
+    "arrivalDateTime": "2024-04-15 13:48:00",
+    "passenger": {
+      "contactPerson": "jadir",
+      "contactPersonLastName": "barrientos",
+      "contactPersonPhoneNumber": 141414,
+      "name": "dylan",
+      "lastName": "barrientos",
+      "phoneNumber": 141414,
+      "dni": 141414
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 72,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 180000.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "RPFECA20240422",
+    "purchaseDateTime": "2024-04-22T01:03:56.409142900",
+    "departureDateTime": "2024-04-15 01:34:00",
+    "arrivalDateTime": "2024-04-15 03:34:00",
+    "passenger": {
+      "contactPerson": "ingeniero",
+      "contactPersonLastName": "pingui",
+      "contactPersonPhoneNumber": 141414,
+      "name": "fernando",
+      "lastName": "cancelado",
+      "phoneNumber": 141414,
+      "dni": 141414
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 71,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 180000.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "RPJOPA20240422",
+    "purchaseDateTime": "2024-04-22T01:08:30.041101500",
+    "departureDateTime": "2024-04-15 08:32:00",
+    "arrivalDateTime": "2024-04-15 10:32:00",
+    "passenger": {
+      "contactPerson": "Fercho",
+      "contactPersonLastName": "Cancelado",
+      "contactPersonPhoneNumber": 131313,
+      "name": "Johan",
+      "lastName": "PAPASOTE",
+      "phoneNumber": 141414,
+      "dni": 141414
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 70,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 180000.0,
+    "category": "VIP"
+  }
 ]

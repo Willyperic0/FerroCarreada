@@ -9,9 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import controller.RouteMController;
+import controller.RouteController;
 import controller.TrainController;
-import model.RouteMModel;
+import model.RouteModel;
 import model.TrainModel;
 import willy.linkedlist.doubly.LinkedList;
 
@@ -26,10 +26,10 @@ public class RouteManagerView extends JFrame {
     private JButton editButton; // Botón para editar la ruta
     private JButton deleteButton; // Botón para eliminar la ruta
     private JTable routeTable;
-    private RouteMController routeController;
+    private RouteController routeController;
     String routesFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "routes.json";
 
-    public RouteManagerView(RouteMController routeController) {
+    public RouteManagerView(RouteController routeController) {
         this.routeController = routeController;
         routeController.printAllRoutes();
 
@@ -257,11 +257,11 @@ public class RouteManagerView extends JFrame {
         model.setRowCount(0);
 
         // Obtener la lista de rutas del controlador
-        LinkedList<RouteMModel> routes = routeController.getRoutes();
+        LinkedList<RouteModel> routes = routeController.getRoutes();
 
         // Agregar cada ruta a la tabla
         for (int i = 0; i < routes.size(); i++) {
-            RouteMModel route = routes.get(i);
+            RouteModel route = routes.get(i);
             Object[] row = {route.getRouteName(), route.getTrainModel().getIdentifier(), route.getWaypoints(), route.getDistance()};
             model.addRow(row);
         }
@@ -277,7 +277,7 @@ public class RouteManagerView extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            RouteMController routeController = new RouteMController();
+            RouteController routeController = new RouteController();
             new RouteManagerView(routeController);
         });
     }

@@ -1,49 +1,55 @@
 package model;
 
-import willy.linkedlist.doubly.LinkedList;
+import java.io.Serializable;
 
-public class RouteModel {
-    private int numVertices;
-    private LinkedList<LinkedList<Arista>> listaAdyacencia;
 
-    public RouteModel(int numVertices) {
-        this.numVertices = numVertices;
-        listaAdyacencia = new LinkedList<>(); // Especificar el tipo genérico
-        for (int i = 0; i < numVertices; i++) {
-            listaAdyacencia.add(new LinkedList<Arista>()); // Especificar el tipo genérico
-        }
+public class RouteModel implements Serializable {
+    private String routeName;
+    private TrainModel trainModel;
+    private String waypoints;
+    private int distance;
+
+    public RouteModel(String routeName, TrainModel trainModel, String waypoints, int distance) {
+        this.routeName = routeName;
+        this.trainModel = trainModel;
+        this.waypoints = waypoints;
+        this.distance = distance;
     }
 
-    public void agregarArista(int origen, int destino, double distancia) {
-        listaAdyacencia.get(origen).add(new Arista(destino, distancia));
-        listaAdyacencia.get(destino).add(new Arista(origen, distancia)); // Grafo no dirigido
+    public String getRouteName() {
+        return routeName;
     }
 
-    public LinkedList<Arista> obtenerAristas(int vertice) {
-        return listaAdyacencia.get(vertice);
-    }
-    public int obtenerNumeroVertices() {
-        return numVertices;
-    }
-    
-
-    // Clase interna para representar una arista
-    public static class Arista {
-        private int destino;
-        private double distancia;
-
-        public Arista(int destino, double distancia) {
-            this.destino = destino;
-            this.distancia = distancia;
-        }
-
-        public int getDestino() {
-            return destino;
-        }
-
-        public double getDistancia() {
-            return distancia;
-        }
+    public void setRouteName(String routeName) {
+        this.routeName = routeName;
     }
 
+    public TrainModel getTrainModel() {
+        return trainModel;
+    }
+
+    public void setTrainModel(TrainModel trainModel) {
+        this.trainModel = trainModel;
+    }
+
+    public String getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(String waypoints) {
+        this.waypoints = waypoints;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
+    public String getTrainIdentifier() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTrainIdentifier'");
+    }
 }

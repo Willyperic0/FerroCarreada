@@ -5,10 +5,12 @@ import javax.swing.*;
 import controller.EmployeeController;
 import controller.FileJsonAdapter;
 import controller.LoginController;
+import controller.RouteController;
 import controller.TicketController;
 import controller.TrainController;
 import model.EmployeeModel;
 import model.PassengerModel;
+import model.RouteModel;
 import model.TicketModel;
 import model.TrainModel;
 import willy.linkedlist.doubly.LinkedList;
@@ -23,24 +25,22 @@ import java.awt.*;
 
 public class TicketPurchaseView extends javax.swing.JFrame {
 
-    private final TicketController ticketController;
-    private final TrainController trainController;
-
-    public TicketPurchaseView(TicketController ticketController, TrainController trainController) {
-        initComponents();
-        this.ticketController = ticketController;
-        this.trainController = trainController; 
-        String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
-        ticketController.loadTicketsFromJson(ticketFilePath); 
-        initTrainComboBox();
-        
-        // Ajustar el tamaño de la ventana
-        setSize(800, 500);
-        
-        // Aplicar colores y tipografía
-        applyCustomStyles();
-    }
-
+        private final TicketController ticketController;
+        private final TrainController trainController; // Conservamos el TrainController
+        private final RouteController routeController;
+    
+        public TicketPurchaseView(TicketController ticketController, TrainController trainController, RouteController routeController) { // Recibimos TrainController y RouteController
+            initComponents();
+            this.ticketController = ticketController;
+            this.trainController = trainController;
+            this.routeController = routeController;
+            String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
+            
+            ticketController.loadTicketsFromJson(ticketFilePath);
+            initTrainComboBox(); // Llamamos a initRouteComboBox en lugar de initTrainComboBox
+            // Resto del constructor...
+        }
+        String trainsFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
     // Método para aplicar colores y tipografía personalizados
     private void applyCustomStyles() {
         // Colores personalizados
@@ -264,6 +264,10 @@ public class TicketPurchaseView extends javax.swing.JFrame {
 
         // Obtener el tren seleccionado del combo box
         String selectedTrainIdentifier = (String) jComboBoxTrains.getSelectedItem();
+        String temporal = (String) selectedTrainIdentifier;
+        String tmp = routeController.changuaTrainId(temporal);
+        selectedTrainIdentifier = (String) tmp;
+        System.out.println(selectedTrainIdentifier);
         TrainModel selectedTrain = trainController.findTrainByIdentifier(selectedTrainIdentifier);
 
         // Simular hora de compra
@@ -281,16 +285,22 @@ public class TicketPurchaseView extends javax.swing.JFrame {
         // Calcular el valor del boleto según la categoría seleccionada
         switch (selectedCategory) {
             case "VIP":
-                ticketValue = 30.0;
+                ticketValue = 1800 * routeController.findDistanceByRouteName(temporal);
+                trainController.updateVip(selectedTrain);
+
                 break;
             case "Ejecutivo":
-                ticketValue = 25.0;
+                ticketValue = 1200 * routeController.findDistanceByRouteName(temporal);
+                trainController.updateExecutive(selectedTrain);
+
                 break;
             case "Estándar":
-                ticketValue = 15.0;
+                ticketValue = 1000 * routeController.findDistanceByRouteName(temporal);
+                trainController.updateStandard(selectedTrain);
+
                 break;
         }
-
+        trainController.updateTrainDataTicket(selectedTrainIdentifier,selectedCategory);
         // Crear el boleto utilizando el TicketController
         ticketController.addTicket(purchaseDateTime, departureDateTime, arrivalDateTime, passenger, selectedTrain, ticketValue, selectedCategory);
         ticketController.saveTicketsToJson();
@@ -311,23 +321,47 @@ public class TicketPurchaseView extends javax.swing.JFrame {
         jTextFieldPhoneNumber.setText("");
         jTextFieldDni.setText("");
     }
-
     private void initTrainComboBox() {
-        LinkedList<TrainModel> trainList = trainController.getTrainList();
-        String[] trainIdentifiers = new String[trainList.size()];
-        for (int i = 0; i < trainList.size(); i++) {
-            trainIdentifiers[i] = trainList.get(i).getIdentifier();
+        LinkedList<RouteModel> routeList = routeController.getRoutes(); // Obtener la lista de rutas del RouteController
+        String[] routeNames = new String[routeList.size()];
+        for (int i = 0; i < routeList.size(); i++) {
+            routeNames[i] = routeList.get(i).getRouteName(); // Obtener el nombre de cada ruta
         }
-        jComboBoxTrains.setModel(new javax.swing.DefaultComboBoxModel<>(trainIdentifiers));
+        jComboBoxTrains.setModel(new javax.swing.DefaultComboBoxModel<>(routeNames)); // Establecer los nombres de las rutas en el combo box
+    
+        // Agregar un ActionListener al combo box para manejar la selección de la ruta
+        jComboBoxTrains.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener el nombre de la ruta seleccionada del combo box
+                String selectedRouteName = (String) jComboBoxTrains.getSelectedItem();
+                
+                // Usar el RouteController para obtener el identificador del tren asociado a la ruta seleccionada
+                String selectedTrainIdentifier = routeController.changuaTrainId(selectedRouteName);
+                
+                // Verificar si se encontró un identificador de tren válido
+                if (selectedTrainIdentifier != null) {
+                    // Usar el TrainController para encontrar el tren por su identificador
+                    TrainModel selectedTrain = trainController.findTrainByIdentifier(selectedTrainIdentifier);
+                    // Ahora tienes el tren seleccionado para trabajar con él
+                } else {
+                    // Si no se encontró un identificador de tren válido, manejar el caso de error
+                    System.out.println("Error: No se encontró ningún tren asociado a la ruta seleccionada.");
+                }
+            }
+        });
     }
+    
 
     public static void main(String[] args) {
         TrainModel trainModel = new TrainModel(); // Crear una instancia de TrainModel
         TrainController trainController = new TrainController(trainModel); // Pasar trainModel como argumento
+        RouteController routeController = new RouteController(); // Crear una instancia de RouteController
         TicketController ticketController = new TicketController(trainController); // Pasando trainController como argumento
-        TicketPurchaseView frame = new TicketPurchaseView(ticketController, trainController);
+        TicketPurchaseView frame = new TicketPurchaseView(ticketController, trainController, routeController); // Pasando routeController como argumento
         frame.setVisible(true);
     }
+    
 
     // Variables declaration - do not modify
     private javax.swing.JButton jButtonPurchase;

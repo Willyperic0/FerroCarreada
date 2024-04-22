@@ -63,7 +63,7 @@ public class TrainController {
     }
     
     
-    private int updateVip(TrainModel train) {
+    public int updateVip(TrainModel train) {
         // Actualizar la cantidad de vagones VIP en el tren seleccionado
         if (train.getVipVagons() > 0) {
             return train.getVipVagons() - 1;
@@ -73,7 +73,7 @@ public class TrainController {
         }
     }
     
-    private int updateStandard(TrainModel train) {
+    public int updateStandard(TrainModel train) {
         // Actualizar la cantidad de vagones Standard en el tren seleccionado
         if (train.getStandardVagons() > 0) {
             return train.getStandardVagons() - 1;
@@ -82,7 +82,7 @@ public class TrainController {
         }
     }
     
-    private int updateExecutive(TrainModel train) {
+    public int updateExecutive(TrainModel train) {
         // Actualizar la cantidad de vagones Executive en el tren seleccionado
         if (train.getExecutiveVagons() > 0) {
             return train.getExecutiveVagons() - 1;
@@ -215,28 +215,36 @@ public LinkedList<TrainModel> getTrainList() {
         this.trains = trainList; // Asigna la lista de trenes recibida como parámetro
     }
 
-    public void deleteAndReorganize(String trainIdToDelete) {
-        // Crear una LinkedList temporal para almacenar los datos
-        LinkedList<TrainModel> tempTrainList = new LinkedList<>();
-        
-        // Recorrer los elementos originales y agregar aquellos cuyo identificador no coincida con el identificador a eliminar
-        for (int i = 0; i < trains.size(); i++) {
-            TrainModel train = trains.get(i);
-            if (!train.getIdentifier().equals(trainIdToDelete)) {
-                tempTrainList.add(train); // Agregar el tren a la lista temporal
-            }
-        }
-        
-        // Limpiar la lista original de trenes
-        trains.clear();
-        
-        // Agregar los trenes de la lista temporal a la lista original uno por uno
-        for (int i = 0; i < tempTrainList.size(); i++) {
-            trains.add(tempTrainList.get(i));
-        }
-        String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
-        saveTrainsToJson(trainFilePath);
+// En el método deleteAndReorganize de TrainController
+public void deleteAndReorganize(String trainIdToDelete) {
+    RouteController routeController = new RouteController();
+    // Verificar si el tren está asignado a una ruta
+    if (!routeController.isTrainAvailable(trainIdToDelete)) {
+        // Si el tren está asignado a una ruta, mostrar un JOptionPane
+        JOptionPane.showMessageDialog(null, "El tren seleccionado no puede ser eliminado porque está asignado a una ruta.");
+        return; // Salir del método sin eliminar el tren
     }
+    
+    // Si el tren no está asignado a ninguna ruta, proceder con la eliminación
+    LinkedList<TrainModel> tempTrainList = new LinkedList<>();
+    
+    for (int i = 0; i < trains.size(); i++) {
+        TrainModel train = trains.get(i);
+        if (!train.getIdentifier().equals(trainIdToDelete)) {
+            tempTrainList.add(train);
+        }
+    }
+    
+    trains.clear();
+    
+    for (int i = 0; i < tempTrainList.size(); i++) {
+        trains.add(tempTrainList.get(i));
+    }
+    
+    String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
+    saveTrainsToJson(trainFilePath);
+}
+
     
     
     public void deleteAllTrains() {
@@ -244,15 +252,23 @@ public LinkedList<TrainModel> getTrainList() {
     }    
 
     public TrainModel findTrainByIdentifier(String identifier) {
+        // Obtener la lista de trenes
+        LinkedList<TrainModel> trainList = getTrainList();
+        System.out.println("Número de trenes en la lista: " + trainList.size());
+        
         // Recorrer la lista de trenes para encontrar el tren con el identificador dado
-        for (int i = 0; i < trains.size(); i++) {
-            TrainModel train = trains.get(i);
+        for (int i = 0; i < trainList.size(); i++) {
+            TrainModel train = trainList.get(i);
+            System.out.println("Identificador del tren en la posición " + i + ": " + train.getIdentifier());
             if (train.getIdentifier().equals(identifier)) {
+                System.out.println("Tren encontrado con el identificador " + identifier + ": " + train.getIdentifier());
                 return train; // Devolver el tren si se encuentra
             }
         }
+        System.out.println("No se encontró ningún tren con el identificador " + identifier);
         return null; // Devolver null si no se encuentra ningún tren con el identificador dado
     }
+    
         // Método para cargar los datos de trenes desde un archivo JSON
         public void loadTrainsFromJson(String trainFilePath) {
             // Crear una instancia de FileJsonAdapter para trenes

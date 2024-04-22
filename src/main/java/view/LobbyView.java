@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 import controller.EmployeeController;
 import controller.FileJsonAdapter;
-import controller.RouteMController;
+import controller.RouteController;
 import controller.TicketController;
 import controller.TrainController;
 import model.EmployeeModel;
@@ -176,7 +176,7 @@ public class LobbyView extends javax.swing.JFrame {
 
     private void jButtonRouteActionPerformed(java.awt.event.ActionEvent evt) {
         // Crear una instancia del controlador de rutas
-        RouteMController routeController = new RouteMController();
+        RouteController routeController = new RouteController();
     
         // Crear una instancia del JFrame de gestión de rutas
         java.awt.EventQueue.invokeLater(new Runnable() {
