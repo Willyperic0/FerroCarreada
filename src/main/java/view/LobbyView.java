@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import controller.EmployeeController;
 import controller.FileJsonAdapter;
+import controller.RouteMController;
 import controller.TicketController;
 import controller.TrainController;
 import model.EmployeeModel;
@@ -174,8 +175,20 @@ public class LobbyView extends javax.swing.JFrame {
     }
 
     private void jButtonRouteActionPerformed(java.awt.event.ActionEvent evt) {
-        JOptionPane.showMessageDialog(null, "Modulo de gestion de rutas no disponible por el momento");
+        // Crear una instancia del controlador de rutas
+        RouteMController routeController = new RouteMController();
+    
+        // Crear una instancia del JFrame de gestión de rutas
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new RouteManagerView(routeController).setVisible(true);
+            }
+        });
+    
+        // Cerrar la ventana actual
+        this.dispose();
     }
+    
 
     private void jButtonPurchaseTicketActionPerformed(java.awt.event.ActionEvent evt) {
         TicketController ticketController = new TicketController(new TrainController(new TrainModel()));

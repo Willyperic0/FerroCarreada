@@ -11,6 +11,7 @@ import willy.linkedlist.doubly.LinkedList;
 public class TrainController {
     private LinkedList<TrainModel> trains; // Lista enlazada para almacenar los trenes
     private TrainModel model; // Modelo de tren
+    
 
 
     // Constructor de la clase TrainController

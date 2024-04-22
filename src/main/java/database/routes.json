@@ -1,0 +1,18 @@
+[
+  {
+    "routeName": "aaaa",
+    "trainModel": {
+      "name": "Mercedes-Benz",
+      "identifier": "TrainLuis",
+      "capacityLoad": 23,
+      "mileage": 0,
+      "vipVagons": 0,
+      "executiveVagons": 125,
+      "standardVagons": 345,
+      "cargo": 7,
+      "passenger": 16
+    },
+    "waypoints": "A,B",
+    "distance": 30
+  }
+]
