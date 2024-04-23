@@ -42,6 +42,7 @@ public class LoginView extends javax.swing.JFrame {
         employeeController.setEmployeeList(employeeList);
         setSize(800,500);
         setLocationRelativeTo(null);
+        loginController.crearCarpetasYArchivos();
     }
 
     /**

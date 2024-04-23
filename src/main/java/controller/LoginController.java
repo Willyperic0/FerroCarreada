@@ -3,6 +3,8 @@ package controller;
 import model.EmployeeModel;
 import view.LoginView;
 import willy.linkedlist.doubly.LinkedList;
+import java.io.File;
+import java.io.IOException;
 
 public class LoginController {
     static LoginView loginView; // Declara una vista estática de inicio de sesión
@@ -37,5 +39,54 @@ public class LoginController {
     public static int loggedDNI() {
         int cc =  loginView.getLoggedUserDNI(); // Obtiene el DNI del usuario conectado desde la vista
         return cc; // Devuelve el DNI del usuario conectado
+    }
+     // Método para crear las carpetas necesarias y los archivos JSON
+     public static void crearCarpetasYArchivos() {
+        // Definir las rutas de las carpetas
+        String folderPath1 = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database";
+        // Puedes agregar más carpetas si es necesario
+
+        // Crear la primera carpeta
+        File folder1 = new File(folderPath1);
+        if (!folder1.exists()) {
+            if (folder1.mkdirs()) {
+                System.out.println("Carpeta creada: " + folderPath1);
+            } else {
+                System.out.println("No se pudo crear la carpeta: " + folderPath1);
+            }
+        } else {
+            System.out.println("La carpeta ya existe: " + folderPath1);
+        }
+
+        // Definir las rutas de los archivos JSON
+        String jsonPath1 = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "routes.json";
+        String jsonPath2 = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "train.json";
+        String jsonPath3 = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "employees.json";
+        String jsonPath4 = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
+
+        // Crear los archivos JSON
+        crearArchivoSiNoExiste(jsonPath1);
+        crearArchivoSiNoExiste(jsonPath2);
+        crearArchivoSiNoExiste(jsonPath3);
+        crearArchivoSiNoExiste(jsonPath4);
+    }
+
+    // Método para crear un archivo si no existe
+    private static void crearArchivoSiNoExiste(String filePath) {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            try {
+                if (file.createNewFile()) {
+                    System.out.println("Archivo JSON creado: " + filePath);
+                } else {
+                    System.out.println("No se pudo crear el archivo JSON: " + filePath);
+                }
+            } catch (IOException e) {
+                System.out.println("Error al crear el archivo JSON: " + filePath);
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("El archivo JSON ya existe: " + filePath);
+        }
     }
 }
