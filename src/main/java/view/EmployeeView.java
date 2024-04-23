@@ -21,7 +21,53 @@ public class EmployeeView extends javax.swing.JFrame {
         initComponents();
         this.employeeController = employeeController;
         loadEmployeesFromJson(); // Actualiza la tabla al iniciar la ventana
+
+        // Establecer el tamaño de la ventana
+        setSize(800, 500);
+        setLocationRelativeTo(null);
+        // Personalización de colores y tipografía
+        customizeUI();
     }
+    private void customizeUI() {
+        // Colores
+        Color backgroundColor = new Color(255, 255, 255); // Blanco para el fondo
+        Color textColor = new Color(78, 41, 115); // Morado para el texto
+        Color buttonColor = new Color(127, 117, 191); // Púrpura para los botones
+
+        // Tipografía
+        Font labelFont = new Font("Segoe UI", Font.PLAIN, 14); // Fuente para las etiquetas
+        Font buttonFont = new Font("Segoe UI", Font.BOLD, 14); // Fuente para los botones
+
+        // Aplicar colores y tipografía a los componentes
+        jPanel1.setBackground(backgroundColor);
+        jPanel1.setBorder(BorderFactory.createTitledBorder("Agregar Empleado"));
+        jLabel1.setForeground(textColor);
+        jLabel1.setFont(labelFont);
+        jLabel2.setForeground(textColor);
+        jLabel2.setFont(labelFont);
+        jLabel3.setForeground(textColor);
+        jLabel3.setFont(labelFont);
+        jLabel4.setForeground(textColor);
+        jLabel4.setFont(labelFont);
+        addButton.setBackground(buttonColor);
+        addButton.setForeground(Color.WHITE);
+        addButton.setFont(buttonFont);
+        deleteButton.setBackground(buttonColor);
+        deleteButton.setForeground(Color.WHITE);
+        deleteButton.setFont(buttonFont);
+
+        jPanel2.setBackground(backgroundColor);
+        jPanel2.setBorder(BorderFactory.createTitledBorder("Lista de Empleados"));
+
+        jScrollPane1.getViewport().setBackground(Color.WHITE); // Fondo blanco para la tabla
+        employeeTable.setForeground(textColor);
+        employeeTable.setFont(labelFont);
+
+        backButton.setBackground(buttonColor);
+        backButton.setForeground(Color.WHITE);
+        backButton.setFont(buttonFont);
+    }
+
     private void loadEmployeesFromJson() {
         // Ruta del archivo JSON para empleados
         String pathFile = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "employees.json";
@@ -240,7 +286,7 @@ private void initComponents() {
                 .addComponent(lastNameText)
                 .addComponent(phoneText)
                 .addComponent(dniText, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-            .addGap(18, 18, 18)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -254,16 +300,16 @@ private void initComponents() {
                 .addComponent(jLabel1)
                 .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(addButton))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel2)
                 .addComponent(lastNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(deleteButton))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel3)
                 .addComponent(phoneText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel4)
                 .addComponent(dniText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -275,12 +321,21 @@ private void initComponents() {
 
     employeeTable.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {
-
+    
         },
         new String [] {
             "Nombre", "Apellido", "Teléfono", "DNI"
         }
-    ));
+    ) {
+        boolean[] canEdit = new boolean [] {
+            false, false, false, false
+        };
+    
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit [columnIndex];
+        }
+    });
+    
     jScrollPane1.setViewportView(employeeTable);
 
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

@@ -9,6 +9,7 @@ import model.TicketModel;
 import model.TrainModel;
 import controller.EmployeeController;
 import controller.LoginController;
+import controller.RouteController;
 import controller.TicketController;
 import controller.TrainController;
 import controller.FileJsonAdapter;
@@ -39,6 +40,8 @@ public class LoginView extends javax.swing.JFrame {
         // Leer los datos del archivo JSON y establecer la lista de empleados en el controlador de empleados
         LinkedList<EmployeeModel> employeeList = employeeJsonAdapter.getObjects(employeeFilePath, EmployeeModel[].class);
         employeeController.setEmployeeList(employeeList);
+        setSize(800,500);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -180,7 +183,20 @@ public class LoginView extends javax.swing.JFrame {
                 }
             });
             this.dispose(); // Cerrar la ventana actual
-        } else {
+        } else if (user.equals("purchase") && password.equals("purchase")) {
+            // Mostrar mensaje de bienvenida para el usuario admin
+            JOptionPane.showMessageDialog(null, "Ingresando a venta de tickets");
+
+            TicketController ticketController = new TicketController(new TrainController(new TrainModel()));
+            RouteController routeController = new RouteController();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new TicketPurchaseView(ticketController,trainController, routeController).setVisible(true);
+                }
+            });
+            this.dispose();
+        }
+        else {
             // Verificar si el usuario y la contraseña coinciden con algún empleado
             boolean isAuthenticated = loginController.authenticate(user, password, employeeController.getEmployeeList());
 

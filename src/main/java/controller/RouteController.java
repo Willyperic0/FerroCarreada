@@ -196,7 +196,7 @@ public LinkedList<RouteModel> getRoutes() {
     }
     
     // Método para definir las distancias predefinidas
-    private void setDistances() {
+    public void setDistances() {
         setDistance("A", "B", 30);
         setDistance("B", "A", 30);
         setDistance("A", "D", 50);
@@ -223,7 +223,6 @@ public LinkedList<RouteModel> getRoutes() {
         setDistance("I", "G", 145);
     }
 
-    
     // Método para calcular la distancia total recorrida a partir de una cadena de puntos
     public int calculateTotalDistance(String[] points) {
         int totalDistance = 0;

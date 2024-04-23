@@ -4,7 +4,7 @@
     "identifier": "Rapido",
     "capacityLoad": 27,
     "mileage": 45320,
-    "vipVagons": 70,
+    "vipVagons": 69,
     "executiveVagons": 144,
     "standardVagons": 390,
     "cargo": 9,
@@ -22,17 +22,6 @@
     "passenger": 10
   },
   {
-    "name": "Mercedes-Benz",
-    "identifier": "Clase E",
-    "capacityLoad": 21,
-    "mileage": 29845,
-    "vipVagons": 56,
-    "executiveVagons": 112,
-    "standardVagons": 302,
-    "cargo": 7,
-    "passenger": 14
-  },
-  {
     "name": "Arnold",
     "identifier": "N",
     "capacityLoad": 30,
@@ -42,16 +31,5 @@
     "standardVagons": 434,
     "cargo": 10,
     "passenger": 20
-  },
-  {
-    "name": "Arnold",
-    "identifier": "HN",
-    "capacityLoad": 23,
-    "mileage": 37691,
-    "vipVagons": 64,
-    "executiveVagons": 128,
-    "standardVagons": 346,
-    "cargo": 7,
-    "passenger": 16
   }
 ]

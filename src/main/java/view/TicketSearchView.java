@@ -1,17 +1,12 @@
 package view;
 
-import javax.swing.*;
-
 import controller.TicketController;
 import controller.TrainController;
 import model.TicketModel;
 import model.TrainModel;
 import willy.linkedlist.doubly.LinkedList;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import javax.swing.*;
 import java.awt.*;
 
 public class TicketSearchView extends javax.swing.JFrame {
@@ -38,7 +33,6 @@ public class TicketSearchView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSearchById;
     private javax.swing.JLabel jLabelSelectTrain;
     private javax.swing.JPanel jPanelMain;
-    private javax.swing.JScrollPane jScrollPaneResult;
     private javax.swing.JTextArea jTextAreaResult;
     private javax.swing.JTextField jTextFieldTicketId;
 
@@ -63,7 +57,6 @@ public class TicketSearchView extends javax.swing.JFrame {
 
         // Tipografía
         Font defaultFont = new Font("Segoe UI", Font.PLAIN, 12);
-        Font titleFont = new Font("Segoe UI", Font.BOLD, 14);
 
         jLabelSearchById.setFont(defaultFont);
         jLabelSearchById.setForeground(textColor);

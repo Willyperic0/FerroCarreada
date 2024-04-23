@@ -1,15 +1,11 @@
 package view;
 
-import java.io.File;
-
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-
-import controller.FileJsonAdapter;
 import controller.TrainController;
 import model.TrainModel;
 import willy.linkedlist.doubly.LinkedList;
@@ -31,7 +27,13 @@ public class TrainView extends javax.swing.JFrame {
 
         // Personalización de colores y tipografía
         customizeUI();
+        setLocationRelativeTo(null);
+        // Establecer el tamaño de la ventana
+        setSize(800, 500);
     }
+
+    // Resto del código...
+
 
     private void customizeUI() {
         // Colores
@@ -85,7 +87,6 @@ public class TrainView extends javax.swing.JFrame {
         mileageText = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         typeComboBox = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -177,12 +178,20 @@ public class TrainView extends javax.swing.JFrame {
 
         trainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+        
             },
             new String [] {
                 "Identificador", "Tipo de tren", "Cantidad de vagones", "Kilometraje"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+        
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(trainTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -320,7 +329,7 @@ public class TrainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

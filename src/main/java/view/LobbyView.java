@@ -19,16 +19,16 @@ import javax.swing.JOptionPane;
 public class LobbyView extends javax.swing.JFrame {
 
     private javax.swing.JButton jButtonEmployee;
-    private javax.swing.JButton jButtonPurchaseTicket;
     private javax.swing.JButton jButtonRoute;
     private javax.swing.JButton jButtonTrain;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel jLabelWelcome;
     private javax.swing.JLabel jLabelInstruction;
+    private javax.swing.JLabel jLabelWelcome;
+    private javax.swing.JPanel jPanel1;
 
     public LobbyView() {
         initComponents();
         setSize(800, 500); // Establece el tamaño de la ventana a 800x500
+        setLocationRelativeTo(null);
     }
 
     private void initComponents() {
@@ -37,7 +37,6 @@ public class LobbyView extends javax.swing.JFrame {
         jButtonTrain = new javax.swing.JButton();
         jButtonEmployee = new javax.swing.JButton();
         jButtonRoute = new javax.swing.JButton();
-        jButtonPurchaseTicket = new javax.swing.JButton();
         jLabelWelcome = new javax.swing.JLabel();
         jLabelInstruction = new javax.swing.JLabel();
 
@@ -45,7 +44,7 @@ public class LobbyView extends javax.swing.JFrame {
         setTitle("Lobby");
         setSize(800, 500); // Establece el tamaño de la ventana a 800x500
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lobby"));
+        jPanel1.setBorder(null); // Elimina el borde del panel
 
         jButtonTrain.setText("Gestión de Trenes");
         jButtonTrain.addActionListener(new java.awt.event.ActionListener() {
@@ -53,6 +52,9 @@ public class LobbyView extends javax.swing.JFrame {
                 jButtonTrainActionPerformed(evt);
             }
         });
+        jButtonTrain.setBorder(null); // Elimina el borde del botón
+        jButtonTrain.setBackground(new Color(127, 117, 191));
+        jButtonTrain.setForeground(Color.WHITE);
 
         jButtonEmployee.setText("Gestión de Empleados");
         jButtonEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +62,9 @@ public class LobbyView extends javax.swing.JFrame {
                 jButtonEmployeeActionPerformed(evt);
             }
         });
+        jButtonEmployee.setBorder(null); // Elimina el borde del botón
+        jButtonEmployee.setBackground(new Color(127, 117, 191));
+        jButtonEmployee.setForeground(Color.WHITE);
 
         jButtonRoute.setText("Gestión de Rutas");
         jButtonRoute.addActionListener(new java.awt.event.ActionListener() {
@@ -67,24 +72,9 @@ public class LobbyView extends javax.swing.JFrame {
                 jButtonRouteActionPerformed(evt);
             }
         });
-
-        jButtonPurchaseTicket.setText("Compra de Boletos");
-        jButtonPurchaseTicket.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPurchaseTicketActionPerformed(evt);
-            }
-        });
-
-        // Aplica el color al botón
-        Color buttonColor = new Color(127, 117, 191);
-        jButtonTrain.setBackground(buttonColor);
-        jButtonEmployee.setBackground(buttonColor);
-        jButtonRoute.setBackground(buttonColor);
-        jButtonPurchaseTicket.setBackground(buttonColor);
-        jButtonTrain.setForeground(Color.WHITE);
-        jButtonEmployee.setForeground(Color.WHITE);
+        jButtonRoute.setBorder(null); // Elimina el borde del botón
+        jButtonRoute.setBackground(new Color(127, 117, 191));
         jButtonRoute.setForeground(Color.WHITE);
-        jButtonPurchaseTicket.setForeground(Color.WHITE);
 
         // Coloca los botones a la izquierda del panel
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
@@ -96,8 +86,7 @@ public class LobbyView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonTrain, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEmployee, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonRoute, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPurchaseTicket, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonRoute, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -109,8 +98,6 @@ public class LobbyView extends javax.swing.JFrame {
                 .addComponent(jButtonEmployee, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonRoute, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonPurchaseTicket, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -159,21 +146,21 @@ public class LobbyView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TrainView(trainController).setVisible(true);
+                setVisible(false); // Oculta la interfaz principal mientras se muestra la pantalla de gestión de trenes
             }
         });
-        this.dispose();
     }
-
+    
     private void jButtonEmployeeActionPerformed(java.awt.event.ActionEvent evt) {
         EmployeeController employeeController = new EmployeeController(new EmployeeModel());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EmployeeView(employeeController).setVisible(true);
+                setVisible(false); // Oculta la interfaz principal mientras se muestra la pantalla de gestión de empleados
             }
         });
-        this.dispose();
     }
-
+    
     private void jButtonRouteActionPerformed(java.awt.event.ActionEvent evt) {
         // Crear una instancia del controlador de rutas
         RouteController routeController = new RouteController();
@@ -182,24 +169,11 @@ public class LobbyView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RouteManagerView(routeController).setVisible(true);
+                setVisible(false); // Oculta la interfaz principal mientras se muestra la pantalla de gestión de rutas
             }
         });
-    
-        // Cerrar la ventana actual
-        this.dispose();
     }
     
-
-    private void jButtonPurchaseTicketActionPerformed(java.awt.event.ActionEvent evt) {
-        TicketController ticketController = new TicketController(new TrainController(new TrainModel()));
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new TicketPurchaseView(ticketController).setVisible(true);
-            }
-        });
-        this.dispose();
-    }
-
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

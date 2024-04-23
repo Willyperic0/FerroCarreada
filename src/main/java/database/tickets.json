@@ -222,5 +222,33 @@
     },
     "ticketValue": 180000.0,
     "category": "VIP"
+  },
+  {
+    "registrationId": "RPJUCA20240422",
+    "purchaseDateTime": "2024-04-22T21:33:56.093067900",
+    "departureDateTime": "2024-04-15 15:55:00",
+    "arrivalDateTime": "2024-04-15 17:55:00",
+    "passenger": {
+      "contactPerson": "William",
+      "contactPersonLastName": "Sanabria",
+      "contactPersonPhoneNumber": 121212,
+      "name": "Juan",
+      "lastName": "Carvajal",
+      "phoneNumber": 121212,
+      "dni": 121212
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 69,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 180000.0,
+    "category": "VIP"
   }
 ]
