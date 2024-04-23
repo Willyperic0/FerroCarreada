@@ -3,14 +3,14 @@
     "routeName": "Libertad",
     "trainModel": {
       "name": "Arnold",
-      "identifier": "Rapido",
-      "capacityLoad": 27,
-      "mileage": 45320,
-      "vipVagons": 72,
-      "executiveVagons": 144,
-      "standardVagons": 390,
+      "identifier": "23",
+      "capacityLoad": 28,
+      "mileage": 0,
+      "vipVagons": 76,
+      "executiveVagons": 152,
+      "standardVagons": 412,
       "cargo": 9,
-      "passenger": 18
+      "passenger": 19
     },
     "waypoints": "B,A,D,E",
     "distance": 100

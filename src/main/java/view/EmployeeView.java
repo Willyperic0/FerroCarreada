@@ -328,7 +328,7 @@ private void initComponents() {
         }
     ) {
         boolean[] canEdit = new boolean [] {
-            false, false, false, false
+            true, true, true, true
         };
     
         public boolean isCellEditable(int rowIndex, int columnIndex) {

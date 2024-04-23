@@ -4,7 +4,7 @@
     "identifier": "Rapido",
     "capacityLoad": 27,
     "mileage": 45320,
-    "vipVagons": 69,
+    "vipVagons": 62,
     "executiveVagons": 144,
     "standardVagons": 390,
     "cargo": 9,
@@ -15,7 +15,7 @@
     "identifier": "Clase C",
     "capacityLoad": 15,
     "mileage": 62178,
-    "vipVagons": 40,
+    "vipVagons": 39,
     "executiveVagons": 80,
     "standardVagons": 214,
     "cargo": 5,
@@ -31,5 +31,27 @@
     "standardVagons": 434,
     "cargo": 10,
     "passenger": 20
+  },
+  {
+    "name": "Arnold",
+    "identifier": "2",
+    "capacityLoad": 2,
+    "mileage": 2,
+    "vipVagons": 8,
+    "executiveVagons": 16,
+    "standardVagons": 38,
+    "cargo": 0,
+    "passenger": 2
+  },
+  {
+    "name": "Arnold",
+    "identifier": "23",
+    "capacityLoad": 28,
+    "mileage": 0,
+    "vipVagons": 76,
+    "executiveVagons": 152,
+    "standardVagons": 412,
+    "cargo": 9,
+    "passenger": 19
   }
 ]

@@ -250,5 +250,117 @@
     },
     "ticketValue": 180000.0,
     "category": "VIP"
+  },
+  {
+    "registrationId": "RPAAAA20240423",
+    "purchaseDateTime": "2024-04-23T16:09:02.425856300",
+    "departureDateTime": "2024-04-15 21:54:00",
+    "arrivalDateTime": "2024-04-15 23:54:00",
+    "passenger": {
+      "contactPerson": "aaaaa",
+      "contactPersonLastName": "aaaaa",
+      "contactPersonPhoneNumber": 121212,
+      "name": "aaaaa",
+      "lastName": "aaaaa",
+      "phoneNumber": 121212,
+      "dni": 121212
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 68,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 180000.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "RPWIWI20240423",
+    "purchaseDateTime": "2024-04-23T16:10:39.090465400",
+    "departureDateTime": "2024-04-15 17:42:00",
+    "arrivalDateTime": "2024-04-15 19:42:00",
+    "passenger": {
+      "contactPerson": "william",
+      "contactPersonLastName": "william",
+      "contactPersonPhoneNumber": 121212,
+      "name": "william",
+      "lastName": "william",
+      "phoneNumber": 121212,
+      "dni": 121212
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 67,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 180000.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "CLJUGR20240423",
+    "purchaseDateTime": "2024-04-23T16:17:56.478326900",
+    "departureDateTime": "2024-04-15 17:14:00",
+    "arrivalDateTime": "2024-04-15 19:14:00",
+    "passenger": {
+      "contactPerson": "Sara",
+      "contactPersonLastName": "Suarez",
+      "contactPersonPhoneNumber": 310310,
+      "name": "Juan",
+      "lastName": "Granados",
+      "phoneNumber": 310310,
+      "dni": 109723
+    },
+    "train": {
+      "name": "Mercedes-Benz",
+      "identifier": "Clase C",
+      "capacityLoad": 15,
+      "mileage": 62178,
+      "vipVagons": 39,
+      "executiveVagons": 80,
+      "standardVagons": 214,
+      "cargo": 5,
+      "passenger": 10
+    },
+    "ticketValue": 558000.0,
+    "category": "VIP"
+  },
+  {
+    "registrationId": "RP121220240423",
+    "purchaseDateTime": "2024-04-23T16:57:47.222297800",
+    "departureDateTime": "2024-04-15 21:01:00",
+    "arrivalDateTime": "2024-04-15 23:01:00",
+    "passenger": {
+      "contactPerson": "121212",
+      "contactPersonLastName": "121212",
+      "contactPersonPhoneNumber": 121212,
+      "name": "121212",
+      "lastName": "121212",
+      "phoneNumber": 121212,
+      "dni": 121212
+    },
+    "train": {
+      "name": "Arnold",
+      "identifier": "Rapido",
+      "capacityLoad": 27,
+      "mileage": 45320,
+      "vipVagons": 62,
+      "executiveVagons": 144,
+      "standardVagons": 390,
+      "cargo": 9,
+      "passenger": 18
+    },
+    "ticketValue": 180000.0,
+    "category": "VIP"
   }
 ]

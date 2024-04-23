@@ -161,7 +161,7 @@ public class TicketPurchaseView extends javax.swing.JFrame {
     
             jComboBoxCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"VIP", "Ejecutivo", "Estándar"}));
     
-            jLabelTrain.setText("Seleccione el Tren:"); // Texto para el JLabel del tren
+            jLabelTrain.setText("Seleccione la Ruta:"); // Texto para el JLabel del tren
     
             jButtonPurchase.setText("Comprar");
             jButtonPurchase.addActionListener(new java.awt.event.ActionListener() {
@@ -309,7 +309,7 @@ public class TicketPurchaseView extends javax.swing.JFrame {
             try {
                 baggageWeight = Double.parseDouble(jTextFieldBaggageWeight.getText());
                 // Verificar si el peso del equipaje está dentro del rango permitido (0 a 80 kg)
-                if (baggageWeight < 0 || baggageWeight > 80) {
+                if (baggageWeight < 0 || baggageWeight > 160) {
                     JOptionPane.showMessageDialog(this, "Tamaño del equipaje no permitido.");
                     return; // Salir del método si el peso del equipaje no está dentro del rango permitido
                 }
