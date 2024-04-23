@@ -22,5 +22,13 @@
     "lastName": "Mendoza",
     "phoneNumber": 300,
     "dni": 111295
+  },
+  {
+    "user": "diego.suarez.56",
+    "password": "DS510056",
+    "name": "Diego",
+    "lastName": "Suarez",
+    "phoneNumber": 320,
+    "dni": 510056
   }
 ]
