@@ -67,6 +67,12 @@ public class TrainModel implements Serializable {
     public void setCargo(int cargo) {
         this.cargo = cargo;
     }
+    public int getPassenger() {
+        return this.passenger;
+    }
+    public int getCargo() {
+        return this.cargo;
+    }
     public void setvipVagons(int vipVagons) {   this.vipVagons = vipVagons; }
     public void setExecutiveVagons(int executiveVagons) { this.executiveVagons = executiveVagons; }
     public void setStandardVagons(int standardVagons) { this.standardVagons = standardVagons; }
@@ -83,7 +89,16 @@ public class TrainModel implements Serializable {
         return this.standardVagons;
     }
     
-
+    public void calculateAndUpdatePassengerAndCargo() {
+        // Recalcular la cantidad de carga y pasajeros
+        int cargo = calculateCargo(capacityLoad);
+        int passenger = calculatePassenger(capacityLoad, cargo);
+        
+        // Establecer la cantidad de carga y pasajeros en el objeto TrainModel
+        setCargo(cargo);
+        setPassenger(passenger);
+    }
+    
 
    // Método para calcular los tickets VIP
 public int calculateVIP(int passengerCount) {

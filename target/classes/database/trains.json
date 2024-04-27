@@ -2,13 +2,13 @@
   {
     "name": "Arnold",
     "identifier": "Rapido",
-    "capacityLoad": 27,
+    "capacityLoad": 31,
     "mileage": 45320,
-    "vipVagons": 62,
-    "executiveVagons": 144,
-    "standardVagons": 390,
-    "cargo": 9,
-    "passenger": 18
+    "vipVagons": 102,
+    "executiveVagons": 184,
+    "standardVagons": 506,
+    "cargo": 10,
+    "passenger": 21
   },
   {
     "name": "Mercedes-Benz",

@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.swing.JOptionPane;
 
+import model.RouteModel;
 import model.TrainModel;
 
 import willy.linkedlist.doubly.LinkedList;
@@ -60,6 +61,99 @@ public class TrainController {
         // Guardar la lista actualizada de trenes en el archivo JSON
         String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
         saveTrainsToJson(trainFilePath);
+    }
+    public void modifyTrain(String trainIdToModify, String newIdentifier, int oldCapacityLoad, int newCapacityLoad) {
+        RouteController routeController = new RouteController();
+            // Obtener la lista temporal de rutas
+    LinkedList<RouteModel> tempRoutes = routeController.getRoutes();
+        // Verificar si el tren existe en la base de datos
+        boolean trainFound = false;
+        TrainModel trainToModify = null;
+        for (int i = 0; i < trains.size(); i++) {
+            TrainModel train = trains.get(i);
+            if (train.getIdentifier().equals(trainIdToModify)) {
+                trainToModify = train;
+                trainFound = true;
+                break;
+            }
+        }
+        System.out.println(trainIdToModify);
+        // Si no se encontró el tren a modificar, mostrar un mensaje y salir del método
+        if (!trainFound) {
+            System.out.println("No se encontró ningún tren con el identificador " + trainIdToModify);
+            return;
+        }
+        // Verificar que el nuevo identificador no sea el identificador de un tren existente
+        if (trainIdToModify != newIdentifier){
+            trainFound = false;
+
+            for (int i = 0; i < trains.size(); i++) {
+                TrainModel train = trains.get(i);
+                if (train.getIdentifier().equals(newIdentifier)) {
+                    trainFound = true;
+                    break;
+                }
+            }
+            if (trainFound == true) {
+                System.out.println("No se puede agregar este identificador debido a que ya hay uno existente " + newIdentifier);
+                return;
+            }
+        }
+
+    
+    // Verificar si el tren está asignado a alguna ruta
+    trainFound = false;
+    for (int i = 0; i < tempRoutes.size(); i++) {
+        RouteModel route = tempRoutes.get(i);
+        if (route.getTrainModel().getIdentifier().equals(trainIdToModify)) {
+            trainFound = true;
+            break;
+        }
+    }
+    if (trainFound == true) {
+        System.out.println("No se puede modificar el tren " + trainIdToModify+ " debido a que ya se encuentra en ruta");
+        return;
+    }
+    
+        // Calcular la cantidad original de vagones VIP, ejecutivos y estándar
+        int originalVipVagons = trainToModify.calculateVIP(trainToModify.getPassenger());
+        int originalExecutiveVagons = trainToModify.calculateExecutive(trainToModify.getPassenger());
+        int originalStandardVagons = trainToModify.calculateStandard(trainToModify.getPassenger());
+    
+        // Calcular la diferencia entre la cantidad original y la cantidad nueva de vagones VIP
+        int vipVagonsDifference = originalVipVagons - trainToModify.getVipVagons();
+        int executiveVagonsDifference = originalExecutiveVagons - trainToModify.getExecutiveVagons();
+        int standardVagonsDifference = originalStandardVagons - trainToModify.getStandardVagons();
+
+        int cargoCount = trainToModify.calculateCargo(newCapacityLoad);
+        // Calcular la cantidad de pasajeros del tren modificado
+        int passengerCount = trainToModify.calculatePassenger(newCapacityLoad, cargoCount);
+    
+        // Calcular la cantidad de vagones VIP, ejecutivos y estándar según la cantidad de pasajeros
+        int updatedVipVagons = trainToModify.calculateVIP(passengerCount);
+        int updatedExecutiveVagons = trainToModify.calculateExecutive(passengerCount);
+        int updatedStandardVagons = trainToModify.calculateStandard(passengerCount) - 6;
+    
+        // Ajustar la cantidad de vagones VIP, ejecutivos y estándar con las diferencias calculadas
+        updatedVipVagons += vipVagonsDifference;
+        updatedExecutiveVagons += executiveVagonsDifference;
+        updatedStandardVagons += standardVagonsDifference;
+    
+        // Actualizar la cantidad de vagones con los nuevos valores
+        trainToModify.setIdentifier(newIdentifier);
+        trainToModify.setvipVagons(updatedVipVagons);
+        trainToModify.setExecutiveVagons(updatedExecutiveVagons);
+        trainToModify.setStandardVagons(updatedStandardVagons);
+        trainToModify.setCapacityLoad(newCapacityLoad); // Actualizar la capacidad de carga
+    
+        // Recalcular la cantidad de vagones y puestos disponibles
+        trainToModify.calculateAndUpdatePassengerAndCargo();
+    
+        // Guardar la lista actualizada de trenes en el archivo JSON
+        String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
+        saveTrainsToJson(trainFilePath);
+    
+        System.out.println("Datos del tren modificados correctamente.");
     }
     
     

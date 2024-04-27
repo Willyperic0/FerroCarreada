@@ -32,9 +32,6 @@ public class TrainView extends javax.swing.JFrame {
         setSize(800, 500);
     }
 
-    // Resto del código...
-
-
     private void customizeUI() {
         // Colores
         Color backgroundColor = new Color(242, 242, 242); // Gris claro para el fondo
@@ -62,6 +59,9 @@ public class TrainView extends javax.swing.JFrame {
         deleteButton.setBackground(buttonColor);
         deleteButton.setForeground(Color.WHITE);
         deleteButton.setFont(buttonFont);
+        modifyButton.setBackground(buttonColor); // Botón de modificar
+        modifyButton.setForeground(Color.WHITE); // Botón de modificar
+        modifyButton.setFont(buttonFont); // Botón de modificar
         typeComboBox.setBackground(Color.WHITE); // Fondo blanco para el ComboBox
     
         jPanel2.setBackground(backgroundColor);
@@ -74,9 +74,9 @@ public class TrainView extends javax.swing.JFrame {
         backButton.setForeground(Color.WHITE);
         backButton.setFont(buttonFont);
     }
+    
 
     private void initComponents() {
-
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         nameText = new javax.swing.JTextField();
@@ -87,42 +87,50 @@ public class TrainView extends javax.swing.JFrame {
         mileageText = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        modifyButton = new javax.swing.JButton(); // Botón de modificar
         typeComboBox = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         trainTable = new javax.swing.JTable();
         backButton = new javax.swing.JButton();
-
+    
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Train Management System");
         setSize(new java.awt.Dimension(800, 500)); // Ajuste del tamaño de la ventana
-
+    
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar Tren"));
-
+    
         jLabel1.setText("Identificador:");
-
+    
         jLabel2.setText("Tipo de tren:");
-
+    
         jLabel3.setText("Cantidad de vagones:");
-
+    
         jLabel4.setText("Kilometraje:");
-
+    
         addButton.setText("Agregar");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
             }
         });
-
+    
         deleteButton.setText("Eliminar");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
             }
         });
-
+    
+        modifyButton.setText("Modificar"); // Texto del botón de modificar
+        modifyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifyButtonActionPerformed(evt);
+            }
+        });
+    
         typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arnold", "Mercedes-Benz" }));
-
+    
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -145,7 +153,9 @@ public class TrainView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(addButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton)))
+                        .addComponent(deleteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(modifyButton))) // Botón de modificar
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -170,15 +180,16 @@ public class TrainView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
-                    .addComponent(deleteButton))
+                    .addComponent(deleteButton)
+                    .addComponent(modifyButton)) // Botón de modificar
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
+    
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Trenes"));
-
+    
         trainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-        
+    
             },
             new String [] {
                 "Identificador", "Tipo de tren", "Cantidad de vagones", "Kilometraje"
@@ -187,13 +198,13 @@ public class TrainView extends javax.swing.JFrame {
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
-        
+    
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(trainTable);
-
+    
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -210,14 +221,14 @@ public class TrainView extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
+    
         backButton.setText("Volver"); // Texto del botón de retorno
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
-
+    
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,9 +255,10 @@ public class TrainView extends javax.swing.JFrame {
                 .addComponent(backButton) // Agregar el botón de retorno al diseño
                 .addContainerGap())
         );
-
+    
         pack();
     }
+    
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
         System.out.println("Add button clicked");
@@ -300,6 +312,60 @@ public class TrainView extends javax.swing.JFrame {
         });
         this.dispose();
     }
+    private void modifyButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        int selectedRow = trainTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un tren para modificar.");
+            return;
+        }
+        String selectedOption = trainTable.getValueAt(selectedRow, 0).toString();
+        // Obtener el identificador del tren seleccionado
+        String identifier = trainTable.getValueAt(selectedRow, 1).toString();
+    
+        // Obtener la antigua capacidad de carga del tren seleccionado
+        int oldCapacityLoad = Integer.parseInt(trainTable.getValueAt(selectedRow, 2).toString());
+    
+        // Obtener el nuevo identificador ingresado en el campo de texto
+        String newIdentifier = nameText.getText();
+    
+        // Obtener la nueva capacidad de carga ingresada en el campo de texto
+        int newCapacityLoad = Integer.parseInt(capacityLoadText.getText());
+            // Validar si ambos campos están vacíos
+    if (newIdentifier.isEmpty() && capacityLoadText.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Ingrese los datos para modificar.");
+        return;
+    }
+
+    // Validar si se ingresó la capacidad de carga pero no el identificador
+    if (newIdentifier.isEmpty() && !capacityLoadText.getText().isEmpty()) {
+        // Mantener el identificador anterior y asignar la nueva capacidad de carga
+        newIdentifier = identifier;
+    } else if (!newIdentifier.isEmpty() && capacityLoadText.getText().isEmpty()) {
+        // Si se ingresó el identificador pero no la capacidad de carga
+        // Mantener la capacidad de carga anterior y asignar el nuevo identificador
+        newCapacityLoad = oldCapacityLoad;
+    }
+
+    if (selectedOption.equals("Arnold")) {
+        if (newCapacityLoad <= 32) {
+            trainController.modifyTrain(identifier, newIdentifier, oldCapacityLoad, newCapacityLoad);
+            updateTrainTable();
+            clearTextFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese una capacidad de carga válida para el tren Arnold.");
+        }
+    } else if (selectedOption.equals("Mercedes-Benz")) {
+        if (newCapacityLoad <= 28) {
+            trainController.modifyTrain(identifier, newIdentifier, oldCapacityLoad, newCapacityLoad);
+            updateTrainTable();
+            clearTextFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese una capacidad de carga válida para el tren Mercedes-Benz.");
+        }
+    }
+    }
+    
+    
 
     private void updateTrainTable() {
         DefaultTableModel model = (DefaultTableModel) trainTable.getModel();
@@ -324,12 +390,12 @@ public class TrainView extends javax.swing.JFrame {
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JButton modifyButton; // Botón de modificar
     private javax.swing.JTextField capacityLoadText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
