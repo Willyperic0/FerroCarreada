@@ -67,6 +67,47 @@ public void addEmployee(String name, String lastName, int phoneNumber, int dni, 
     saveEmployeesToJson();
     JOptionPane.showMessageDialog(null,"Empleado agregado correctamente al sistema."); // Imprime un mensaje de éxito
 }
+public void updateEmployeeData(int dni, String newName, String newLastName, int newPhoneNumber, String newUser, String newPassword, String Dni) {
+    // Convertir el DNI proporcionado como cadena
+    String providedDni = String.valueOf(dni);
+    
+    // Verificar si el usuario ha proporcionado un nuevo DNI y si es diferente al DNI anterior
+    if (!Dni.isEmpty() && !Dni.equals(providedDni)) {
+        // Verificar si ya existe un empleado con el mismo DNI
+        if (isEmployeeExists(dni)) {
+            System.out.println("Error: Ya existe un empleado con el mismo DNI en el sistema. No se pueden actualizar los datos.");
+            return; // Salir del método si ya existe un empleado con el mismo DNI
+        }
+    }
+
+    // Buscar al empleado por su DNI
+    EmployeeModel employeeToUpdate = null;
+    for (int i = 0; i < employees.size(); i++) {
+        if (employees.get(i).getDni() == dni) {
+            employeeToUpdate = employees.get(i);
+            break;
+        }
+    }
+    
+    // Verificar si se encontró al empleado
+    if (employeeToUpdate != null) {
+        // Actualizar los datos del empleado encontrado
+        employeeToUpdate.setName(newName);
+        employeeToUpdate.setLastName(newLastName);
+        employeeToUpdate.setPhoneNumber(newPhoneNumber);
+        employeeToUpdate.setUser(newUser);
+        employeeToUpdate.setPassword(newPassword);
+        
+        // Guardar los cambios en el archivo JSON
+        saveEmployeesToJson();
+        
+        System.out.println("Datos del empleado actualizados correctamente.");
+    } else {
+        System.out.println("No se encontró ningún empleado con el DNI proporcionado.");
+    }
+}
+
+
 
 // Método para verificar si ya existe un empleado con el mismo DNI
 private boolean isEmployeeExists(int dni) {
