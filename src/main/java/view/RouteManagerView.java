@@ -27,8 +27,6 @@ public class RouteManagerView extends JFrame {
     private JButton deleteButton; // Botón para eliminar la ruta
     private JTable routeTable;
     private RouteController routeController;
-    String routesFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "routes.json";
-
     public RouteManagerView(RouteController routeController) {
         this.routeController = routeController;
         routeController.printAllRoutes();
@@ -146,7 +144,7 @@ public class RouteManagerView extends JFrame {
                         // La ruta es válida, proceder con la asignación del tren
                         routeController.assignTrainToRoute(selectedTrain.getIdentifier(), routeName, routePoints, totalDistance);
                         updateRouteTable();
-                        routeController.saveRoutesToJson(routesFilePath);
+                        routeController.saveRoutesToJson();
                     } else {
                         // Mostrar un JOptionPane indicando que la ruta no es válida debido a la falta de conexiones
                         JOptionPane.showMessageDialog(null, "La ruta especificada no es válida debido a que algunas conexiones no existen.");
@@ -177,7 +175,7 @@ public class RouteManagerView extends JFrame {
                         }
                         routeController.editTrainForRoute(routeName, selectedTrainIdentifier);
                         updateRouteTable();
-                        routeController.saveRoutesToJson(routesFilePath);
+                        routeController.saveRoutesToJson();
                     } else {
                         JOptionPane.showMessageDialog(null, "Por favor, seleccione un tren válido.");
                     }
@@ -196,7 +194,7 @@ public class RouteManagerView extends JFrame {
                 String selectedTrainIdentifier = (String) routeTable.getValueAt(selectedRowIndex, 1);
                 routeController.removeRouteByTrainId(selectedTrainIdentifier);
                 updateRouteTable();
-                routeController.saveRoutesToJson(routesFilePath);
+                routeController.saveRoutesToJson();
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor, seleccione una ruta para eliminar.");
             }
@@ -269,7 +267,7 @@ public class RouteManagerView extends JFrame {
 
     private void startTable() {
         // Cargar las rutas
-        routeController.loadRoutesFromJson(routesFilePath);
+        routeController.loadRoutesFromJson();
 
         // Actualizar la tabla con las rutas cargadas
         updateRouteTable();

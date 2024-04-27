@@ -3,23 +3,56 @@ package controller;
 
 import willy.linkedlist.doubly.LinkedList;
 
+import java.io.File;
+
 import javax.swing.JOptionPane;
 
 import model.EmployeeModel;
-import view.EmployeeView;
+
 
 public class EmployeeController {
     private LinkedList<EmployeeModel> employees; // Lista enlazada para almacenar los empleados
     private EmployeeModel model; // Modelo de empleado
+    
 
     static LoginController loginController;
     public EmployeeController(EmployeeModel model) {
         this.model = model;
         this.employees = new LinkedList<>();
+        loadEmployeesFromJson();
     }
+        public void loadEmployeesFromJson() {
+            String employeeFilePath = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "employees.json";
+            // Crear una instancia de FileJsonAdapter para trenes
+            FileJsonAdapter<EmployeeModel> employeeJsonAdapter = FileJsonAdapter.getInstance();
+        
+            // Leer los datos del archivo JSON y establecer la lista de trenes en el controlador de trenes
+            LinkedList<EmployeeModel> employeeList = employeeJsonAdapter.getObjects(employeeFilePath, EmployeeModel[].class);
+        
+            // Verificar si se leyeron correctamente los datos
+            if (employeeList != null) {
+                // Actualizar la lista de trenes en el controlador de trenes
+                this.employees = employeeList;
+            } else {
+                System.out.println("Error al leer los datos de empleados desde el archivo JSON.");
+            }
+        }
+        public void saveEmployeesToJson() {
+            String employeeFilePath = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "employees.json";
+            // Crear una instancia de FileJsonAdapter para trenes
+            FileJsonAdapter<EmployeeModel> employeeJsonAdapter = FileJsonAdapter.getInstance();
+    
+            // Guardar los datos de trenes en un archivo JSON
+            boolean success = employeeJsonAdapter.writeObjects(employeeFilePath, employees);
+    
+            // Mostrar mensaje de éxito o error para trenes
+            if (success) {
+                System.out.println("Datos de Empleados guardados correctamente en el archivo JSON.");
+            } else {
+                System.out.println("Error al guardar los datos de Empleados en el archivo JSON.");
+            }
+        }
 
-
-    // Método para agregar un nuevo empleado al sistema
 // Método para agregar un nuevo empleado al sistema
 public void addEmployee(String name, String lastName, int phoneNumber, int dni, String user, String password, boolean role) {
     // Verificar si ya existe un empleado con el mismo DNI
@@ -31,6 +64,7 @@ public void addEmployee(String name, String lastName, int phoneNumber, int dni, 
     // Si no hay un empleado con el mismo DNI, proceder con la adición del nuevo empleado
     EmployeeModel newEmployee = new EmployeeModel(name, lastName, phoneNumber, dni, user, password, role); // Crea un nuevo objeto EmployeeModel
     employees.add(newEmployee); // Agrega el nuevo empleado a la lista de empleados
+    saveEmployeesToJson();
     JOptionPane.showMessageDialog(null,"Empleado agregado correctamente al sistema."); // Imprime un mensaje de éxito
 }
 
@@ -62,30 +96,10 @@ private boolean isEmployeeExists(int dni) {
 
 
 
-    // Método para obtener una representación de texto de la lista de empleados en el sistema
-    public String getEmployees() {
-        StringBuilder message = new StringBuilder(); // Crea un StringBuilder para construir el mensaje
-
-        // Verifica si la lista de empleados no está vacía
-        if (employees != null && !employees.isEmpty()) {
-            message.append("Lista de empleados:\n");
-            // Itera sobre la lista de empleados y agrega los detalles de cada empleado al mensaje
-            for (int i = 0; i < employees.size(); i++) {
-                EmployeeModel employee = employees.get(i);
-                message.append("Nombre: ").append(employee.getName()).append("\n")
-                        .append("Apellido: ").append(employee.getLastName()).append("\n")
-                        .append("Número de teléfono: ").append(employee.getPhoneNumber()).append("\n")
-                        .append("DNI: ").append(employee.getDni()).append("\n");
-            }
-        } else { // Si la lista de empleados está vacía, agrega un mensaje indicando que no hay empleados en el sistema
-            message.append("No hay empleados en el sistema.");
-        }
-
-        return message.toString(); // Retorna el mensaje como una cadena de texto
-    }
 
     // Método para obtener la lista de empleados
     public LinkedList<EmployeeModel> getEmployeeList() {
+        loadEmployeesFromJson();
         return employees; // Retorna la lista de empleados
     }
 
@@ -125,6 +139,7 @@ private boolean isEmployeeExists(int dni) {
         
         // Actualizar la lista de empleados con la lista temporal
         employees = tempEmployeeList;
+        saveEmployeesToJson();
     }
     }
 

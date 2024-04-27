@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.util.Random;
 
+import model.EmployeeModel;
 import model.PassengerModel;
 import model.TicketModel;
 import model.TrainModel;
@@ -18,6 +19,7 @@ public class TicketController {
         this.tickets = new LinkedList<>();
         this.trainController = trainController;
         this.boardingQueue = new PriorityQueue<>(3);
+        loadTicketsFromJson();
     }
     public PriorityQueue<String> getPriorityQueue() {
         PriorityQueue<String> priorityQueue = new PriorityQueue<>(3);
@@ -43,11 +45,9 @@ public class TicketController {
         // Crear una nueva lista para almacenar los tickets
         LinkedList<TicketModel> ticketList = new LinkedList<>();
     
-        // Especifica la ruta completa del archivo JSON para los tickets
-        String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
     
         // Cargar los datos de tickets desde el archivo JSON en la nueva lista
-        loadTicketsFromJson(ticketFilePath, ticketList);
+        loadTicketsFromJson();
 
     
         // Obtener el ID del tren seleccionado
@@ -90,21 +90,22 @@ public class TicketController {
         return null;
     }
     
-    public void loadTicketsFromJson(String ticketFilePath, LinkedList<TicketModel> ticketList) {
-        FileJsonAdapter<TicketModel> ticketJsonAdapter = FileJsonAdapter.getInstance();
-        LinkedList<TicketModel> loadedTickets = ticketJsonAdapter.getObjects(ticketFilePath, TicketModel[].class);
-        if (!loadedTickets.isEmpty()) {
-            int size = loadedTickets.size();
-            for (int i = 0; i < size; i++) {
-                TicketModel ticket = loadedTickets.get(i);
-                ticketList.add(ticket);
-
+            public void loadTicketsFromJson() {
+            String ticketFilePath = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
+            // Crear una instancia de FileJsonAdapter para trenes
+            FileJsonAdapter<TicketModel> ticketJsonAdapter = FileJsonAdapter.getInstance();
+        
+            // Leer los datos del archivo JSON y establecer la lista de trenes en el controlador de trenes
+            LinkedList<TicketModel> loadedTickets = ticketJsonAdapter.getObjects(ticketFilePath, TicketModel[].class);
+        
+            // Verificar si se leyeron correctamente los datos
+            if (loadedTickets != null) {
+                // Actualizar la lista de trenes en el controlador de trenes
+                this.tickets = loadedTickets;
+            } else {
+                System.out.println("Error al leer los datos de empleados desde el archivo JSON.");
             }
-
-        } else {
-
         }
-    }
 
     
 
@@ -159,11 +160,8 @@ public TrainModel getRandomTrain() {
 }
     // Método para obtener la lista de tickets
     public LinkedList<TicketModel> getTicketList() {
-        // Especifica la ruta completa del archivo JSON para los tickets
-        String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
-
         // Carga los datos de tickets desde el archivo JSON antes de devolver la lista de tickets
-        loadTicketsFromJson(ticketFilePath);
+        loadTicketsFromJson();
 
         // Retorna la lista de tickets
         return tickets;
@@ -172,7 +170,7 @@ public TrainModel getRandomTrain() {
 // Guardar la lista de tickets en el archivo JSON especificado
 public void saveTicketsToJson() {
     // Definir la ruta del archivo donde se guardarán los tickets en formato JSON
-    String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
+    String ticketFilePath = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
     
     FileJsonAdapter<TicketModel> ticketJsonAdapter = FileJsonAdapter.getInstance();
     boolean success = ticketJsonAdapter.writeObjects(ticketFilePath, tickets);
@@ -183,17 +181,7 @@ public void saveTicketsToJson() {
     }
 }
 
-// Cargar la lista de tickets desde el archivo JSON especificado
-public void loadTicketsFromJson(String ticketFilePath) {
-    FileJsonAdapter<TicketModel> ticketJsonAdapter = FileJsonAdapter.getInstance();
-    LinkedList<TicketModel> loadedTickets = ticketJsonAdapter.getObjects(ticketFilePath, TicketModel[].class);
-    if (!loadedTickets.isEmpty()) {
-        tickets = loadedTickets;
 
-    } else {
-
-    }
-}
 
     // Método para agregar un boleto
     public void addTicket(String purchaseDateTime, String departureDateTime, String arrivalDateTime,

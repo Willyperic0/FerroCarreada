@@ -49,9 +49,8 @@ public class TicketPurchaseView extends javax.swing.JFrame {
             this.ticketController = ticketController;
             this.trainController = trainController;
             this.routeController = routeController;
-            String ticketFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
     
-            ticketController.loadTicketsFromJson(ticketFilePath);
+            ticketController.loadTicketsFromJson();
             initTrainComboBox();
             applyCustomStyles(); // Aplicar estilos personalizados
             setSize(800, 500); // Definir el tamaño de la ventana

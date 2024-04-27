@@ -19,6 +19,7 @@ public class TrainController {
     public TrainController(TrainModel model) { // Este metodo se esta usando en App
         this.model = model; // Asigna el modelo de tre
         this.trains = new LinkedList<>(); // Inicializa la lista de trenes
+        loadTrainsFromJson();
     }
     public void updateTrainDataTicket(String trainIdToUpdate, String category) {
         // Crear una LinkedList temporal para almacenar los datos
@@ -59,8 +60,7 @@ public class TrainController {
         }
         
         // Guardar la lista actualizada de trenes en el archivo JSON
-        String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
-        saveTrainsToJson(trainFilePath);
+        saveTrainsToJson();
     }
     public void modifyTrain(String trainIdToModify, String newIdentifier, int oldCapacityLoad, int newCapacityLoad) {
         RouteController routeController = new RouteController();
@@ -150,8 +150,7 @@ public class TrainController {
         trainToModify.calculateAndUpdatePassengerAndCargo();
     
         // Guardar la lista actualizada de trenes en el archivo JSON
-        String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
-        saveTrainsToJson(trainFilePath);
+        saveTrainsToJson();
     
         System.out.println("Datos del tren modificados correctamente.");
     }
@@ -234,8 +233,7 @@ public void saveTrainsToJson(String trainFilePath, LinkedList<TrainModel> trainL
         trains.add(newTrain); // Agrega el nuevo tren a la lista de trenes
         
         // Guardar la lista actualizada de trenes en el archivo JSON
-        String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
-        saveTrainsToJson(trainFilePath);
+        saveTrainsToJson();
         
         JOptionPane.showMessageDialog(null,"Tren agregado correctamente al sistema."); // Imprime un mensaje de éxito
     }
@@ -295,10 +293,9 @@ private boolean isTrainExists(String identifier) {
 // Método para obtener la lista de trenes
 public LinkedList<TrainModel> getTrainList() {
     // Especifica la ruta completa del archivo JSON para los trenes
-    String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
     
     // Carga los datos de trenes desde el archivo JSON antes de devolver la lista de trenes
-    loadTrainsFromJson(trainFilePath);
+    loadTrainsFromJson();
 
     // Retorna la lista de trenes
     return trains;
@@ -335,8 +332,7 @@ public void deleteAndReorganize(String trainIdToDelete) {
         trains.add(tempTrainList.get(i));
     }
     
-    String trainFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
-    saveTrainsToJson(trainFilePath);
+    saveTrainsToJson();
 }
 
     
@@ -364,7 +360,9 @@ public void deleteAndReorganize(String trainIdToDelete) {
     }
     
         // Método para cargar los datos de trenes desde un archivo JSON
-        public void loadTrainsFromJson(String trainFilePath) {
+        public void loadTrainsFromJson() {
+            String trainFilePath = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
+
             // Crear una instancia de FileJsonAdapter para trenes
             FileJsonAdapter<TrainModel> trainJsonAdapter = FileJsonAdapter.getInstance();
         
@@ -380,7 +378,9 @@ public void deleteAndReorganize(String trainIdToDelete) {
             }
         }
             // Método para guardar los trenes en el archivo JSON
-    public void saveTrainsToJson(String trainFilePath) {
+    public void saveTrainsToJson() {
+        String trainFilePath = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
+
         // Crear una instancia de FileJsonAdapter para trenes
         FileJsonAdapter<TrainModel> trainJsonAdapter = FileJsonAdapter.getInstance();
 

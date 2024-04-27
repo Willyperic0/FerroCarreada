@@ -28,9 +28,8 @@ public class LoginView extends javax.swing.JFrame {
     static TrainModel trainModel = new TrainModel();
     static TrainController trainController = new TrainController(trainModel);
     static LoginController loginController = new LoginController();
-    FileJsonAdapter<EmployeeModel> employeeJsonAdapter = FileJsonAdapter.getInstance();
     static TicketController ticketController = new TicketController(trainController);
-    String employeeFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "employees.json";
+    
     
     /**
      * Creates new form LoginView
@@ -38,8 +37,6 @@ public class LoginView extends javax.swing.JFrame {
     public LoginView() {
         initComponents();
         // Leer los datos del archivo JSON y establecer la lista de empleados en el controlador de empleados
-        LinkedList<EmployeeModel> employeeList = employeeJsonAdapter.getObjects(employeeFilePath, EmployeeModel[].class);
-        employeeController.setEmployeeList(employeeList);
         setSize(800,500);
         setLocationRelativeTo(null);
         loginController.crearCarpetasYArchivos();

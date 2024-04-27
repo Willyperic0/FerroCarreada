@@ -9,8 +9,10 @@ import java.io.IOException;
 public class LoginController {
     static LoginView loginView; // Declara una vista estática de inicio de sesión
 
+
     // Método para autenticar un usuario
     public boolean authenticate(String username, String password, LinkedList<EmployeeModel> employees) {
+
         int size = employees.size(); // Obtiene el tamaño de la lista de empleados
         for (int i = 0; i < size; i++) { // Bucle para recorrer la lista de empleados
             EmployeeModel employee = employees.get(i); // Obtiene el empleado en la posición actual del bucle
@@ -56,7 +58,7 @@ public class LoginController {
      // Método para crear las carpetas necesarias y los archivos JSON
      public static void crearCarpetasYArchivos() {
         // Definir las rutas de las carpetas
-        String folderPath1 = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database";
+        String folderPath1 = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database";
         // Puedes agregar más carpetas si es necesario
 
         // Crear la primera carpeta
@@ -72,10 +74,10 @@ public class LoginController {
         }
 
         // Definir las rutas de los archivos JSON
-        String jsonPath1 = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "routes.json";
-        String jsonPath2 = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
-        String jsonPath3 = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "employees.json";
-        String jsonPath4 = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
+        String jsonPath1 = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "routes.json";
+        String jsonPath2 = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "trains.json";
+        String jsonPath3 = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "employees.json";
+        String jsonPath4 = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "tickets.json";
 
         // Crear los archivos JSON
         crearArchivoSiNoExiste(jsonPath1);

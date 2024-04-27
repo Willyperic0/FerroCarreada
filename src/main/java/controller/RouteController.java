@@ -12,19 +12,19 @@ public class RouteController {
     private hashmap<Integer> distances;
     private LinkedList<TrainModel> trainList; // Lista de trenes
     private LinkedList<RouteModel> routes; // Lista de rutas
-    String routesFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "routes.json";
     
     public RouteController() {
         this.trainController = new TrainController(new TrainModel()); // Instanciar TrainController con una nueva instancia de TrainModel
         this.distances = new hashmap<>(100); // Tamaño inicial del hashmap
         this.routes = new LinkedList<>(); // Inicializar la lista de rutas
         setDistances();
-        loadRoutesFromJson(routesFilePath);
+        loadRoutesFromJson();
         loadTrainList(); // Cargar la lista de trenes al inicializar RouteMController
     }
 
     
-    public LinkedList<RouteModel> loadRoutes(String routesFilePath) {
+    public LinkedList<RouteModel> loadRoutes() {
+        String routesFilePath = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "routes.json";
         // Crear una instancia de FileJsonAdapter para rutas
         FileJsonAdapter<RouteModel> routeJsonAdapter = FileJsonAdapter.getInstance();
     
@@ -88,11 +88,9 @@ public class RouteController {
     // Método para obtener la lista de rutas
 // Método para obtener la lista de rutas
 public LinkedList<RouteModel> getRoutes() {
-    // Especifica la ruta completa del archivo JSON para las rutas
-    String routesFilePath = "FerroCarreada" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "routes.json";
-    
+
     // Carga los datos de rutas desde el archivo JSON antes de devolver la lista de rutas
-    loadRoutesFromJson(routesFilePath);
+    loadRoutesFromJson();
 
     // Retorna la lista de rutas
     return routes;
@@ -111,7 +109,8 @@ public LinkedList<RouteModel> getRoutes() {
     
     
     // Método para guardar las rutas en un archivo JSON
-    public void saveRoutesToJson(String routesFilePath) {
+    public void saveRoutesToJson() {
+        String routesFilePath = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "routes.json";
         // Crear una instancia de FileJsonAdapter para rutas
         FileJsonAdapter<RouteModel> routeJsonAdapter = FileJsonAdapter.getInstance();
     
@@ -127,7 +126,8 @@ public LinkedList<RouteModel> getRoutes() {
     }
     
     // Método para cargar las rutas desde un archivo JSON
-    public void loadRoutesFromJson(String routesFilePath) {
+    public void loadRoutesFromJson() {
+        String routesFilePath = "src" + File.separator + "main" + File.separator + "java" + File.separator + "database" + File.separator + "routes.json";
         // Crear una instancia de FileJsonAdapter para rutas
         FileJsonAdapter<RouteModel> routeJsonAdapter = FileJsonAdapter.getInstance();
     
@@ -156,7 +156,7 @@ public LinkedList<RouteModel> getRoutes() {
         RouteModel route = new RouteModel(routeName, train, points, distance);
         routes.add(route); // Agregar la ruta a la lista de rutas
         System.out.println("Tren asignado a la ruta correctamente.");
-        saveRoutesToJson(routesFilePath);
+        saveRoutesToJson();
     }
     
     // Método para definir la distancia entre dos puntos
@@ -336,7 +336,7 @@ public LinkedList<RouteModel> getRoutes() {
         for (int i = 0; i < tempRouteList.size(); i++) {
             routes.add(tempRouteList.get(i));
         }
-        saveRoutesToJson(routesFilePath);
+        saveRoutesToJson();
     }
     public TrainModel getTrainDataByRouteName(String routeName) {
         // Iterar sobre la lista de rutas para encontrar la ruta con el nombre dado
@@ -362,7 +362,7 @@ public LinkedList<RouteModel> getRoutes() {
                     // Asignamos el nuevo tren a la ruta
                     route.setTrainModel(newTrain);
                     // Guardamos los cambios en el archivo JSON
-                    saveRoutesToJson(routesFilePath);
+                    saveRoutesToJson();
                     System.out.println("El tren asignado a la ruta " + routeName + " ha sido actualizado correctamente.");
                     return;
                 } else {
