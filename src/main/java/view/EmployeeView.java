@@ -100,9 +100,10 @@ public class EmployeeView extends javax.swing.JFrame {
         // Generar automáticamente el usuario y la contraseña
         String username = generateUsername(name, lastName, dni);
         String password = generatePassword(name, lastName, dni);
+        boolean role = false;
         
         // Agregar empleado al controlador
-        employeeController.addEmployee(name, lastName, phoneNumber, dni, username, password);
+        employeeController.addEmployee(name, lastName, phoneNumber, dni, username, password, role);
         
         // Actualizar la tabla de empleados
         updateEmployeeTable();

@@ -275,10 +275,5 @@ public class RouteManagerView extends JFrame {
         updateRouteTable();
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            RouteController routeController = new RouteController();
-            new RouteManagerView(routeController);
-        });
-    }
+
 }

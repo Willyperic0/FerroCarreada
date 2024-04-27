@@ -173,18 +173,7 @@ public class LoginView extends javax.swing.JFrame {
         // Verificar si el usuario o la contraseña están vacíos
         if (user.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Uno de los campos se encuentra vacío");
-        } else if (user.equals("admin") && password.equals("admin")) {
-            // Mostrar mensaje de bienvenida para el usuario admin
-            JOptionPane.showMessageDialog(null, "Bienvenido, admin");
-
-            // Crear una instancia de LobbyView y hacerla visible
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new LobbyView().setVisible(true);
-                }
-            });
-            this.dispose(); // Cerrar la ventana actual
-        } else if (user.equals("purchase") && password.equals("purchase")) {
+        }  else if (user.equals("purchase") && password.equals("purchase")) {
             // Mostrar mensaje de bienvenida para el usuario admin
             JOptionPane.showMessageDialog(null, "Ingresando a venta de tickets");
 
@@ -203,7 +192,9 @@ public class LoginView extends javax.swing.JFrame {
 
             // Mostrar el mensaje correspondiente según la autenticación
             if (isAuthenticated) {
+                Boolean role = loginController.authenticateRole(user, password, employeeController.getEmployeeList());
                 // Obtener el nombre completo del empleado autenticado
+                if (role == false) {
                 String fullName = employeeController.getEmployeeFullName(user);
                 // Construir el mensaje de bienvenida personalizado
                 String welcomeMessage = "Bienvenido, " + fullName;
@@ -217,6 +208,20 @@ public class LoginView extends javax.swing.JFrame {
                     }
                 });
                 this.dispose(); // Cerrar la ventana actual
+            } else if(role == true) {
+                String fullName = employeeController.getEmployeeFullName(user);
+                // Construir el mensaje de bienvenida personalizado
+                String welcomeMessage = "Bienvenido, " + fullName;
+                JOptionPane.showMessageDialog(null, welcomeMessage);
+
+                // Crear una instancia de LobbyView y hacerla visible
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new LobbyView().setVisible(true);
+                    }
+                });
+                this.dispose(); // Cerrar la ventana actual
+            }
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
             }

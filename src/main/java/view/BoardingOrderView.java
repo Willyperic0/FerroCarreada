@@ -70,11 +70,4 @@ public class BoardingOrderView extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new BoardingOrderView().setVisible(true);
-            }
-        });
-    }
 }

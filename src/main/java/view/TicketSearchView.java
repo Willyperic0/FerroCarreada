@@ -199,11 +199,4 @@ public class TicketSearchView extends javax.swing.JFrame {
         boardingOrderView.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        TrainModel trainModel = new TrainModel();
-        TrainController trainController = new TrainController(trainModel);
-        TicketController ticketController = new TicketController(trainController);
-        TicketSearchView frame = new TicketSearchView(ticketController, trainController);
-        frame.setVisible(true);
-    }
 }

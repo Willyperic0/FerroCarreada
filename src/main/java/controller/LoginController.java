@@ -21,6 +21,19 @@ public class LoginController {
         }
         return false; // Devuelve falso si no se encontraron coincidencias de credenciales
     }
+    public boolean authenticateRole(String username, String password, LinkedList<EmployeeModel> employees) {
+        boolean result = false;
+        int size = employees.size(); // Obtiene el tamaño de la lista de empleados
+        for (int i = 0; i < size; i++) { // Bucle para recorrer la lista de empleados
+            EmployeeModel employee = employees.get(i); // Obtiene el empleado en la posición actual del bucle
+            // Comprueba si el nombre de usuario y la contraseña coinciden con las credenciales del empleado
+            if (employee.getUser().equals(username) && employee.getPassword().equals(password)) {
+                result = employee.getisAdmin();
+                return result; // Devuelve verdadero si las credenciales coinciden
+            }
+        }
+        return false; // Devuelve falso si no se encontraron coincidencias de credenciales
+    }
 
     // Método para obtener el DNI del usuario conectado
     public int getLoggedUserDNI(String username, LinkedList<EmployeeModel> employees) {

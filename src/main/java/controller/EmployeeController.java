@@ -21,7 +21,7 @@ public class EmployeeController {
 
     // Método para agregar un nuevo empleado al sistema
 // Método para agregar un nuevo empleado al sistema
-public void addEmployee(String name, String lastName, int phoneNumber, int dni, String user, String password) {
+public void addEmployee(String name, String lastName, int phoneNumber, int dni, String user, String password, boolean role) {
     // Verificar si ya existe un empleado con el mismo DNI
     if (isEmployeeExists(dni)) {
         JOptionPane.showMessageDialog(null,"Error: Ya existe un empleado con el mismo DNI en el sistema.");
@@ -29,7 +29,7 @@ public void addEmployee(String name, String lastName, int phoneNumber, int dni, 
     }
     
     // Si no hay un empleado con el mismo DNI, proceder con la adición del nuevo empleado
-    EmployeeModel newEmployee = new EmployeeModel(name, lastName, phoneNumber, dni, user, password); // Crea un nuevo objeto EmployeeModel
+    EmployeeModel newEmployee = new EmployeeModel(name, lastName, phoneNumber, dni, user, password, role); // Crea un nuevo objeto EmployeeModel
     employees.add(newEmployee); // Agrega el nuevo empleado a la lista de empleados
     JOptionPane.showMessageDialog(null,"Empleado agregado correctamente al sistema."); // Imprime un mensaje de éxito
 }
